@@ -28,3 +28,4 @@ C:\Users\user1\Documents\תכנות ו\פרויקט גמר\CVBuilder\CVBuilder.S
 C:\Users\user1\Documents\תכנות ו\פרויקט גמר\CVBuilder\CVBuilder.Service\obj\Debug\net9.0\refint\CVBuilder.Service.dll
 C:\Users\user1\Documents\תכנות ו\פרויקט גמר\CVBuilder\CVBuilder.Service\obj\Debug\net9.0\CVBuilder.Service.pdb
 C:\Users\user1\Documents\תכנות ו\פרויקט גמר\CVBuilder\CVBuilder.Service\obj\Debug\net9.0\ref\CVBuilder.Service.dll
+C:\Users\user1\Documents\תכנות ו\פרויקט גמר\CVBuilder\CVBuilder.Service\obj\Debug\net9.0\CVBuilder.Service.sourcelink.json
