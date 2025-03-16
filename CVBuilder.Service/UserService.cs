@@ -1,0 +1,70 @@
+﻿using CVBuilder.Core.Models;
+using CVBuilder.Core.Repositories;
+using CVBuilder.Core.Services;
+using Microsoft.AspNetCore.Identity;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
+using System.Threading.Tasks;
+
+
+
+namespace CVBuilder.Service
+{
+    public class UserService : IUserService
+    {
+        private readonly IUserRepository _userRepository;
+        //private readonly IHttpContextAccessor _httpContextAccessor;
+
+        public UserService(IUserRepository userRepository)
+        {
+            _userRepository = userRepository;
+        }
+
+        public async Task<bool> RegisterAsync(string fullName, string email, string password, string role)
+        {
+            var existingUser = await _userRepository.GetByEmailAsync(email);
+            if (existingUser != null)
+                return false;
+
+            var hashedPassword = HashPassword(password);
+
+            var user = new User
+            {
+                FullName = fullName,
+                Email = email,
+                Password = hashedPassword,
+                Role = role,
+                CVFiles = new List<FileCV>()
+            };
+
+            await _userRepository.AddAsync(user);
+            return true;
+        }
+
+        public async Task<User> LoginAsync(string email, string password)
+        {
+            var user = await _userRepository.GetByEmailAsync(email);
+            if (user == null || !VerifyPassword(password, user.Password))
+                return null;
+
+            return user;
+        }
+
+        private string HashPassword(string password)
+        {
+            using (SHA256 sha256 = SHA256.Create())
+            {
+                byte[] bytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
+                return Convert.ToBase64String(bytes);
+            }
+        }
+
+        private bool VerifyPassword(string inputPassword, string storedHashedPassword)
+        {
+            return HashPassword(inputPassword) == storedHashedPassword;
+        }
+    }
+}

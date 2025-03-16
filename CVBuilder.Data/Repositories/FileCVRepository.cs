@@ -1,0 +1,81 @@
+﻿using CVBuilder.Core.DTOs;
+using CVBuilder.Core.Models;
+using CVBuilder.Core.Repositories;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace CVBuilder.Data.Repositories
+{
+    public class FileCVRepository : IFileCVRepository
+    {
+        private readonly CVBuilderDbContext _context;
+
+        public FileCVRepository(CVBuilderDbContext context)
+        {
+            _context = context;
+        }
+        //להחזרת כל הקורות חיים
+        public async Task<List<FileCV>> GetFilesByUserIdAsync(int userId)
+        {
+            return await _context.FileCVs
+                .Where(f => f.UserId == userId)
+                .ToListAsync();
+        }
+        //delete
+        public async Task DeleteFileCVAsync(int fileId)
+        {
+            var file = await _context.FileCVs.FindAsync(fileId);
+            if (file != null)
+            {
+                _context.FileCVs.Remove(file);
+                await _context.SaveChangesAsync();
+            }
+        }
+
+        //create
+
+        public async Task<List<FileCV>> GetByUserIdAsync(int userId)
+        {
+            Console.WriteLine($"[DEBUG] userId: {userId}");
+            return await _context.FileCVs.Where(f => f.UserId == userId).ToListAsync();
+        }
+        //create
+        public async Task AddAsync(FileCV fileCV)
+        {
+            await _context.FileCVs.AddAsync(fileCV);
+            await _context.SaveChangesAsync();
+        }
+
+        //update getfilebyuserid delete
+        public async Task<FileCV> GetFileByUserIdAsync(int fileId, int userId)
+        {
+            return await _context.FileCVs
+                .FirstOrDefaultAsync(f => f.Id == fileId && f.UserId == userId);
+        }
+      
+        //update
+        public async Task UpdateAsync(FileCV fileCV)
+        {
+            var existingFile = await _context.FileCVs.FindAsync(fileCV.Id);
+            if (existingFile != null)
+            {
+                existingFile.Name = fileCV.Name ?? existingFile.Name;
+                existingFile.FirstName = fileCV.FirstName ?? existingFile.FirstName;
+                existingFile.LastName = fileCV.LastName ?? existingFile.LastName;
+                existingFile.Email = fileCV.Email ?? existingFile.Email;
+                existingFile.Phone = fileCV.Phone ?? existingFile.Phone;
+                existingFile.Summary = fileCV.Summary ?? existingFile.Summary;
+                existingFile.Skills = fileCV.Skills ?? existingFile.Skills;
+                existingFile.Languages = fileCV.Languages ?? existingFile.Languages;
+                await _context.SaveChangesAsync();
+            }
+        }
+
+    
+    }
+}
+

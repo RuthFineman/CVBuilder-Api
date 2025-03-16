@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "Aolhkjoxc13c2XVJlORJcQZGTZC3XD12t+MAp5uLtPI=",
+  "Source": "CVBuilder.Api",
+  "BasePath": "_content/CVBuilder.Api",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}
