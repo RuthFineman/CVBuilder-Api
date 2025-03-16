@@ -9,7 +9,7 @@ namespace CVBuilder.Core.Services
 {
     public interface IUserService
     {
-        Task<bool> RegisterAsync(string fullName, string email, string password, string role);
+        Task<bool> RegisterAsync(string fullName, string email, string password);
         Task<User> LoginAsync(string email, string password);
     }
 }

@@ -23,7 +23,7 @@ namespace CVBuilder.Service
             _userRepository = userRepository;
         }
 
-        public async Task<bool> RegisterAsync(string fullName, string email, string password, string role)
+        public async Task<bool> RegisterAsync(string fullName, string email, string password)
         {
             var existingUser = await _userRepository.GetByEmailAsync(email);
             if (existingUser != null)
@@ -36,7 +36,7 @@ namespace CVBuilder.Service
                 FullName = fullName,
                 Email = email,
                 Password = hashedPassword,
-                Role = role,
+                Role = "user",
                 CVFiles = new List<FileCV>()
             };
 

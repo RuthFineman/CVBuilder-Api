@@ -29,11 +29,15 @@ namespace CVBuilder.Api.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] UserRegisterModel userDto)
         {
-            var result = await _userService.RegisterAsync(userDto.FullName, userDto.Email, userDto.Password, userDto.Role);
+            var result = await _userService.RegisterAsync(userDto.FullName, userDto.Email, userDto.Password);
             if (!result)
                 return BadRequest("User already exists.");
 
-            return Ok("User registered successfully.");
+            var user = await _userService.LoginAsync(userDto.Email, userDto.Password);
+            var token = _authService.GenerateJwtToken(user.Email, user.Id, user.Role);
+
+            // החזרת ה-Token למשתמש
+            return Ok(new { token });  // מחזיר את ה-Token למשתמש לאחר הרשמה
         }
 
         [HttpPost("login")]

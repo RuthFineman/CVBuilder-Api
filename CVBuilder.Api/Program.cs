@@ -55,6 +55,14 @@ builder.Services.AddAuthentication(options =>
 
 // הוספת שירותי HTTP
 builder.Services.AddControllers();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowLocalhost",
+        builder => builder.WithOrigins("http://localhost:3000")  // כתובת ה-frontend שלך
+                          .AllowAnyMethod()
+                          .AllowAnyHeader());
+});
+
 builder.Services.AddSwaggerGen(options =>
 {
     options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
@@ -89,7 +97,7 @@ if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
 }
-
+app.UseCors("AllowLocalhost");
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
@@ -99,7 +107,7 @@ app.UseSwagger();
 app.UseSwaggerUI(c =>
 {
     c.SwaggerEndpoint("/swagger/v1/swagger.json", "CVBuilder API V1");
-    c.RoutePrefix = string.Empty; // כדי שה-Swagger UI יופיע ב-root URL
+    c.RoutePrefix = string.Empty; 
 });
 
 app.Run();
