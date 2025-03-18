@@ -22,9 +22,16 @@ namespace CVBuilder.Data.Repositories
         public async Task<List<FileCV>> GetFilesByUserIdAsync(int userId)
         {
             return await _context.FileCVs
-                .Where(f => f.UserId == userId)
+                .Where(f => f.UserId == userId)  // אם השתנה שם השדה, עדכן כאן
                 .ToListAsync();
         }
+
+        //public async Task<List<FileCV>> GetFilesByUserIdAsync(int userId)
+        //{
+        //    return await _context.FileCVs
+        //        .Where(f => f.UserId == userId)
+        //        .ToListAsync();
+        //}
         //delete
         public async Task DeleteFileCVAsync(int fileId)
         {
@@ -56,28 +63,48 @@ namespace CVBuilder.Data.Repositories
             return await _context.FileCVs
                 .FirstOrDefaultAsync(f => f.Id == fileId && f.UserId == userId);
         }
-      
+
         //update
+
+        //public async Task UpdateAsync(FileCV fileCV)
+        //{
+        //    var existingFile = await _context.FileCVs.FindAsync(fileCV.Id);
+        //    if (existingFile != null)
+        //    {
+
+        //        existingFile.Name = fileCV.Name ?? existingFile.Name;
+        //        existingFile.Id = fileCV.Id ;
+        //        existingFile.FirstName = fileCV.FirstName ?? existingFile.FirstName;
+        //        existingFile.LastName = fileCV.LastName ?? existingFile.LastName;
+        //        existingFile.Email = fileCV.Email ?? existingFile.Email;
+        //        existingFile.Phone = fileCV.Phone ?? existingFile.Phone;
+        //        existingFile.Summary = fileCV.Summary ?? existingFile.Summary;
+        //        existingFile.Skills = fileCV.Skills ?? existingFile.Skills;
+        //        existingFile.Languages = fileCV.Languages ?? existingFile.Languages;
+        //        await _context.SaveChangesAsync();
+        //    }
+        //}
         public async Task UpdateAsync(FileCV fileCV)
         {
             var existingFile = await _context.FileCVs.FindAsync(fileCV.Id);
             if (existingFile != null)
             {
-
-                existingFile.Name = fileCV.Name ?? existingFile.Name;
-                existingFile.Id = fileCV.Id ;
                 existingFile.FirstName = fileCV.FirstName ?? existingFile.FirstName;
                 existingFile.LastName = fileCV.LastName ?? existingFile.LastName;
                 existingFile.Email = fileCV.Email ?? existingFile.Email;
                 existingFile.Phone = fileCV.Phone ?? existingFile.Phone;
                 existingFile.Summary = fileCV.Summary ?? existingFile.Summary;
                 existingFile.Skills = fileCV.Skills ?? existingFile.Skills;
-                existingFile.Languages = fileCV.Languages ?? existingFile.Languages;
+
+                // עדכון חוויות עבודה וחינוך
+                existingFile.WorkExperiences = fileCV.WorkExperiences ?? existingFile.WorkExperiences;
+                existingFile.Educations = fileCV.Educations ?? existingFile.Educations;
+
                 await _context.SaveChangesAsync();
             }
         }
 
-    
+
     }
 }
 

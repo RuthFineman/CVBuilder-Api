@@ -21,16 +21,45 @@ namespace CVBuilder.Service
         {
             return new FileCVDto
             {
-                Name = fileCV.Name,
+                Id = fileCV.Id,
                 FirstName = fileCV.FirstName,
                 LastName = fileCV.LastName,
                 Email = fileCV.Email,
                 Phone = fileCV.Phone,
                 Summary = fileCV.Summary,
-                Skills = fileCV.Skills ?? new List<string>(),
-                Languages = fileCV.Languages ?? new List<string>()
+                WorkExperiences = fileCV.WorkExperiences?.Select(we => new CVBuilder.Core.DTOs.WorkExperience
+                {
+                    Company = we.Company,
+                    Position = we.Position,
+                    StartDate = we.StartDate,
+                    EndDate = we.EndDate,
+                    Description = we.Description
+                }).ToList() ?? new List<CVBuilder.Core.DTOs.WorkExperience>(),  
+                Educations = fileCV.Educations?.Select(e => new CVBuilder.Core.DTOs.Education
+                {
+                    Institution = e.Institution,
+                    Degree = e.Degree
+                }).ToList() ?? new List<CVBuilder.Core.DTOs.Education>(),  
+                Skills = fileCV.Skills,
             };
         }
+
+
+        //private FileCVDto ToFileCVDto(FileCV fileCV)
+        //{
+        //    return new FileCVDto
+        //    {
+        //        Id = fileCV.Id,
+        //        FirstName = fileCV.FirstName,
+        //        LastName = fileCV.LastName,
+        //        Email = fileCV.Email,
+        //        Phone = fileCV.Phone,
+        //        Summary = fileCV.Summary,
+        //        WorkExperiences = fileCV.WorkExperiences,
+        //        Educations = fileCV.Educations,
+        //        Skills = fileCV.Skills,
+        //    };
+        //}
         public async Task<List<FileCVDto>> GetFilesByUserIdAsync(int userId)
         {
             var files = await _fileCVRepository.GetFilesByUserIdAsync(userId) ?? new List<FileCV>();
@@ -56,39 +85,104 @@ namespace CVBuilder.Service
             {
                 throw new InvalidOperationException("User cannot create more than 5 resumes.");
             }
+
             var newFile = new FileCV
             {
                 UserId = userId,
-                Name = fileCVDto.Name ?? "Untitled Resume",
                 FirstName = fileCVDto.FirstName,
                 LastName = fileCVDto.LastName,
                 Email = fileCVDto.Email,
-                Phone = fileCVDto.Phone,
+                Phone = fileCVDto.Phone,  
                 Summary = fileCVDto.Summary,
+                //WorkExperiences = fileCVDto.WorkExperiences,
+                //Educations = fileCVDto.Educations,
                 Skills = fileCVDto.Skills ?? new List<string>(),
-                Languages = fileCVDto.Languages ?? new List<string>()
+                // שדות אחרים שאולי הוספתם
             };
 
             await _fileCVRepository.AddAsync(newFile);
             return ToFileCVDto(newFile);
         }
+
+        //public async Task<FileCVDto> CreateFileCVAsync(FileCVDto fileCVDto, int userId)
+        //{
+        //    if (userId <= 0)
+        //    {
+        //        throw new ArgumentException("UserId Missing");
+        //    }
+
+        //    var userFiles = await _fileCVRepository.GetByUserIdAsync(userId);
+        //    if (userFiles.Count >= 5)
+        //    {
+        //        throw new InvalidOperationException("User cannot create more than 5 resumes.");
+        //    }
+        //    var newFile = new FileCV
+        //    {
+        //        UserId = userId,
+        //        FirstName = fileCVDto.FirstName,
+        //        LastName = fileCVDto.LastName,
+        //        Email = fileCVDto.Email,
+        //        Phone = fileCVDto.Phone,
+        //        Summary = fileCVDto.Summary,
+        //        Skills = fileCVDto.Skills ?? new List<string>(),
+        //        Languages = fileCVDto.Languages ?? new List<string>()
+        //    };
+
+        //    await _fileCVRepository.AddAsync(newFile);
+        //    return ToFileCVDto(newFile);
+        //}
         public async Task<FileCV> UpdateFileCVAsync(int id, int userId, FileCVDto fileCVDto)
         {
             var file = await _fileCVRepository.GetFileByUserIdAsync(id, userId);
             if (file == null) return null;
+
             file.Id = id;
-            file.Name = fileCVDto.Name ?? file.Name;
             file.FirstName = fileCVDto.FirstName ?? file.FirstName;
             file.LastName = fileCVDto.LastName ?? file.LastName;
             file.Email = fileCVDto.Email ?? file.Email;
             file.Phone = fileCVDto.Phone ?? file.Phone;
             file.Summary = fileCVDto.Summary ?? file.Summary;
             file.Skills = fileCVDto.Skills ?? new List<string>();
-            file.Languages = fileCVDto.Languages ?? new List<string>();
+
+            // המרת חוויות עבודה עם namespace מלא
+            file.WorkExperiences = fileCVDto.WorkExperiences?.Select(we => new CVBuilder.Core.Models.WorkExperience
+            {
+                Company = we.Company,
+                Position = we.Position,
+                StartDate = we.StartDate,
+                EndDate = we.EndDate,
+                Description = we.Description
+            }).ToList() ?? new List<CVBuilder.Core.Models.WorkExperience>();  // טיפול במצב שבו השדה ריק
+
+            // המרת חינוך עם namespace מלא
+            file.Educations = fileCVDto.Educations?.Select(e => new CVBuilder.Core.Models.Education
+            {
+                Institution = e.Institution,
+                Degree = e.Degree
+            }).ToList() ?? new List<CVBuilder.Core.Models.Education>();  // טיפול במצב שבו השדה ריק
 
             await _fileCVRepository.UpdateAsync(file);
             return file;
         }
+
+
+        //public async Task<FileCV> UpdateFileCVAsync(int id, int userId, FileCVDto fileCVDto)
+        //{
+        //    var file = await _fileCVRepository.GetFileByUserIdAsync(id, userId);
+        //    if (file == null) return null;
+        //    file.Id = id;
+        //    file.Name = fileCVDto.Name ?? file.Name;
+        //    file.FirstName = fileCVDto.FirstName ?? file.FirstName;
+        //    file.LastName = fileCVDto.LastName ?? file.LastName;
+        //    file.Email = fileCVDto.Email ?? file.Email;
+        //    file.Phone = fileCVDto.Phone ?? file.Phone;
+        //    file.Summary = fileCVDto.Summary ?? file.Summary;
+        //    file.Skills = fileCVDto.Skills ?? new List<string>();
+        //    file.Languages = fileCVDto.Languages ?? new List<string>();
+
+        //    await _fileCVRepository.UpdateAsync(file);
+        //    return file;
+        //}
         public async Task<FileCVDto> GetFileByUserIdAsync(int fileId, int userId)
         {
             var file = await _fileCVRepository.GetFileByUserIdAsync(fileId, userId);

@@ -1,6 +1,7 @@
 ﻿using CVBuilder.Core.Models;
 using CVBuilder.Core.Repositories;
 using CVBuilder.Core.Services;
+using CVBuilder.Core.Validators;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
@@ -22,8 +23,18 @@ namespace CVBuilder.Service
             _userRepository = userRepository;
         }
 
+        public bool ValidateEmail(string email)
+        {
+            return UserValidator.IsValidEmail(email);
+        }
+
+
         public async Task<bool> RegisterAsync(string fullName, string email, string password)
         {
+            if (!ValidateEmail(email))
+            {
+                throw new InvalidOperationException("כתובת האימייל לא תקינה.");
+            }
             var existingUser = await _userRepository.GetByEmailAsync(email);
             if (existingUser != null)
                 return false;

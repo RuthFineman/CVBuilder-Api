@@ -286,12 +286,26 @@
   },
   "components": {
     "schemas": {
+      "Education": {
+        "type": "object",
+        "properties": {
+          "institution": {
+            "type": "string",
+            "nullable": true
+          },
+          "degree": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "FileCVDto": {
         "type": "object",
         "properties": {
-          "name": {
-            "type": "string",
-            "nullable": true
+          "id": {
+            "type": "integer",
+            "format": "int32"
           },
           "firstName": {
             "type": "string",
@@ -301,11 +315,11 @@
             "type": "string",
             "nullable": true
           },
-          "email": {
+          "Phone": {
             "type": "string",
             "nullable": true
           },
-          "phone": {
+          "email": {
             "type": "string",
             "nullable": true
           },
@@ -313,14 +327,21 @@
             "type": "string",
             "nullable": true
           },
-          "skills": {
+          "workExperiences": {
             "type": "array",
             "items": {
-              "type": "string"
+              "$ref": "#/components/schemas/WorkExperience"
             },
             "nullable": true
           },
-          "languages": {
+          "educations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Education"
+            },
+            "nullable": true
+          },
+          "skills": {
             "type": "array",
             "items": {
               "type": "string"
@@ -375,6 +396,32 @@
             "nullable": true
           },
           "password": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "WorkExperience": {
+        "type": "object",
+        "properties": {
+          "company": {
+            "type": "string",
+            "nullable": true
+          },
+          "position": {
+            "type": "string",
+            "nullable": true
+          },
+          "startDate": {
+            "type": "string",
+            "nullable": true
+          },
+          "endDate": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
             "type": "string",
             "nullable": true
           }

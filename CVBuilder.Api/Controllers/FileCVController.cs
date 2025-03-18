@@ -43,27 +43,25 @@ namespace CVBuilder.Api.Controllers
                 return Unauthorized(new { message = "File not found or doesn't belong to the user." });
             }
         }
-
-
         [Authorize]
         [HttpPost("add")]
         public async Task<IActionResult> CreateFileCV([FromBody] FileCVDto fileCVDto)
         {
-            Console.WriteLine($"Received Name: {fileCVDto.Name}");
+            Console.WriteLine($"Received Name: {fileCVDto.Id}");
             var userId = GetUserIdFromContext();
             try
             {
                 var newFileCV = await _fileCVService.CreateFileCVAsync(fileCVDto, userId);
                 return Ok(new FileCVDto
                 {
-                    Name = newFileCV.Name,
                     FirstName = newFileCV.FirstName,
                     LastName = newFileCV.LastName,
                     Email = newFileCV.Email,
-                    Phone = newFileCV.Phone,
+                    Phone = newFileCV.Phone,  
                     Summary = newFileCV.Summary,
-                    Skills = newFileCV.Skills ?? new List<string>(),
-                    Languages = newFileCV.Languages ?? new List<string>()
+                    WorkExperiences = newFileCV.WorkExperiences,
+                    Educations = newFileCV.Educations,
+                    Skills = newFileCV.Skills,
                 });
             }
             catch (InvalidOperationException ex)
@@ -71,6 +69,8 @@ namespace CVBuilder.Api.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+
 
         [HttpPut("modify/{id}")]
         public async Task<IActionResult> UpdateFileCV(int id, [FromBody] FileCVDto fileCVDto)

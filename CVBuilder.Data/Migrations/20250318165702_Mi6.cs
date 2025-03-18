@@ -5,7 +5,7 @@
 namespace CVBuilder.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class Migration14 : Migration
+    public partial class Mi6 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

@@ -1,6 +1,7 @@
 using CVBuilder.Core.Models;
 using CVBuilder.Core.Repositories;
 using CVBuilder.Core.Services;
+using CVBuilder.Core.Validators;
 using CVBuilder.Data;
 using CVBuilder.Data.Repositories;
 using CVBuilder.Service;
@@ -32,6 +33,7 @@ builder.Services.AddScoped<IFileCVRepository, FileCVRepository>();
 builder.Services.AddScoped<ITemplateService, TemplateService>();
 builder.Services.AddScoped<ITemplateRepository, TemplateRepository>();
 builder.Services.AddScoped<AuthService>();
+builder.Services.AddTransient<UserValidator>();
 
 // הוספת הגדרות האותנטיקציה JWT
 builder.Services.AddAuthentication(options =>

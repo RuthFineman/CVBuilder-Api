@@ -1,13 +1,13 @@
 ﻿using CVBuilder.Api.Models;
 using CVBuilder.Core.Models;
 using CVBuilder.Core.Services;
+using CVBuilder.Core.Validators;
 using CVBuilder.Data;
 using CVBuilder.Service;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace CVBuilder.Api.Controllers
@@ -18,26 +18,45 @@ namespace CVBuilder.Api.Controllers
     {
         private readonly IUserService _userService;
         private readonly AuthService _authService;
+        private readonly UserValidator _userValidator;
 
 
-        public UsersController(IUserService userService, AuthService authService)
+        public UsersController(IUserService userService, AuthService authService, UserValidator userValidator)
         {
             _userService = userService;
             _authService = authService;
+            _userValidator = userValidator;
         }
 
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] UserRegisterModel userDto)
         {
-            var result = await _userService.RegisterAsync(userDto.FullName, userDto.Email, userDto.Password);
-            if (!result)
-                return BadRequest("User already exists.");
+            try
+            {
+                var result = await _userService.RegisterAsync(userDto.FullName, userDto.Email, userDto.Password);
+                if (!result)
+                    return BadRequest("User already exists.");
 
-            var user = await _userService.LoginAsync(userDto.Email, userDto.Password);
-            var token = _authService.GenerateJwtToken(user.Email, user.Id, user.Role);
+                var isValidPassword = await _userValidator.IsValidPasswordAsync(userDto.Email, userDto.Password);
+                if (!isValidPassword)
+                {
+                    return BadRequest("הסיסמה לא תקינה.");
+                }
+                var user = await _userService.LoginAsync(userDto.Email, userDto.Password);
+                var token = _authService.GenerateJwtToken(user.Email, user.Id, user.Role);
 
-            // החזרת ה-Token למשתמש
-            return Ok(new { token });  // מחזיר את ה-Token למשתמש לאחר הרשמה
+                // החזרת ה-Token למשתמש
+                return Ok(new { token });
+            }
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(ex.Message); // החזרת הודעת שגיאה אם המייל לא תקין
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "An error occurred: " + ex.Message); // טיפול בשגיאות כלליות
+            }
+
         }
 
         [HttpPost("login")]

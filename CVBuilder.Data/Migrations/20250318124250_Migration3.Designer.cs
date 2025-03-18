@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CVBuilder.Data.Migrations
 {
     [DbContext(typeof(CVBuilderDbContext))]
-    [Migration("20250316010328_db8")]
-    partial class db8
+    [Migration("20250318124250_Migration3")]
+    partial class Migration3
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
