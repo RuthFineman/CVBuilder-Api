@@ -3,44 +3,24 @@
   "WorkspaceRootPath": "C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA \u05D5\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 \u05D2\u05DE\u05E8\\CVBuilder\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{F849470C-D7A5-4EEC-882B-F23EC8283EB9}|CVBuilder.Core\\CVBuilder.Core.csproj|c:\\users\\user1\\documents\\\u05EA\u05DB\u05E0\u05D5\u05EA \u05D5\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 \u05D2\u05DE\u05E8\\cvbuilder\\cvbuilder.core\\models\\filecv.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F849470C-D7A5-4EEC-882B-F23EC8283EB9}|CVBuilder.Core\\CVBuilder.Core.csproj|solutionrelative:cvbuilder.core\\models\\filecv.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA \u05D5\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 \u05D2\u05DE\u05E8\\CVBuilder\\CVBuilder.Data\\Migrations\\20250318013956_m14.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:CVBuilder.Data\\Migrations\\20250318013956_m14.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A02A08BF-6B8F-468F-A473-A88450356A86}|CVBuilder.Data\\CVBuilder.Data.csproj|c:\\users\\user1\\documents\\\u05EA\u05DB\u05E0\u05D5\u05EA \u05D5\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 \u05D2\u05DE\u05E8\\cvbuilder\\cvbuilder.data\\repositories\\filecvrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A02A08BF-6B8F-468F-A473-A88450356A86}|CVBuilder.Data\\CVBuilder.Data.csproj|solutionrelative:cvbuilder.data\\repositories\\filecvrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2F167D28-AFF6-459A-93DD-2A70E6355B8E}|CVBuilder.Service\\CVBuilder.Service.csproj|c:\\users\\user1\\documents\\\u05EA\u05DB\u05E0\u05D5\u05EA \u05D5\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 \u05D2\u05DE\u05E8\\cvbuilder\\cvbuilder.service\\filecvservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2F167D28-AFF6-459A-93DD-2A70E6355B8E}|CVBuilder.Service\\CVBuilder.Service.csproj|solutionrelative:cvbuilder.service\\filecvservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{D3CE3097-3FF7-4261-8F89-A5509EE5CEA4}|CVBuilder.Api\\CVBuilder.Api.csproj|c:\\users\\user1\\documents\\\u05EA\u05DB\u05E0\u05D5\u05EA \u05D5\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 \u05D2\u05DE\u05E8\\cvbuilder\\cvbuilder.api\\controllers\\filecvcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D3CE3097-3FF7-4261-8F89-A5509EE5CEA4}|CVBuilder.Api\\CVBuilder.Api.csproj|solutionrelative:cvbuilder.api\\controllers\\filecvcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D3CE3097-3FF7-4261-8F89-A5509EE5CEA4}|CVBuilder.Api\\CVBuilder.Api.csproj|c:\\users\\user1\\documents\\\u05EA\u05DB\u05E0\u05D5\u05EA \u05D5\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 \u05D2\u05DE\u05E8\\cvbuilder\\cvbuilder.api\\controllers\\templatecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D3CE3097-3FF7-4261-8F89-A5509EE5CEA4}|CVBuilder.Api\\CVBuilder.Api.csproj|solutionrelative:cvbuilder.api\\controllers\\templatecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D3CE3097-3FF7-4261-8F89-A5509EE5CEA4}|CVBuilder.Api\\CVBuilder.Api.csproj|c:\\users\\user1\\documents\\\u05EA\u05DB\u05E0\u05D5\u05EA \u05D5\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 \u05D2\u05DE\u05E8\\cvbuilder\\cvbuilder.api\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D3CE3097-3FF7-4261-8F89-A5509EE5CEA4}|CVBuilder.Api\\CVBuilder.Api.csproj|solutionrelative:cvbuilder.api\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D3CE3097-3FF7-4261-8F89-A5509EE5CEA4}|CVBuilder.Api\\CVBuilder.Api.csproj|c:\\users\\user1\\documents\\\u05EA\u05DB\u05E0\u05D5\u05EA \u05D5\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 \u05D2\u05DE\u05E8\\cvbuilder\\cvbuilder.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D3CE3097-3FF7-4261-8F89-A5509EE5CEA4}|CVBuilder.Api\\CVBuilder.Api.csproj|solutionrelative:cvbuilder.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A02A08BF-6B8F-468F-A473-A88450356A86}|CVBuilder.Data\\CVBuilder.Data.csproj|c:\\users\\user1\\documents\\\u05EA\u05DB\u05E0\u05D5\u05EA \u05D5\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 \u05D2\u05DE\u05E8\\cvbuilder\\cvbuilder.data\\repositories\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A02A08BF-6B8F-468F-A473-A88450356A86}|CVBuilder.Data\\CVBuilder.Data.csproj|solutionrelative:cvbuilder.data\\repositories\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2F167D28-AFF6-459A-93DD-2A70E6355B8E}|CVBuilder.Service\\CVBuilder.Service.csproj|c:\\users\\user1\\documents\\\u05EA\u05DB\u05E0\u05D5\u05EA \u05D5\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 \u05D2\u05DE\u05E8\\cvbuilder\\cvbuilder.service\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2F167D28-AFF6-459A-93DD-2A70E6355B8E}|CVBuilder.Service\\CVBuilder.Service.csproj|solutionrelative:cvbuilder.service\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D3CE3097-3FF7-4261-8F89-A5509EE5CEA4}|CVBuilder.Api\\CVBuilder.Api.csproj|c:\\users\\user1\\documents\\\u05EA\u05DB\u05E0\u05D5\u05EA \u05D5\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 \u05D2\u05DE\u05E8\\cvbuilder\\cvbuilder.api\\models\\userregistermodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D3CE3097-3FF7-4261-8F89-A5509EE5CEA4}|CVBuilder.Api\\CVBuilder.Api.csproj|solutionrelative:cvbuilder.api\\models\\userregistermodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F849470C-D7A5-4EEC-882B-F23EC8283EB9}|CVBuilder.Core\\CVBuilder.Core.csproj|c:\\users\\user1\\documents\\\u05EA\u05DB\u05E0\u05D5\u05EA \u05D5\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 \u05D2\u05DE\u05E8\\cvbuilder\\cvbuilder.core\\services\\iuserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F849470C-D7A5-4EEC-882B-F23EC8283EB9}|CVBuilder.Core\\CVBuilder.Core.csproj|solutionrelative:cvbuilder.core\\services\\iuserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F849470C-D7A5-4EEC-882B-F23EC8283EB9}|CVBuilder.Core\\CVBuilder.Core.csproj|c:\\users\\user1\\documents\\\u05EA\u05DB\u05E0\u05D5\u05EA \u05D5\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 \u05D2\u05DE\u05E8\\cvbuilder\\cvbuilder.core\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F849470C-D7A5-4EEC-882B-F23EC8283EB9}|CVBuilder.Core\\CVBuilder.Core.csproj|solutionrelative:cvbuilder.core\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F849470C-D7A5-4EEC-882B-F23EC8283EB9}|CVBuilder.Core\\CVBuilder.Core.csproj|c:\\users\\user1\\documents\\\u05EA\u05DB\u05E0\u05D5\u05EA \u05D5\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 \u05D2\u05DE\u05E8\\cvbuilder\\cvbuilder.core\\models\\filecv.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F849470C-D7A5-4EEC-882B-F23EC8283EB9}|CVBuilder.Core\\CVBuilder.Core.csproj|solutionrelative:cvbuilder.core\\models\\filecv.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -55,131 +35,66 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "FileCV.cs",
-              "DocumentMoniker": "C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA \u05D5\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 \u05D2\u05DE\u05E8\\CVBuilder\\CVBuilder.Core\\Models\\FileCV.cs",
-              "RelativeDocumentMoniker": "CVBuilder.Core\\Models\\FileCV.cs",
-              "ToolTip": "C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA \u05D5\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 \u05D2\u05DE\u05E8\\CVBuilder\\CVBuilder.Core\\Models\\FileCV.cs",
-              "RelativeToolTip": "CVBuilder.Core\\Models\\FileCV.cs",
+              "Title": "20250318013956_m14.cs",
+              "DocumentMoniker": "C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA \u05D5\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 \u05D2\u05DE\u05E8\\CVBuilder\\CVBuilder.Data\\Migrations\\20250318013956_m14.cs",
+              "RelativeDocumentMoniker": "CVBuilder.Data\\Migrations\\20250318013956_m14.cs",
+              "ToolTip": "C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA \u05D5\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 \u05D2\u05DE\u05E8\\CVBuilder\\CVBuilder.Data\\Migrations\\20250318013956_m14.cs",
+              "RelativeToolTip": "CVBuilder.Data\\Migrations\\20250318013956_m14.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-16T23:26:23.546Z",
+              "WhenOpened": "2025-03-18T01:39:56.443Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "FileCVController.cs",
-              "DocumentMoniker": "C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA \u05D5\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 \u05D2\u05DE\u05E8\\CVBuilder\\CVBuilder.Api\\Controllers\\FileCVController.cs",
-              "RelativeDocumentMoniker": "CVBuilder.Api\\Controllers\\FileCVController.cs",
-              "ToolTip": "C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA \u05D5\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 \u05D2\u05DE\u05E8\\CVBuilder\\CVBuilder.Api\\Controllers\\FileCVController.cs",
-              "RelativeToolTip": "CVBuilder.Api\\Controllers\\FileCVController.cs",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAAACAAAAA7AAAAAAAAAA==",
+              "Title": "FileCVRepository.cs",
+              "DocumentMoniker": "C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA \u05D5\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 \u05D2\u05DE\u05E8\\CVBuilder\\CVBuilder.Data\\Repositories\\FileCVRepository.cs",
+              "RelativeDocumentMoniker": "CVBuilder.Data\\Repositories\\FileCVRepository.cs",
+              "ToolTip": "C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA \u05D5\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 \u05D2\u05DE\u05E8\\CVBuilder\\CVBuilder.Data\\Repositories\\FileCVRepository.cs",
+              "RelativeToolTip": "CVBuilder.Data\\Repositories\\FileCVRepository.cs",
+              "ViewState": "AgIAADMAAAAAAAAAAAAgwEMAAAAsAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-16T23:19:34.995Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "TemplateController.cs",
-              "DocumentMoniker": "C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA \u05D5\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 \u05D2\u05DE\u05E8\\CVBuilder\\CVBuilder.Api\\Controllers\\TemplateController.cs",
-              "RelativeDocumentMoniker": "CVBuilder.Api\\Controllers\\TemplateController.cs",
-              "ToolTip": "C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA \u05D5\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 \u05D2\u05DE\u05E8\\CVBuilder\\CVBuilder.Api\\Controllers\\TemplateController.cs",
-              "RelativeToolTip": "CVBuilder.Api\\Controllers\\TemplateController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-16T23:19:33.146Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA \u05D5\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 \u05D2\u05DE\u05E8\\CVBuilder\\CVBuilder.Api\\Program.cs",
-              "RelativeDocumentMoniker": "CVBuilder.Api\\Program.cs",
-              "ToolTip": "C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA \u05D5\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 \u05D2\u05DE\u05E8\\CVBuilder\\CVBuilder.Api\\Program.cs",
-              "RelativeToolTip": "CVBuilder.Api\\Program.cs",
-              "ViewState": "AgIAAFQAAAAAAAAAAAAAAGMAAAAeAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-16T18:36:40.847Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "User.cs",
-              "DocumentMoniker": "C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA \u05D5\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 \u05D2\u05DE\u05E8\\CVBuilder\\CVBuilder.Core\\Models\\User.cs",
-              "RelativeDocumentMoniker": "CVBuilder.Core\\Models\\User.cs",
-              "ToolTip": "C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA \u05D5\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 \u05D2\u05DE\u05E8\\CVBuilder\\CVBuilder.Core\\Models\\User.cs",
-              "RelativeToolTip": "CVBuilder.Core\\Models\\User.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-16T18:28:13.811Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "IUserService.cs",
-              "DocumentMoniker": "C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA \u05D5\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 \u05D2\u05DE\u05E8\\CVBuilder\\CVBuilder.Core\\Services\\IUserService.cs",
-              "RelativeDocumentMoniker": "CVBuilder.Core\\Services\\IUserService.cs",
-              "ToolTip": "C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA \u05D5\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 \u05D2\u05DE\u05E8\\CVBuilder\\CVBuilder.Core\\Services\\IUserService.cs",
-              "RelativeToolTip": "CVBuilder.Core\\Services\\IUserService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-16T18:28:04.894Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "UserRepository.cs",
-              "DocumentMoniker": "C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA \u05D5\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 \u05D2\u05DE\u05E8\\CVBuilder\\CVBuilder.Data\\Repositories\\UserRepository.cs",
-              "RelativeDocumentMoniker": "CVBuilder.Data\\Repositories\\UserRepository.cs",
-              "ToolTip": "C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA \u05D5\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 \u05D2\u05DE\u05E8\\CVBuilder\\CVBuilder.Data\\Repositories\\UserRepository.cs",
-              "RelativeToolTip": "CVBuilder.Data\\Repositories\\UserRepository.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-16T18:27:52.91Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "UserRegisterModel.cs",
-              "DocumentMoniker": "C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA \u05D5\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 \u05D2\u05DE\u05E8\\CVBuilder\\CVBuilder.Api\\Models\\UserRegisterModel.cs",
-              "RelativeDocumentMoniker": "CVBuilder.Api\\Models\\UserRegisterModel.cs",
-              "ToolTip": "C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA \u05D5\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 \u05D2\u05DE\u05E8\\CVBuilder\\CVBuilder.Api\\Models\\UserRegisterModel.cs",
-              "RelativeToolTip": "CVBuilder.Api\\Models\\UserRegisterModel.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAArAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-16T18:25:43.414Z",
+              "WhenOpened": "2025-03-18T01:39:04.498Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "UsersController.cs",
-              "DocumentMoniker": "C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA \u05D5\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 \u05D2\u05DE\u05E8\\CVBuilder\\CVBuilder.Api\\Controllers\\UsersController.cs",
-              "RelativeDocumentMoniker": "CVBuilder.Api\\Controllers\\UsersController.cs",
-              "ToolTip": "C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA \u05D5\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 \u05D2\u05DE\u05E8\\CVBuilder\\CVBuilder.Api\\Controllers\\UsersController.cs",
-              "RelativeToolTip": "CVBuilder.Api\\Controllers\\UsersController.cs",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAAACMAAABWAAAAAAAAAA==",
+              "Title": "FileCVController.cs",
+              "DocumentMoniker": "C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA \u05D5\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 \u05D2\u05DE\u05E8\\CVBuilder\\CVBuilder.Api\\Controllers\\FileCVController.cs",
+              "RelativeDocumentMoniker": "CVBuilder.Api\\Controllers\\FileCVController.cs",
+              "ToolTip": "C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA \u05D5\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 \u05D2\u05DE\u05E8\\CVBuilder\\CVBuilder.Api\\Controllers\\FileCVController.cs",
+              "RelativeToolTip": "CVBuilder.Api\\Controllers\\FileCVController.cs",
+              "ViewState": "AgIAAD0AAAAAAAAAAAAkwFQAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-16T17:29:18.53Z",
+              "WhenOpened": "2025-03-18T01:34:50.734Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "UserService.cs",
-              "DocumentMoniker": "C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA \u05D5\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 \u05D2\u05DE\u05E8\\CVBuilder\\CVBuilder.Service\\UserService.cs",
-              "RelativeDocumentMoniker": "CVBuilder.Service\\UserService.cs",
-              "ToolTip": "C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA \u05D5\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 \u05D2\u05DE\u05E8\\CVBuilder\\CVBuilder.Service\\UserService.cs",
-              "RelativeToolTip": "CVBuilder.Service\\UserService.cs",
-              "ViewState": "AgIAABkAAAAAAAAAAAA1wCUAAAAcAAAAAAAAAA==",
+              "DocumentIndex": 4,
+              "Title": "FileCV.cs",
+              "DocumentMoniker": "C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA \u05D5\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 \u05D2\u05DE\u05E8\\CVBuilder\\CVBuilder.Core\\Models\\FileCV.cs",
+              "RelativeDocumentMoniker": "CVBuilder.Core\\Models\\FileCV.cs",
+              "ToolTip": "C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA \u05D5\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 \u05D2\u05DE\u05E8\\CVBuilder\\CVBuilder.Core\\Models\\FileCV.cs",
+              "RelativeToolTip": "CVBuilder.Core\\Models\\FileCV.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAgwCgAAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-16T17:27:03.652Z",
+              "WhenOpened": "2025-03-18T01:12:35.53Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "FileCVService.cs",
+              "DocumentMoniker": "C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA \u05D5\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 \u05D2\u05DE\u05E8\\CVBuilder\\CVBuilder.Service\\FileCVService.cs",
+              "RelativeDocumentMoniker": "CVBuilder.Service\\FileCVService.cs",
+              "ToolTip": "C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA \u05D5\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 \u05D2\u05DE\u05E8\\CVBuilder\\CVBuilder.Service\\FileCVService.cs",
+              "RelativeToolTip": "CVBuilder.Service\\FileCVService.cs",
+              "ViewState": "AgIAAEUAAAAAAAAAAAAowF0AAABUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-17T23:52:52.631Z",
               "EditorCaption": ""
             }
           ]

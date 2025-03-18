@@ -13,12 +13,10 @@ namespace CVBuilder.Api.Controllers
     public class TemplateController : ControllerBase
     {
         private readonly ITemplateService _templateService;
-        //private readonly IUserService _userService;
 
         public TemplateController(ITemplateService templateService, IUserService userService)
         {
             _templateService = templateService;
-            //_userService = userService;
         }
         private int GetUserIdFromContext()
         {

@@ -63,7 +63,9 @@ namespace CVBuilder.Data.Repositories
             var existingFile = await _context.FileCVs.FindAsync(fileCV.Id);
             if (existingFile != null)
             {
+
                 existingFile.Name = fileCV.Name ?? existingFile.Name;
+                existingFile.Id = fileCV.Id ;
                 existingFile.FirstName = fileCV.FirstName ?? existingFile.FirstName;
                 existingFile.LastName = fileCV.LastName ?? existingFile.LastName;
                 existingFile.Email = fileCV.Email ?? existingFile.Email;

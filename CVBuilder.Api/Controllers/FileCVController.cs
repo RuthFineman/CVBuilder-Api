@@ -49,6 +49,7 @@ namespace CVBuilder.Api.Controllers
         [HttpPost("add")]
         public async Task<IActionResult> CreateFileCV([FromBody] FileCVDto fileCVDto)
         {
+            Console.WriteLine($"Received Name: {fileCVDto.Name}");
             var userId = GetUserIdFromContext();
             try
             {

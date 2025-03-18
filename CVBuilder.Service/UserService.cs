@@ -16,7 +16,6 @@ namespace CVBuilder.Service
     public class UserService : IUserService
     {
         private readonly IUserRepository _userRepository;
-        //private readonly IHttpContextAccessor _httpContextAccessor;
 
         public UserService(IUserRepository userRepository)
         {

@@ -21,7 +21,7 @@ namespace CVBuilder.Service
         {
             return new FileCVDto
             {
-                Name = System.IO.Path.GetFileName(fileCV.FilePath),
+                Name = fileCV.Name,
                 FirstName = fileCV.FirstName,
                 LastName = fileCV.LastName,
                 Email = fileCV.Email,
@@ -52,9 +52,9 @@ namespace CVBuilder.Service
             }
 
             var userFiles = await _fileCVRepository.GetByUserIdAsync(userId);
-            if (userFiles.Count >= 10)
+            if (userFiles.Count >= 5)
             {
-                throw new InvalidOperationException("User cannot create more than 10 resumes.");
+                throw new InvalidOperationException("User cannot create more than 5 resumes.");
             }
             var newFile = new FileCV
             {
@@ -76,7 +76,7 @@ namespace CVBuilder.Service
         {
             var file = await _fileCVRepository.GetFileByUserIdAsync(id, userId);
             if (file == null) return null;
-
+            file.Id = id;
             file.Name = fileCVDto.Name ?? file.Name;
             file.FirstName = fileCVDto.FirstName ?? file.FirstName;
             file.LastName = fileCVDto.LastName ?? file.LastName;
