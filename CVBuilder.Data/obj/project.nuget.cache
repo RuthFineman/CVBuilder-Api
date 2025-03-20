@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "m02uY7d665Y=",
+  "dgSpecHash": "+XkvO3bDzzs=",
   "success": true,
   "projectFilePath": "C:\\Users\\user1\\Documents\\תכנות ו\\פרויקט גמר\\CVBuilder\\CVBuilder.Data\\CVBuilder.Data.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\user1\\.nuget\\packages\\awssdk.core\\3.7.402.21\\awssdk.core.3.7.402.21.nupkg.sha512",
+    "C:\\Users\\user1\\.nuget\\packages\\awssdk.s3\\3.7.415.20\\awssdk.s3.3.7.415.20.nupkg.sha512",
     "C:\\Users\\user1\\.nuget\\packages\\bouncycastle.cryptography\\2.3.1\\bouncycastle.cryptography.2.3.1.nupkg.sha512",
     "C:\\Users\\user1\\.nuget\\packages\\google.protobuf\\3.26.1\\google.protobuf.3.26.1.nupkg.sha512",
     "C:\\Users\\user1\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",

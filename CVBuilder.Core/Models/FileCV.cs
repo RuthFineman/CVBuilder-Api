@@ -14,7 +14,7 @@ namespace CVBuilder.Core.Models
         public int Id { get; set; }
         public int UserId { get; set; }
         public User User { get; set; }
-        public string PathToCss { get; set; } = string.Empty;
+        //public string PathToCss { get; set; } = string.Empty;
         public string FilePath { get; set; } = string.Empty;
         [JsonPropertyName("firstName")]
         public string FirstName { get; set; }

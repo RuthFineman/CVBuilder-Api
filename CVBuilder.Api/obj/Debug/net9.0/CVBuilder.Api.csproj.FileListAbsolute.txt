@@ -337,3 +337,6 @@ C:\Users\user1\Documents\תכנות ו\פרויקט גמר\CVBuilder\CVBuilder.A
 C:\Users\user1\Documents\תכנות ו\פרויקט גמר\CVBuilder\CVBuilder.Api\obj\Debug\net9.0\CVBuilder.Api.genruntimeconfig.cache
 C:\Users\user1\Documents\תכנות ו\פרויקט גמר\CVBuilder\CVBuilder.Api\obj\Debug\net9.0\ref\CVBuilder.Api.dll
 C:\Users\user1\Documents\תכנות ו\פרויקט גמר\CVBuilder\CVBuilder.Api\obj\Debug\net9.0\CVBuilder.Api.sourcelink.json
+C:\Users\user1\Documents\תכנות ו\פרויקט גמר\CVBuilder\CVBuilder.Api\bin\Debug\net9.0\AWSSDK.Core.dll
+C:\Users\user1\Documents\תכנות ו\פרויקט גמר\CVBuilder\CVBuilder.Api\bin\Debug\net9.0\AWSSDK.Extensions.NETCore.Setup.dll
+C:\Users\user1\Documents\תכנות ו\פרויקט גמר\CVBuilder\CVBuilder.Api\bin\Debug\net9.0\AWSSDK.S3.dll

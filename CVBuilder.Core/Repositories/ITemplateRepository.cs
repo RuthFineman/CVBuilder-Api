@@ -9,7 +9,8 @@ namespace CVBuilder.Core.Repositories
 {
     public interface ITemplateRepository
     {
-        IEnumerable<Template> GetAll();
+        Task<List<string>> GetAllFilesAsync();
+        Task<string?> GetFirstFileAsync();
         Template? GetByIdAndUserId(int id, int userId);
         void Add(Template template);
         bool Delete(int id);

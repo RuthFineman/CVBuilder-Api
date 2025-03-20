@@ -19,7 +19,7 @@ namespace CVBuilder.Data
         public DbSet<Education> Educations { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<FileCV>()
+            modelBuilder.Entity<FileCV>() 
                 .HasMany(f => f.Educations)
                 .WithOne()  // אם אין קשר ישיר ל-Education (למשל לא הגדרת ForeignKey)
                 .HasForeignKey("FileCVId");  // יש להגדיר את שם ה-ForeignKey אם יש צורך

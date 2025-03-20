@@ -11,6 +11,7 @@ namespace CVBuilder.Core.Models
         public int? Id { get; set; }
         public string?   Name { get; set; }
 
-        public string? CssFilePath { get; set; }
+        //public string? CssFilePath { get; set; }
     }
 }
+

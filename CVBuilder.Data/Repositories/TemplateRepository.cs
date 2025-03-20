@@ -6,23 +6,56 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Amazon;
+using Amazon.S3;
+using Amazon.S3.Model;
 namespace CVBuilder.Data.Repositories
 {
     public class TemplateRepository: ITemplateRepository
     {
         private readonly CVBuilderDbContext _context;
+        private readonly IAmazonS3 _s3Client;
+        private readonly string _bucketName = "cvfilebuilder";
 
-        public TemplateRepository(CVBuilderDbContext context)
+        public TemplateRepository(IAmazonS3 s3Client)
         {
-            _context = context;
-        }
+            _s3Client = s3Client;
+           
 
-        public IEnumerable<Template> GetAll()
-        {
-            return _context.Templates.ToList();  
         }
-        //שיניתי כאן משהו בפונקציה למטה
+        public async Task<List<string>> GetAllFilesAsync()
+        {
+            var request = new ListObjectsV2Request
+            {
+                BucketName = _bucketName,
+                Prefix = "exampleCV/"
+            };
+
+            var response = await _s3Client.ListObjectsV2Async(request);
+            var fileUrls = new List<string>();
+
+            foreach (var s3Object in response.S3Objects)
+            {
+                if (s3Object.Key.EndsWith("/") || s3Object.Size == 0)
+                {
+                    continue;
+                }
+                string fileUrl = $"https://{_bucketName}.s3.amazonaws.com/{s3Object.Key}";
+                fileUrls.Add(fileUrl);
+            }
+            return fileUrls;
+        }
+        public async Task<string?> GetFirstFileAsync()
+        {
+            var request = new ListObjectsV2Request
+            {
+                BucketName = _bucketName,
+                MaxKeys = 1
+            };
+
+            var response = await _s3Client.ListObjectsV2Async(request);
+            return response.S3Objects.FirstOrDefault()?.Key;
+        }
 
         public Template? GetByIdAndUserId(int id, int userId)
         {

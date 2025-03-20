@@ -8,6 +8,7 @@
     ".NETCoreApp,Version=v9.0": {
       "CVBuilder.Api/1.0.0": {
         "dependencies": {
+          "AWSSDK.Extensions.NETCore.Setup": "3.7.400",
           "CVBuilder.Data": "1.0.0",
           "CVBuilder.Service": "1.0.0",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "9.0.3",
@@ -30,6 +31,39 @@
           "lib/net8.0/AutoMapper.dll": {
             "assemblyVersion": "14.0.0.0",
             "fileVersion": "14.0.0.0"
+          }
+        }
+      },
+      "AWSSDK.Core/3.7.402.21": {
+        "runtime": {
+          "lib/net8.0/AWSSDK.Core.dll": {
+            "assemblyVersion": "3.3.0.0",
+            "fileVersion": "3.7.402.21"
+          }
+        }
+      },
+      "AWSSDK.Extensions.NETCore.Setup/3.7.400": {
+        "dependencies": {
+          "AWSSDK.Core": "3.7.402.21",
+          "Microsoft.Extensions.Configuration.Abstractions": "9.0.0",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "9.0.3",
+          "Microsoft.Extensions.Logging.Abstractions": "9.0.3"
+        },
+        "runtime": {
+          "lib/net8.0/AWSSDK.Extensions.NETCore.Setup.dll": {
+            "assemblyVersion": "3.3.0.0",
+            "fileVersion": "3.7.400.0"
+          }
+        }
+      },
+      "AWSSDK.S3/3.7.415.20": {
+        "dependencies": {
+          "AWSSDK.Core": "3.7.402.21"
+        },
+        "runtime": {
+          "lib/net8.0/AWSSDK.S3.dll": {
+            "assemblyVersion": "3.3.0.0",
+            "fileVersion": "3.7.415.20"
           }
         }
       },
@@ -1034,6 +1068,7 @@
       },
       "CVBuilder.Data/1.0.0": {
         "dependencies": {
+          "AWSSDK.S3": "3.7.415.20",
           "CVBuilder.Core": "1.0.0",
           "MySql.Data": "9.2.0",
           "MySql.Data.EntityFrameworkCore": "8.0.22",
@@ -1048,6 +1083,7 @@
       },
       "CVBuilder.Service/1.0.0": {
         "dependencies": {
+          "AWSSDK.S3": "3.7.415.20",
           "AutoMapper": "14.0.0",
           "BCrypt.Net-Next": "4.0.3",
           "CVBuilder.Core": "1.0.0",
@@ -1078,6 +1114,27 @@
       "sha512": "sha512-OC+1neAPM4oCCqQj3g2GJ2shziNNhOkxmNB9cVS8jtx4JbgmRzLcUOxB9Tsz6cVPHugdkHgCaCrTjjSI0Z5sCQ==",
       "path": "automapper/14.0.0",
       "hashPath": "automapper.14.0.0.nupkg.sha512"
+    },
+    "AWSSDK.Core/3.7.402.21": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-EliYjOVbBITpmdHDuELPK+Oc7ryK/nO4pG/xNsbxocO/ehicGfbPMkL9OFDi3lvyAYi/daMJnPH8xeNM7+IkVw==",
+      "path": "awssdk.core/3.7.402.21",
+      "hashPath": "awssdk.core.3.7.402.21.nupkg.sha512"
+    },
+    "AWSSDK.Extensions.NETCore.Setup/3.7.400": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-i4ta6n+QuGKt1RBCIbRU2wohz5DYJ+wRPR9EI7YkzC8eaWSbmMXTNL+s4HpYUsoxM7uyUrYoW0gC52/9KnK7xw==",
+      "path": "awssdk.extensions.netcore.setup/3.7.400",
+      "hashPath": "awssdk.extensions.netcore.setup.3.7.400.nupkg.sha512"
+    },
+    "AWSSDK.S3/3.7.415.20": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-7VQbxZgFrnbH/vZgD4+J0XUuHF6DzEI+PSmYAwuiD85dJkoeyYA/NmgHUmu/SSvyrt2INykucNklOsOa2/OsFQ==",
+      "path": "awssdk.s3/3.7.415.20",
+      "hashPath": "awssdk.s3.3.7.415.20.nupkg.sha512"
     },
     "BCrypt.Net-Next/4.0.3": {
       "type": "package",

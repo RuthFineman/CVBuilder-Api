@@ -8,6 +8,7 @@
     ".NETCoreApp,Version=v9.0": {
       "CVBuilder.Service/1.0.0": {
         "dependencies": {
+          "AWSSDK.S3": "3.7.415.20",
           "AutoMapper": "14.0.0",
           "BCrypt.Net-Next": "4.0.3",
           "CVBuilder.Core": "1.0.0",
@@ -29,6 +30,25 @@
           "lib/net8.0/AutoMapper.dll": {
             "assemblyVersion": "14.0.0.0",
             "fileVersion": "14.0.0.0"
+          }
+        }
+      },
+      "AWSSDK.Core/3.7.402.21": {
+        "runtime": {
+          "lib/net8.0/AWSSDK.Core.dll": {
+            "assemblyVersion": "3.3.0.0",
+            "fileVersion": "3.7.402.21"
+          }
+        }
+      },
+      "AWSSDK.S3/3.7.415.20": {
+        "dependencies": {
+          "AWSSDK.Core": "3.7.402.21"
+        },
+        "runtime": {
+          "lib/net8.0/AWSSDK.S3.dll": {
+            "assemblyVersion": "3.3.0.0",
+            "fileVersion": "3.7.415.20"
           }
         }
       },
@@ -554,6 +574,20 @@
       "sha512": "sha512-OC+1neAPM4oCCqQj3g2GJ2shziNNhOkxmNB9cVS8jtx4JbgmRzLcUOxB9Tsz6cVPHugdkHgCaCrTjjSI0Z5sCQ==",
       "path": "automapper/14.0.0",
       "hashPath": "automapper.14.0.0.nupkg.sha512"
+    },
+    "AWSSDK.Core/3.7.402.21": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-EliYjOVbBITpmdHDuELPK+Oc7ryK/nO4pG/xNsbxocO/ehicGfbPMkL9OFDi3lvyAYi/daMJnPH8xeNM7+IkVw==",
+      "path": "awssdk.core/3.7.402.21",
+      "hashPath": "awssdk.core.3.7.402.21.nupkg.sha512"
+    },
+    "AWSSDK.S3/3.7.415.20": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-7VQbxZgFrnbH/vZgD4+J0XUuHF6DzEI+PSmYAwuiD85dJkoeyYA/NmgHUmu/SSvyrt2INykucNklOsOa2/OsFQ==",
+      "path": "awssdk.s3/3.7.415.20",
+      "hashPath": "awssdk.s3.3.7.415.20.nupkg.sha512"
     },
     "BCrypt.Net-Next/4.0.3": {
       "type": "package",

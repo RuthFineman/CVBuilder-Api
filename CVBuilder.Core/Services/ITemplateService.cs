@@ -9,8 +9,10 @@ namespace CVBuilder.Core.Services
 {
     public interface ITemplateService
     {
-        IEnumerable<Template> GetAllTemplates();
-        Template? GetTemplateByIdAndUserId(int id, int userId);
+        Task<List<string>> GetAllFilesAsync();
+        Task<string?> GetFirstFileAsync();
+        //Task<List<string>> GetLastFiveFilesAsync();
+        //Template? GetTemplateByIdAndUserId(int id, int userId); 
         void AddTemplate(Template template);
         bool DeleteTemplate(int id);
     }

@@ -1,4 +1,7 @@
-﻿using CVBuilder.Core.Models;
+﻿using Amazon;
+using Amazon.S3;
+using Amazon.S3.Model;
+using CVBuilder.Core.Models;
 using CVBuilder.Core.Repositories;
 using CVBuilder.Core.Services;
 using System;
@@ -12,22 +15,25 @@ namespace CVBuilder.Service
     public class TemplateService: ITemplateService
     {
         private readonly ITemplateRepository _templateRepository;
-        private readonly IUserRepository _userRepository;
+        private readonly IAmazonS3 _s3Client;
+        private readonly string _bucketName = "cvfilebuilder";
 
-        public TemplateService(ITemplateRepository templateRepository, IUserRepository userRepository)
+        public TemplateService(ITemplateRepository ITemplateRepository)
         {
-            _templateRepository = templateRepository;
-            _userRepository = userRepository;
+            _templateRepository = ITemplateRepository;
         }
-
-        public IEnumerable<Template> GetAllTemplates()
+        public async Task<List<string>> GetAllFilesAsync()
         {
-            return _templateRepository.GetAll();
+            return await _templateRepository.GetAllFilesAsync();
         }
-        public Template? GetTemplateByIdAndUserId(int id, int userId)
+        public async Task<string?> GetFirstFileAsync()
         {
-            return _templateRepository.GetByIdAndUserId(id, userId);
+            return await _templateRepository.GetFirstFileAsync();
         }
+        //public Template? GetTemplateByIdAndUserId(int id, int userId)
+        //{
+        //    return _templateRepository.GetByIdAndUserId(id, userId);
+        //}
 
         public void AddTemplate(Template template)
         {

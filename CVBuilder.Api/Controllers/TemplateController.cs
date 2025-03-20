@@ -1,8 +1,12 @@
-﻿using CVBuilder.Core.Models;
+﻿using Amazon.S3.Model;
+using Amazon.S3;
+using CVBuilder.Core.Models;
 using CVBuilder.Core.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using static Org.BouncyCastle.Math.EC.ECCurve;
+using CVBuilder.Service;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -14,7 +18,7 @@ namespace CVBuilder.Api.Controllers
     {
         private readonly ITemplateService _templateService;
 
-        public TemplateController(ITemplateService templateService, IUserService userService)
+        public TemplateController(ITemplateService templateService)
         {
             _templateService = templateService;
         }
@@ -22,59 +26,31 @@ namespace CVBuilder.Api.Controllers
         {
 
             var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
-            if (userIdClaim != null)
+            if (userIdClaim != null) 
             {
                 return int.Parse(userIdClaim.Value);
             }
             throw new UnauthorizedAccessException("User not authenticated.");
         }
-
-        // קבלת כל התבניות למשתמש מחובר
-        [HttpGet]
-        [Authorize]
-        public IActionResult GetTemplates()
+     
+        [HttpGet("files")]
+        [Authorize] 
+        public async Task<IActionResult> GetFiles()
         {
-            var templates = _templateService.GetAllTemplates();  
-            return Ok(templates);
-        }
-        // קבלת תבנית לפי id למשתמש מחובר
-        [HttpGet("{id}")]
-        public IActionResult GetTemplateById(int id)
-        {
-            var userId = GetUserIdFromContext();
-
-            if (userId == null)
-            {
-                return Unauthorized("User is not authenticated.");  // אם אין משתמש מחובר
-            }
-
-            var templates = _templateService.GetAllTemplates();
-            return Ok(templates);
+            var files = await _templateService.GetAllFilesAsync();
+            return Ok(files);
         }
 
-        // הוספת תבנית – רק למנהל
-        [HttpPost]
-        [Authorize(Roles = "Admin")]
-        public IActionResult AddTemplate([FromBody] Template template)
+        //להפוך את זה ללפי ID
+        [HttpGet("first")]
+        public async Task<IActionResult> GetFirstFile()
         {
-            if (template == null)
-                return BadRequest();
+            var fileKey = await _templateService.GetFirstFileAsync();
+            if (fileKey == null)
+                return NotFound("לא נמצאו קבצים ב-S3");
 
-            _templateService.AddTemplate(template);
-            return CreatedAtAction(nameof(GetTemplateById), new { id = template.Id }, template);
+            return Ok(fileKey);
         }
-
-        // מחיקת תבנית – רק למנהל
-        [HttpDelete("{id}")]
-        [Authorize(Roles = "Admin")]
-        public IActionResult DeleteTemplate(int id)
-        {
-            var success = _templateService.DeleteTemplate(id);
-
-            if (!success)
-                return NotFound();
-
-            return NoContent();
-        }
+   
     }
 }
