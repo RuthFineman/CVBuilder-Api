@@ -15,21 +15,25 @@ namespace CVBuilder.Service
     public class TemplateService: ITemplateService
     {
         private readonly ITemplateRepository _templateRepository;
-        private readonly IAmazonS3 _s3Client;
-        private readonly string _bucketName = "cvfilebuilder";
+        //private readonly IAmazonS3 _s3Client;
+        //private readonly string _bucketName = "cvfilebuilder";
 
         public TemplateService(ITemplateRepository ITemplateRepository)
         {
             _templateRepository = ITemplateRepository;
         }
-        public async Task<List<string>> GetAllFilesAsync()
+        public async Task<List<string>> GetAllTamplatesAsync()
         {
-            return await _templateRepository.GetAllFilesAsync();
+            return await _templateRepository.GetAllTamplatesAsync();
         }
-        public async Task<string?> GetFirstFileAsync()
+        public async Task<string> GetFileAsync(int index)
         {
-            return await _templateRepository.GetFirstFileAsync();
+            return await _templateRepository.GetFileByIndexAsync(index);
         }
+        //public async Task<string?> GetFirstFileAsync()
+        //{
+        //    return await _templateRepository.GetFirstFileAsync();
+        //}
         //public Template? GetTemplateByIdAndUserId(int id, int userId)
         //{
         //    return _templateRepository.GetByIdAndUserId(id, userId);

@@ -148,10 +148,21 @@
         }
       }
     },
-    "/api/Template/first": {
+    "/api/Template/{index}": {
       "get": {
         "tags": [
           "Template"
+        ],
+        "parameters": [
+          {
+            "name": "index",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
         ],
         "responses": {
           "200": {

@@ -80,18 +80,24 @@
   },
   {
     "ContainingType": "CVBuilder.Api.Controllers.TemplateController",
-    "Method": "GetFiles",
-    "RelativePath": "api/Template/files",
+    "Method": "GetFile",
+    "RelativePath": "api/Template/{index}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
+    "Parameters": [
+      {
+        "Name": "index",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
     "ReturnTypes": []
   },
   {
     "ContainingType": "CVBuilder.Api.Controllers.TemplateController",
-    "Method": "GetFirstFile",
-    "RelativePath": "api/Template/first",
+    "Method": "GetTemplates",
+    "RelativePath": "api/Template/files",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,

@@ -11,7 +11,7 @@ using Amazon.S3;
 using Amazon.S3.Model;
 namespace CVBuilder.Data.Repositories
 {
-    public class TemplateRepository: ITemplateRepository
+    public class TemplateRepository : ITemplateRepository
     {
         private readonly CVBuilderDbContext _context;
         private readonly IAmazonS3 _s3Client;
@@ -20,10 +20,10 @@ namespace CVBuilder.Data.Repositories
         public TemplateRepository(IAmazonS3 s3Client)
         {
             _s3Client = s3Client;
-           
+
 
         }
-        public async Task<List<string>> GetAllFilesAsync()
+        public async Task<List<string>> GetAllTamplatesAsync()
         {
             var request = new ListObjectsV2Request
             {
@@ -45,21 +45,44 @@ namespace CVBuilder.Data.Repositories
             }
             return fileUrls;
         }
-        public async Task<string?> GetFirstFileAsync()
+        public async Task<string> GetFileByIndexAsync(int index)
         {
             var request = new ListObjectsV2Request
             {
                 BucketName = _bucketName,
-                MaxKeys = 1
+                Prefix = "CVFilebuilder/"
             };
 
             var response = await _s3Client.ListObjectsV2Async(request);
-            return response.S3Objects.FirstOrDefault()?.Key;
+
+            var fileList = response.S3Objects
+                .Where(obj => !obj.Key.EndsWith("/") && obj.Size > 0)
+                .Select(obj => obj.Key)
+                .OrderBy(name => name) // למקרה שהשמות לא בסדר מסודר
+                .ToList();
+
+            if (index < 0 || index >= fileList.Count)
+                return null;
+
+            string fileName = fileList[index ];
+
+            return $"https://{_bucketName}.s3.amazonaws.com/{fileName}";
         }
+        //public async Task<string?> GetFirstFileAsync()
+        //{
+        //    var request = new ListObjectsV2Request
+        //    {
+        //        BucketName = _bucketName,
+        //        MaxKeys = 1
+        //    };
+
+        //    var response = await _s3Client.ListObjectsV2Async(request);
+        //    return response.S3Objects.FirstOrDefault()?.Key;
+        //}
 
         public Template? GetByIdAndUserId(int id, int userId)
         {
-            return _context.Templates.FirstOrDefault(t => t.Id == id );
+            return _context.Templates.FirstOrDefault(t => t.Id == id);
         }
 
         public void Add(Template template)

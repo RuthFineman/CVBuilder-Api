@@ -22,35 +22,46 @@ namespace CVBuilder.Api.Controllers
         {
             _templateService = templateService;
         }
-        private int GetUserIdFromContext()
-        {
+        //private int GetUserIdFromContext()
+        //{
 
-            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
-            if (userIdClaim != null) 
-            {
-                return int.Parse(userIdClaim.Value);
-            }
-            throw new UnauthorizedAccessException("User not authenticated.");
-        }
+        //    var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+        //    if (userIdClaim != null) 
+        //    {
+        //        return int.Parse(userIdClaim.Value);
+        //    }
+        //    throw new UnauthorizedAccessException("User not authenticated.");
+        //}
      
         [HttpGet("files")]
         [Authorize] 
-        public async Task<IActionResult> GetFiles()
+        public async Task<IActionResult> GetTemplates()
         {
-            var files = await _templateService.GetAllFilesAsync();
+            var files = await _templateService.GetAllTamplatesAsync();
             return Ok(files);
         }
+        [HttpGet("{index}")]
+        public async Task<IActionResult> GetFile(int index)
+        {
+            var fileUrl = await _templateService.GetFileAsync(index);
+
+            if (string.IsNullOrEmpty(fileUrl))
+                return NotFound("File not found");
+
+            return Ok(fileUrl);
+        }
+
 
         //להפוך את זה ללפי ID
-        [HttpGet("first")]
-        public async Task<IActionResult> GetFirstFile()
-        {
-            var fileKey = await _templateService.GetFirstFileAsync();
-            if (fileKey == null)
-                return NotFound("לא נמצאו קבצים ב-S3");
+        //[HttpGet("first")]
+        //public async Task<IActionResult> GetFirstFile()
+        //{
+        //    var fileKey = await _templateService.GetFirstFileAsync();
+        //    if (fileKey == null)
+        //        return NotFound("לא נמצאו קבצים ב-S3");
 
-            return Ok(fileKey);
-        }
-   
+        //    return Ok(fileKey);
+        //}
+
     }
 }
