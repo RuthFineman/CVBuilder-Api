@@ -14,7 +14,6 @@ namespace CVBuilder.Core.Models
         public int Id { get; set; }
         public int UserId { get; set; }
         public User User { get; set; }
-        //public string PathToCss { get; set; } = string.Empty;
         public string FilePath { get; set; } = string.Empty;
         [JsonPropertyName("firstName")]
         public string FirstName { get; set; }
@@ -31,11 +30,9 @@ namespace CVBuilder.Core.Models
         public string Summary { get; set; }
 
         [JsonPropertyName("workExperiences")]
-        //public List<WorkExperience> WorkExperiences { get; set; }
         public List<WorkExperience> WorkExperiences { get; set; } = new List<WorkExperience>();
 
         [JsonPropertyName("educations")]
-        //public List<Education> Educations { get; set; }
         public List<Education> Educations { get; set; } = new List<Education>();
 
         [JsonPropertyName("skills")]
