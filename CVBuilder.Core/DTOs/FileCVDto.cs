@@ -13,8 +13,9 @@ namespace CVBuilder.Core.DTOs
     public class FileCVDto
     {
         public int Id { get; set; }
-       
+
         [JsonPropertyName("firstName")]
+        public string FileName { get; set; }
         public string FirstName { get; set; }
         [JsonPropertyName("lastName")]
         public string LastName { get; set; }
@@ -69,11 +70,11 @@ namespace CVBuilder.Core.DTOs
     }
     public class Education
     {
-        
+
         [JsonPropertyName("institution")]
         public string Institution { get; set; }
 
         [JsonPropertyName("degree")]
         public string Degree { get; set; }
     }
-   }
+}

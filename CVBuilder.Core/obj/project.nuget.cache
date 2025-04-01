@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "up0jHnWDIic=",
+  "dgSpecHash": "g3EQJ29b8Z0=",
   "success": true,
   "projectFilePath": "C:\\Users\\user1\\Documents\\תכנות ו\\פרויקט גמר\\CVBuilder\\CVBuilder.Core\\CVBuilder.Core.csproj",
   "expectedPackageFiles": [
@@ -9,6 +9,7 @@
     "C:\\Users\\user1\\.nuget\\packages\\k4os.compression.lz4\\1.3.8\\k4os.compression.lz4.1.3.8.nupkg.sha512",
     "C:\\Users\\user1\\.nuget\\packages\\k4os.compression.lz4.streams\\1.3.8\\k4os.compression.lz4.streams.1.3.8.nupkg.sha512",
     "C:\\Users\\user1\\.nuget\\packages\\k4os.hash.xxhash\\1.0.8\\k4os.hash.xxhash.1.0.8.nupkg.sha512",
+    "C:\\Users\\user1\\.nuget\\packages\\microsoft.aspnetcore.http.features\\2.3.0\\microsoft.aspnetcore.http.features.2.3.0.nupkg.sha512",
     "C:\\Users\\user1\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.0\\microsoft.bcl.asyncinterfaces.1.1.0.nupkg.sha512",
     "C:\\Users\\user1\\.nuget\\packages\\microsoft.bcl.hashcode\\1.1.0\\microsoft.bcl.hashcode.1.1.0.nupkg.sha512",
     "C:\\Users\\user1\\.nuget\\packages\\microsoft.entityframeworkcore\\3.1.1\\microsoft.entityframeworkcore.3.1.1.nupkg.sha512",
@@ -25,7 +26,7 @@
     "C:\\Users\\user1\\.nuget\\packages\\microsoft.extensions.logging\\3.1.1\\microsoft.extensions.logging.3.1.1.nupkg.sha512",
     "C:\\Users\\user1\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\3.1.1\\microsoft.extensions.logging.abstractions.3.1.1.nupkg.sha512",
     "C:\\Users\\user1\\.nuget\\packages\\microsoft.extensions.options\\3.1.1\\microsoft.extensions.options.3.1.1.nupkg.sha512",
-    "C:\\Users\\user1\\.nuget\\packages\\microsoft.extensions.primitives\\3.1.1\\microsoft.extensions.primitives.3.1.1.nupkg.sha512",
+    "C:\\Users\\user1\\.nuget\\packages\\microsoft.extensions.primitives\\8.0.0\\microsoft.extensions.primitives.8.0.0.nupkg.sha512",
     "C:\\Users\\user1\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
     "C:\\Users\\user1\\.nuget\\packages\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
     "C:\\Users\\user1\\.nuget\\packages\\mysql.data\\9.2.0\\mysql.data.9.2.0.nupkg.sha512",
