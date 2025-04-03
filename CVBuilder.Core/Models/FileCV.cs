@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CVBuilder.Core.DTOs;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -22,6 +23,8 @@ namespace CVBuilder.Core.Models
         public string FirstName { get; set; }
         [JsonPropertyName("lastName")]
         public string LastName { get; set; }
+        [JsonPropertyName("role")]
+        public string Role { get; set; }
 
         [JsonPropertyName("Phone")]
         public string Phone { get; set; }
@@ -34,6 +37,8 @@ namespace CVBuilder.Core.Models
 
         [JsonPropertyName("workExperiences")]
         public List<WorkExperience> WorkExperiences { get; set; } = new List<WorkExperience>();
+        [JsonPropertyName("languages")]
+        public List<Language> Languages { get; set; } = new List<Language>();
 
         [JsonPropertyName("educations")]
         public List<Education> Educations { get; set; } = new List<Education>();
@@ -74,12 +79,20 @@ namespace CVBuilder.Core.Models
         [JsonPropertyName("description")]
         public string Description { get; set; }
     }
+    public class Language
+    {
+        [Key]
+        [JsonPropertyName("languageName")]
+        public string LanguageName { get; set; }
 
+        [JsonPropertyName("proficiency")]
+        public string Proficiency { get; set; }
+    }
 
     public class Education
     {
         [Key]
-        public int Id { get; set; }
+        public int Id { get; set; }  
         [JsonPropertyName("institution")]
         public string Institution { get; set; }
 
@@ -88,42 +101,4 @@ namespace CVBuilder.Core.Models
 
     }
 }
-
-        //public int Id { get; set; }
-        //[Column(TypeName = "text")]
-
-        //public string Name { get; set; }
-        //public int UserId { get; set; }
-
-        //public User User { get; set; }
-        //[Column(TypeName = "text")]
-
-        //public string FilePath { get; set; } = string.Empty;
-        //[Column(TypeName = "text")]
-
-        //public string PathToCss { get; set; }=string.Empty;
-        //[Column(TypeName = "text")]
-
-        //public string FirstName { get; set; } = string.Empty;
-        //[Column(TypeName = "text")]
-
-        //public string LastName { get; set; } = string.Empty;
-        //[Column(TypeName = "text")]
-
-        //public string Email { get; set; } = string.Empty;
-        //[Column(TypeName = "text")]
-
-        //public string Phone { get; set; } = string.Empty;
-        //[Column(TypeName = "text")]
-        //public string Summary { get; set; } = string.Empty;
-
-        //[Column(TypeName = "text")]
-
-        //public List<string> Skills { get; set; } = new List<string>();
-        //[Column(TypeName = "text")]
-
-        //public List<string> Languages { get; set; } = new List<string>();
-
-
-    
 

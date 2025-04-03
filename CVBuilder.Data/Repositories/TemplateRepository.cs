@@ -20,8 +20,6 @@ namespace CVBuilder.Data.Repositories
         public TemplateRepository(IAmazonS3 s3Client)
         {
             _s3Client = s3Client;
-
-
         }
         public async Task<List<string>> GetAllTamplatesAsync()
         {

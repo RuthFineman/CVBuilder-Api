@@ -19,8 +19,6 @@ namespace CVBuilder.Api.Controllers
         private readonly IUserService _userService;
         private readonly AuthService _authService;
         private readonly UserValidator _userValidator;
-
-
         public UsersController(IUserService userService, AuthService authService, UserValidator userValidator)
         {
             _userService = userService;
@@ -46,7 +44,7 @@ namespace CVBuilder.Api.Controllers
                 var token = _authService.GenerateJwtToken(user.Email, user.Id, user.Role);
 
                 // החזרת ה-Token למשתמש
-                return Ok(new { token });
+                return Ok(new { token, user.Id });
             }
             catch (InvalidOperationException ex)
             {
@@ -68,8 +66,8 @@ namespace CVBuilder.Api.Controllers
                 return Unauthorized("Invalid credentials.");
 
             var token = _authService.GenerateJwtToken(user.Email, user.Id,user.Role);  // יצירת ה-JWT
-
-            return Ok(new { token });  // מחזיר את ה-Token למשתמש
+            Console.WriteLine(user.Id);
+            return Ok(new { token,user.Id });  // מחזיר את ה-Token למשתמש
         }
     }
 }

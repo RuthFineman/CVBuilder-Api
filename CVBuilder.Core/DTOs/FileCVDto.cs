@@ -19,7 +19,8 @@ namespace CVBuilder.Core.DTOs
         public string FirstName { get; set; }
         [JsonPropertyName("lastName")]
         public string LastName { get; set; }
-
+        [JsonPropertyName("role")]
+        public string Role { get; set; }
         [JsonPropertyName("Phone")]
         public string Phone { get; set; }
 
@@ -31,6 +32,8 @@ namespace CVBuilder.Core.DTOs
 
         [JsonPropertyName("workExperiences")]
         public List<WorkExperience> WorkExperiences { get; set; }
+        [JsonPropertyName("languages")]
+        public List<Language> Languages { get; set; } = new List<Language>();
 
         [JsonPropertyName("educations")]
         public List<Education> Educations { get; set; }
@@ -68,13 +71,22 @@ namespace CVBuilder.Core.DTOs
         [JsonPropertyName("description")]
         public string Description { get; set; }
     }
+    public class Language
+    {
+        [JsonPropertyName("languageName")]
+        public string LanguageName { get; set; }
+
+        [JsonPropertyName("proficiency")]
+        public string Proficiency { get; set; }
+    }
+
     public class Education
     {
-
         [JsonPropertyName("institution")]
         public string Institution { get; set; }
 
         [JsonPropertyName("degree")]
         public string Degree { get; set; }
     }
+
 }

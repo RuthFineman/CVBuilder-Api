@@ -10,7 +10,8 @@ namespace CVBuilder.Core.Services
 {
     public interface IFileCVService
     {
-        Task<List<FileCVDto>> GetFilesByUserIdAsync(int userId);
+        //Task<List<FileCVDto>> GetFilesByUserIdAsync(int userId);
+        Task<List<string>> GetUserFilesAsync(string userId);
         Task<bool> DeleteFileByUserIdAsync(int fileId, int userId);
         Task<FileCVDto> CreateFileCVAsync(FileCVDto fileCVDto, int userId);
         Task<FileCVDto> GetFileByUserIdAsync(int fileId, int userId);

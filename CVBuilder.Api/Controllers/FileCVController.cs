@@ -21,11 +21,18 @@ namespace CVBuilder.Api.Controllers
         }
         [Authorize] 
         [HttpGet("user-files")]
-        public async Task<IActionResult> GetUserFiles()
+        public async Task<IActionResult> GetUserFiles(string userId)
         {
-            var userId = GetUserIdFromContext();
-            var files = await _fileCVService.GetFilesByUserIdAsync(userId);
-            return Ok(files);
+            try
+            {
+                var files = await _fileCVService.GetUserFilesAsync(userId);
+                return Ok(files);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "שגיאה בטעינת הקבצים: " + ex.Message);
+            }
+
         }
 
         [Authorize]

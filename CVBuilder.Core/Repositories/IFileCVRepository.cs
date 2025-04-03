@@ -9,7 +9,8 @@ namespace CVBuilder.Core.Repositories
 {
     public interface IFileCVRepository
     {
-        Task<List<FileCV>> GetFilesByUserIdAsync(int userId);
+        //Task<List<FileCV>> GetFilesByUserIdAsync(int userId);
+        Task<List<string>> FetchFilesByUserIdAsync(string userId);
         Task DeleteFileCVAsync(int fileId);
         Task<List<FileCV>> GetByUserIdAsync(int userId);
         Task AddAsync(FileCV fileCV);

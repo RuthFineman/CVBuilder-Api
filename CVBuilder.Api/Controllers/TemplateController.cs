@@ -21,18 +21,7 @@ namespace CVBuilder.Api.Controllers
         public TemplateController(ITemplateService templateService)
         {
             _templateService = templateService;
-        }
-        //private int GetUserIdFromContext()
-        //{
-
-        //    var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
-        //    if (userIdClaim != null) 
-        //    {
-        //        return int.Parse(userIdClaim.Value);
-        //    }
-        //    throw new UnauthorizedAccessException("User not authenticated.");
-        //}
-     
+        }     
         [HttpGet("files")]
         [Authorize] 
         public async Task<IActionResult> GetTemplates()

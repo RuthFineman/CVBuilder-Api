@@ -10,6 +10,15 @@
         "tags": [
           "FileCV"
         ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -141,6 +150,15 @@
         "tags": [
           "FileUpload"
         ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "requestBody": {
           "content": {
             "multipart/form-data": {
@@ -150,11 +168,96 @@
                   "file": {
                     "type": "string",
                     "format": "binary"
+                  },
+                  "Id": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "FileName": {
+                    "type": "string"
+                  },
+                  "FirstName": {
+                    "type": "string"
+                  },
+                  "LastName": {
+                    "type": "string"
+                  },
+                  "Role": {
+                    "type": "string"
+                  },
+                  "Phone": {
+                    "type": "string"
+                  },
+                  "Email": {
+                    "type": "string"
+                  },
+                  "Summary": {
+                    "type": "string"
+                  },
+                  "WorkExperiences": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/WorkExperience"
+                    }
+                  },
+                  "Languages": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/Language"
+                    }
+                  },
+                  "Educations": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/Education"
+                    }
+                  },
+                  "Skills": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
                   }
                 }
               },
               "encoding": {
                 "file": {
+                  "style": "form"
+                },
+                "Id": {
+                  "style": "form"
+                },
+                "FileName": {
+                  "style": "form"
+                },
+                "FirstName": {
+                  "style": "form"
+                },
+                "LastName": {
+                  "style": "form"
+                },
+                "Role": {
+                  "style": "form"
+                },
+                "Phone": {
+                  "style": "form"
+                },
+                "Email": {
+                  "style": "form"
+                },
+                "Summary": {
+                  "style": "form"
+                },
+                "WorkExperiences": {
+                  "style": "form"
+                },
+                "Languages": {
+                  "style": "form"
+                },
+                "Educations": {
+                  "style": "form"
+                },
+                "Skills": {
                   "style": "form"
                 }
               }
@@ -297,6 +400,10 @@
             "type": "string",
             "nullable": true
           },
+          "role": {
+            "type": "string",
+            "nullable": true
+          },
           "Phone": {
             "type": "string",
             "nullable": true
@@ -316,6 +423,13 @@
             },
             "nullable": true
           },
+          "languages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Language"
+            },
+            "nullable": true
+          },
           "educations": {
             "type": "array",
             "items": {
@@ -328,6 +442,20 @@
             "items": {
               "type": "string"
             },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Language": {
+        "type": "object",
+        "properties": {
+          "languageName": {
+            "type": "string",
+            "nullable": true
+          },
+          "proficiency": {
+            "type": "string",
             "nullable": true
           }
         },

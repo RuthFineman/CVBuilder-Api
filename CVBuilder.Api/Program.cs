@@ -36,18 +36,13 @@ builder.Services.AddScoped<IFileCVService, FileCVService>();
 builder.Services.AddScoped<IFileCVRepository, FileCVRepository>();
 builder.Services.AddScoped<ITemplateService, TemplateService>();
 builder.Services.AddScoped<ITemplateRepository, TemplateRepository>();
-builder.Services.AddScoped<IFileCVRepository, FileCVRepository>();
-builder.Services.AddScoped<IFileCVService, FileCVService>();
 builder.Services.AddScoped<AuthService>();
 builder.Services.AddTransient<UserValidator>();
 builder.Services.AddAWSService<IAmazonS3>();
 builder.Services.AddScoped<IFileUploadService, FileUploadService>();
-//builder.Services.AddScoped<IFileRepository, FileRepository>();
-//builder.Services.AddScoped<IFileService, FileService>();
+builder.Services.AddScoped<IFileRepository,FileRepository>();
 builder.Services.AddSingleton<IConfiguration>(builder.Configuration);
 IConfiguration Configuration = builder.Configuration;
-builder.Services.AddSingleton<IConfiguration>(Configuration);
-builder.Services.AddAWSService<IAmazonS3>();
 builder.Services.AddScoped<ITemplateService, TemplateService>();
 
 
@@ -103,6 +98,7 @@ builder.Services.AddSwaggerGen(options =>
             new List<string>()
         }
     });
+
 });
 
 var app = builder.Build();

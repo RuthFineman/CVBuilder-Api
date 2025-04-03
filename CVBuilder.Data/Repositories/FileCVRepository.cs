@@ -1,4 +1,6 @@
-﻿using CVBuilder.Core.DTOs;
+﻿using Amazon.S3;
+using Amazon.S3.Model;
+using CVBuilder.Core.DTOs;
 using CVBuilder.Core.Models;
 using CVBuilder.Core.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -13,25 +15,31 @@ namespace CVBuilder.Data.Repositories
     public class FileCVRepository : IFileCVRepository
     {
         private readonly CVBuilderDbContext _context;
-
-        public FileCVRepository(CVBuilderDbContext context)
+        private readonly IAmazonS3 _s3Client;
+        public FileCVRepository(CVBuilderDbContext context, IAmazonS3 s3Client)
         {
             _context = context;
+            _s3Client = s3Client;
+
         }
         //להחזרת כל הקורות חיים
-        public async Task<List<FileCV>> GetFilesByUserIdAsync(int userId)
+        public async Task<List<string>> FetchFilesByUserIdAsync(string userId)
         {
-            return await _context.FileCVs
-                .Where(f => f.UserId == userId)  // אם השתנה שם השדה, עדכן כאן
-                .ToListAsync();
+            var bucketName = "cvfilebuilder";
+            var request = new ListObjectsV2Request
+            {
+                BucketName = bucketName,
+                Prefix = $"{userId}/"
+            };
+
+            var response = await _s3Client.ListObjectsV2Async(request);
+
+            // הוסף לוג כדי לבדוק את התגובה
+            Console.WriteLine($"Number of files found: {response.S3Objects.Count}");
+
+            return response.S3Objects.Select(o => o.Key).ToList();
         }
 
-        //public async Task<List<FileCV>> GetFilesByUserIdAsync(int userId)
-        //{
-        //    return await _context.FileCVs
-        //        .Where(f => f.UserId == userId)
-        //        .ToListAsync();
-        //}
         //delete
         public async Task DeleteFileCVAsync(int fileId)
         {

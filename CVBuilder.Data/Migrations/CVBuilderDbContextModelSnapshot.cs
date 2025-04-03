@@ -92,6 +92,11 @@ namespace CVBuilder.Data.Migrations
                         .HasColumnType("longtext")
                         .HasAnnotation("Relational:JsonPropertyName", "Phone");
 
+                    b.Property<string>("Role")
+                        .IsRequired()
+                        .HasColumnType("longtext")
+                        .HasAnnotation("Relational:JsonPropertyName", "role");
+
                     b.PrimitiveCollection<string>("Skills")
                         .IsRequired()
                         .HasColumnType("longtext")
@@ -113,6 +118,29 @@ namespace CVBuilder.Data.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("FileCVs");
+                });
+
+            modelBuilder.Entity("CVBuilder.Core.Models.Language", b =>
+                {
+                    b.Property<string>("LanguageName")
+                        .HasColumnType("varchar(255)")
+                        .HasAnnotation("Relational:JsonPropertyName", "languageName");
+
+                    b.Property<int?>("FileCVId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Proficiency")
+                        .IsRequired()
+                        .HasColumnType("longtext")
+                        .HasAnnotation("Relational:JsonPropertyName", "proficiency");
+
+                    b.HasKey("LanguageName");
+
+                    b.HasIndex("FileCVId");
+
+                    b.ToTable("Language");
+
+                    b.HasAnnotation("Relational:JsonPropertyName", "languages");
                 });
 
             modelBuilder.Entity("CVBuilder.Core.Models.Template", b =>
@@ -223,6 +251,13 @@ namespace CVBuilder.Data.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("CVBuilder.Core.Models.Language", b =>
+                {
+                    b.HasOne("CVBuilder.Core.Models.FileCV", null)
+                        .WithMany("Languages")
+                        .HasForeignKey("FileCVId");
+                });
+
             modelBuilder.Entity("CVBuilder.Core.Models.WorkExperience", b =>
                 {
                     b.HasOne("CVBuilder.Core.Models.FileCV", null)
@@ -233,6 +268,8 @@ namespace CVBuilder.Data.Migrations
             modelBuilder.Entity("CVBuilder.Core.Models.FileCV", b =>
                 {
                     b.Navigation("Educations");
+
+                    b.Navigation("Languages");
 
                     b.Navigation("WorkExperiences");
                 });
