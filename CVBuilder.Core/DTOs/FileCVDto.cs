@@ -31,15 +31,15 @@ namespace CVBuilder.Core.DTOs
         public string Summary { get; set; }
 
         [JsonPropertyName("workExperiences")]
-        public List<WorkExperience> WorkExperiences { get; set; }
+        public List<WorkExperience>? WorkExperiences { get; set; } = new List<WorkExperience>();
         [JsonPropertyName("languages")]
-        public List<Language> Languages { get; set; } = new List<Language>();
+        public List<Language>? Languages { get; set; } = new List<Language>();
 
         [JsonPropertyName("educations")]
-        public List<Education> Educations { get; set; }
+        public List<Education>? Educations { get; set; } = new List<Education>();
 
         [JsonPropertyName("skills")]
-        public List<string> Skills { get; set; } = new List<string>
+        public List<string>? Skills { get; set; } = new List<string>
         {
             "כישורי ארגון",
             "פתרון בעיות",

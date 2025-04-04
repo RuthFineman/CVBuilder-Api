@@ -1,7 +1,10 @@
 ﻿using Amazon.S3;
 using CVBuilder.Core.DTOs;
 using CVBuilder.Core.Services;
+using CVBuilder.Service;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace CVBuilder.Api.Controllers
 {
@@ -14,6 +17,15 @@ namespace CVBuilder.Api.Controllers
         public FileUploadController(IFileUploadService fileUploadService)
         {
             _fileUploadService = fileUploadService;
+        }
+        private int GetUserIdFromContext()
+        {
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+            if (userIdClaim != null)
+            {
+                return int.Parse(userIdClaim.Value);
+            }
+            throw new UnauthorizedAccessException("User not authenticated.");
         }
 
         [HttpPost]
@@ -33,6 +45,21 @@ namespace CVBuilder.Api.Controllers
             catch (Exception ex)
             {
                 return BadRequest($"Error uploading file: {ex.Message}");
+            }
+        }
+        [Authorize]
+        [HttpDelete("remove/{id}")]
+        public async Task<IActionResult> DeleteFile(int id)
+        {
+            var userId = GetUserIdFromContext();
+            var result = await _fileUploadService.DeleteFileByUserIdAsync(id, userId);
+            if (result)
+            {
+                return Ok(new { message = "File deleted successfully." });
+            }
+            else
+            {
+                return Unauthorized(new { message = "File not found or doesn't belong to the user." });
             }
         }
     }

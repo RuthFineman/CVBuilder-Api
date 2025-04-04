@@ -1,6 +1,7 @@
 ﻿using CVBuilder.Core.DTOs;
 using CVBuilder.Core.Models;
 using CVBuilder.Core.Repositories;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,18 +18,27 @@ namespace CVBuilder.Data.Repositories
         {
             _context = context;
         }
-
-        public async Task SaveFileRecordAsync(string fileName, string fileUrl)
+        public async Task SaveFileRecordAsync(FileCV fileRecord)
         {
-            var fileRecord = new FileCV
-            {
-                FileName = fileName,
-                FileUrl = fileUrl,
-                UploadedAt = DateTime.UtcNow
-            };
-
             _context.FileCVs.Add(fileRecord);
             await _context.SaveChangesAsync();
         }
+        public async Task DeleteFileCVAsync(int fileId)
+        {
+            var file = await _context.FileCVs.FindAsync(fileId);
+            if (file != null)
+            {
+                _context.FileCVs.Remove(file);
+                await _context.SaveChangesAsync();
+            }
+        }
+        //בשביל המחיקה
+        public async Task<FileCV> GetFileByUserIdAsync(int fileId, int userId)
+        {
+            return await _context.FileCVs
+                .Where(f => f.Id == fileId && f.UserId == userId)
+                .FirstOrDefaultAsync();
+        }
+
     }
 }

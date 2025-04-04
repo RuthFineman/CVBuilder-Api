@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CVBuilder.Core.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,8 @@ namespace CVBuilder.Core.Repositories
 {
     public interface IFileRepository
     {
-        Task SaveFileRecordAsync(string fileName, string fileUrl);
+        Task SaveFileRecordAsync(FileCV fileRecord);
+        Task DeleteFileCVAsync(int fileId);
+        Task<FileCV> GetFileByUserIdAsync(int fileId, int userId);
     }
 }

@@ -55,18 +55,25 @@ public class FileUploadService : IFileUploadService
             Skills = fileDto.Skills ?? new List<string>()
         };
     }
+
     public async Task UploadFileAsync(IFormFile file, string userId, FileCVDto fileDto)
     {
         if (string.IsNullOrEmpty(userId))
         {
-            Console.WriteLine("UserId is required");
+            //Console.WriteLine("UserId is required");
             throw new ArgumentException("UserId is required");
         }
 
         if (file == null || file.Length == 0)
         {
-            Console.WriteLine("No file provided or file is empty");
+            //Console.WriteLine("No file provided or file is empty");
             throw new InvalidOperationException("No file provided or file is empty");
+        }
+
+        if (fileDto == null)
+        {
+            //Console.WriteLine("FileCVDto cannot be null");
+            throw new ArgumentException("FileCVDto cannot be null");
         }
 
         try
@@ -74,22 +81,43 @@ public class FileUploadService : IFileUploadService
             // העלאת הקובץ ל-AWS S3
             using (var stream = file.OpenReadStream())
             {
+                if (stream.Length == 0)
+                {
+                    //Console.WriteLine("The file is empty.");
+                    throw new InvalidOperationException("The file is empty.");
+                }
+
                 var uploadRequest = new PutObjectRequest
                 {
                     BucketName = _bucketName,
-                    Key = $"{userId}/{file.FileName}",
+                    Key = $"{userId}/{file.FileName}", // ודא שאין בעיה בשמות הקבצים כאן
                     InputStream = stream,
                     ContentType = file.ContentType
                 };
 
                 var response = await _s3Client.PutObjectAsync(uploadRequest);
-                Console.WriteLine($"File uploaded to S3: {response.HttpStatusCode}");
+                //Console.WriteLine($"File uploaded to S3: {response.HttpStatusCode}");
 
                 // המרה מ-FileCVDto ל-FileCV
                 var fileRecord = ConvertToFileCV(fileDto, userId, file);
 
+                // בדוק שהמידע המתקבל ממיר כראוי
+                if (fileRecord == null)
+                {
+                    Console.WriteLine("Error: Failed to convert FileCVDto to FileCV.");
+                    throw new InvalidOperationException("Failed to convert FileCVDto to FileCV.");
+                }
+                Console.WriteLine($"Email: {fileRecord.Email}");
+
+                if (string.IsNullOrEmpty(fileRecord.Email))
+                {
+                    throw new ArgumentException("Email is required.");
+                }
                 // שמירת הנתונים בבסיס הנתונים
-                await _fileRepository.SaveFileRecordAsync(fileRecord.FileName, fileRecord.FileUrl);
+           
+
+                await _fileRepository.SaveFileRecordAsync(fileRecord);
+
                 Console.WriteLine("File record saved in database");
             }
         }
@@ -98,6 +126,25 @@ public class FileUploadService : IFileUploadService
             Console.WriteLine($"Error uploading file: {ex.Message}");
             throw new InvalidOperationException("An error occurred while uploading the file.", ex);
         }
+    }
+    public async Task<bool> DeleteFileByUserIdAsync(int fileId, int userId)
+    {
+        var file = await _fileRepository.GetFileByUserIdAsync(fileId, userId);
+        if (file == null) return false;
+
+        // שלב 1: מחיקה מ-AWS S3
+        if (!string.IsNullOrEmpty(file.FileName))
+        {
+            Console.WriteLine(userId + "/" + file.FileName);
+            Console.WriteLine("FileName: " + file.FileName);
+            Console.WriteLine("FileName: " + file.FileName);
+            await _s3Client.DeleteObjectAsync(_bucketName, userId+"/"+file.FileName); 
+            await _s3Client.DeleteObjectAsync(_bucketName," 115 / קורות_חיים_mmmmm_mmmm_4980.pdf");
+        }
+
+        // שלב 2: מחיקה מה-Database
+        await _fileRepository.DeleteFileCVAsync(file.Id);
+        return true;
     }
 
 }

@@ -50,32 +50,32 @@ namespace CVBuilder.Api.Controllers
                 return Unauthorized(new { message = "File not found or doesn't belong to the user." });
             }
         }
-        [Authorize]
-        [HttpPost("add")]
-        public async Task<IActionResult> CreateFileCV([FromBody] FileCVDto fileCVDto)
-        {
-            Console.WriteLine($"Received Name: {fileCVDto.Id}");
-            var userId = GetUserIdFromContext();
-            try
-            {
-                var newFileCV = await _fileCVService.CreateFileCVAsync(fileCVDto, userId);
-                return Ok(new FileCVDto
-                {
-                    FirstName = newFileCV.FirstName,
-                    LastName = newFileCV.LastName,
-                    Email = newFileCV.Email,
-                    Phone = newFileCV.Phone,  
-                    Summary = newFileCV.Summary,
-                    WorkExperiences = newFileCV.WorkExperiences,
-                    Educations = newFileCV.Educations,
-                    Skills = newFileCV.Skills,
-                });
-            }
-            catch (InvalidOperationException ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
+        //[Authorize]
+        //[HttpPost("add")]
+        //public async Task<IActionResult> CreateFileCV([FromBody] FileCVDto fileCVDto)
+        //{
+        //    Console.WriteLine($"Received Name: {fileCVDto.Id}");
+        //    var userId = GetUserIdFromContext();
+        //    try
+        //    {
+        //        var newFileCV = await _fileCVService.CreateFileCVAsync(fileCVDto, userId);
+        //        return Ok(new FileCVDto
+        //        {
+        //            FirstName = newFileCV.FirstName,
+        //            LastName = newFileCV.LastName,
+        //            Email = newFileCV.Email,
+        //            Phone = newFileCV.Phone,  
+        //            Summary = newFileCV.Summary,
+        //            WorkExperiences = newFileCV.WorkExperiences,
+        //            Educations = newFileCV.Educations,
+        //            Skills = newFileCV.Skills,
+        //        });
+        //    }
+        //    catch (InvalidOperationException ex)
+        //    {
+        //        return BadRequest(ex.Message);
+        //    }
+        //}
 
 
 

@@ -1,22 +1,6 @@
 [
   {
     "ContainingType": "CVBuilder.Api.Controllers.FileCVController",
-    "Method": "CreateFileCV",
-    "RelativePath": "api/FileCV/add",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "fileCVDto",
-        "Type": "CVBuilder.Core.DTOs.FileCVDto",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "CVBuilder.Api.Controllers.FileCVController",
     "Method": "UpdateFileCV",
     "RelativePath": "api/FileCV/modify/{id}",
     "HttpMethod": "PUT",
@@ -219,6 +203,22 @@
         "Name": "Skills",
         "Type": "System.Collections.Generic.List\u00601[[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CVBuilder.Api.Controllers.FileUploadController",
+    "Method": "DeleteFile",
+    "RelativePath": "upload/remove/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []

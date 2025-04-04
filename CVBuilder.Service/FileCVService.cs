@@ -55,36 +55,36 @@ namespace CVBuilder.Service
             await _fileCVRepository.DeleteFileCVAsync(file.Id);
             return true;
         }
-        public async Task<FileCVDto> CreateFileCVAsync(FileCVDto fileCVDto, int userId)
-        {
-            if (userId <= 0)
-            {
-                throw new ArgumentException("UserId Missing");
-            }
+        //public async Task<FileCVDto> CreateFileCVAsync(FileCVDto fileCVDto, int userId)
+        //{
+        //    if (userId <= 0)
+        //    {
+        //        throw new ArgumentException("UserId Missing");
+        //    }
 
-            var userFiles = await _fileCVRepository.GetByUserIdAsync(userId);
-            if (userFiles.Count >= 5)
-            {
-                throw new InvalidOperationException("User cannot create more than 5 resumes.");
-            }
+        //    var userFiles = await _fileCVRepository.GetByUserIdAsync(userId);
+        //    if (userFiles.Count >= 5)
+        //    {
+        //        throw new InvalidOperationException("User cannot create more than 5 resumes.");
+        //    }
 
-            var newFile = new FileCV
-            {
-                UserId = userId,
-                FirstName = fileCVDto.FirstName,
-                LastName = fileCVDto.LastName,
-                Email = fileCVDto.Email,
-                Phone = fileCVDto.Phone,  
-                Summary = fileCVDto.Summary,
-                //WorkExperiences = fileCVDto.WorkExperiences,
-                //Educations = fileCVDto.Educations,
-                Skills = fileCVDto.Skills ?? new List<string>(),
-                // שדות אחרים שאולי הוספתם
-            };
+        //    var newFile = new FileCV
+        //    {
+        //        UserId = userId,
+        //        FirstName = fileCVDto.FirstName,
+        //        LastName = fileCVDto.LastName,
+        //        Email = fileCVDto.Email,
+        //        Phone = fileCVDto.Phone,  
+        //        Summary = fileCVDto.Summary,
+        //        //WorkExperiences = fileCVDto.WorkExperiences,
+        //        //Educations = fileCVDto.Educations,
+        //        Skills = fileCVDto.Skills ?? new List<string>(),
+        //        // שדות אחרים שאולי הוספתם
+        //    };
 
-            await _fileCVRepository.AddAsync(newFile);
-            return ToFileCVDto(newFile);
-        }
+        //    await _fileCVRepository.AddAsync(newFile);
+        //    return ToFileCVDto(newFile);
+        //}
 
         public async Task<FileCV> UpdateFileCVAsync(int id, int userId, FileCVDto fileCVDto)
         {

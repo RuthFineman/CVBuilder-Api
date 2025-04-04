@@ -12,5 +12,6 @@ namespace CVBuilder.Core.Services
     public interface IFileUploadService
     {
         Task UploadFileAsync(IFormFile file, string userId, FileCVDto fileDto);
+        Task<bool> DeleteFileByUserIdAsync(int fileId, int userId);
     }
 }
