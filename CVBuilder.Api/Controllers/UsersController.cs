@@ -29,17 +29,20 @@ namespace CVBuilder.Api.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] UserRegisterModel userDto)
         {
+            Console.WriteLine($"FullName: {userDto.FullName}, Email: {userDto.Email}, Password: {userDto.Password}");
+
             try
             {
-                var result = await _userService.RegisterAsync(userDto.FullName, userDto.Email, userDto.Password);
-                if (!result)
-                    return BadRequest("User already exists.");
+               
 
                 var isValidPassword = await _userValidator.IsValidPasswordAsync(userDto.Email, userDto.Password);
                 if (!isValidPassword)
                 {
                     return BadRequest("הסיסמה לא תקינה.");
                 }
+                var result = await _userService.RegisterAsync(userDto.FullName, userDto.Email, userDto.Password);
+                if (!result)
+                    return BadRequest("User already exists.");
                 var user = await _userService.LoginAsync(userDto.Email, userDto.Password);
                 var token = _authService.GenerateJwtToken(user.Email, user.Id, user.Role);
 

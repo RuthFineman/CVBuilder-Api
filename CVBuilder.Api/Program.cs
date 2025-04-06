@@ -15,6 +15,7 @@ using CVBuilder.Core.Validators;
 using MySqlX.XDevAPI;
 using Amazon.Extensions.NETCore.Setup;
 using System.Configuration;
+using CVBuilder.Api.Controllers;
 
 var builder = WebApplication.CreateBuilder(args);
 

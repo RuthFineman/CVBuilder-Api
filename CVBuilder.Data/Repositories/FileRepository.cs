@@ -1,4 +1,5 @@
-﻿using CVBuilder.Core.DTOs;
+﻿using Amazon.S3.Model;
+using CVBuilder.Core.DTOs;
 using CVBuilder.Core.Models;
 using CVBuilder.Core.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -18,6 +19,13 @@ namespace CVBuilder.Data.Repositories
         {
             _context = context;
         }
+        public async Task<List<FileCV>> GetFilesByUserIdAsync(string userId)
+        {
+            return await _context.FileCVs
+                .Where(f => f.UserId.ToString() == userId)
+                .ToListAsync();
+        }
+
         public async Task SaveFileRecordAsync(FileCV fileRecord)
         {
             _context.FileCVs.Add(fileRecord);
@@ -28,17 +36,35 @@ namespace CVBuilder.Data.Repositories
             var file = await _context.FileCVs.FindAsync(fileId);
             if (file != null)
             {
-                _context.FileCVs.Remove(file);
-                await _context.SaveChangesAsync();
+                _context.FileCVs.Remove(file); // מסיר את הקובץ מה-DB
+                await _context.SaveChangesAsync(); // שומר את השינויים
             }
         }
-        //בשביל המחיקה
-        public async Task<FileCV> GetFileByUserIdAsync(int fileId, int userId)
+
+        //  והעדכון בשביל המחיקה
+        public async Task<FileCV> GetFileByUserIdAsync(int fileId, string userId)
         {
             return await _context.FileCVs
-                .Where(f => f.Id == fileId && f.UserId == userId)
+                .Where(f => f.Id == fileId && f.UserId.ToString() == userId) // המרה של UserId מ- int ל-string להשוואה
+                .FirstOrDefaultAsync(); // מחזיר את הקובץ אם נמצא או null אם לא נמצא
+        }
+
+        public async Task<FileCV> GetFileByUrlAsync(string fileUrl)
+        {
+            return await _context.FileCVs
+                .Where(f => f.FileUrl == fileUrl)
                 .FirstOrDefaultAsync();
         }
 
+        //לעדכון
+        public async Task UpdateAsync(FileCV fileCV)
+        {
+            var existingFile = await _context.FileCVs.FindAsync(fileCV.Id);
+            if (existingFile != null)
+            {
+
+                await _context.SaveChangesAsync();
+            }
+        }
     }
 }

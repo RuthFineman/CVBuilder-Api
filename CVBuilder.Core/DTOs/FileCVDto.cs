@@ -14,8 +14,9 @@ namespace CVBuilder.Core.DTOs
     {
         public int Id { get; set; }
 
-        [JsonPropertyName("firstName")]
+        [JsonPropertyName("fileName")]
         public string FileName { get; set; }
+        [JsonPropertyName("firstName")]
         public string FirstName { get; set; }
         [JsonPropertyName("lastName")]
         public string LastName { get; set; }

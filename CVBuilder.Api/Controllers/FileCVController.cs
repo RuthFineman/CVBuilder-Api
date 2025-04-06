@@ -32,7 +32,6 @@ namespace CVBuilder.Api.Controllers
             {
                 return StatusCode(500, "שגיאה בטעינת הקבצים: " + ex.Message);
             }
-
         }
 
         [Authorize]

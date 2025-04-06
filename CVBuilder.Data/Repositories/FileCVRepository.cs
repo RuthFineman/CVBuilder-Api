@@ -97,16 +97,16 @@ namespace CVBuilder.Data.Repositories
             var existingFile = await _context.FileCVs.FindAsync(fileCV.Id);
             if (existingFile != null)
             {
-                existingFile.FirstName = fileCV.FirstName ?? existingFile.FirstName;
-                existingFile.LastName = fileCV.LastName ?? existingFile.LastName;
-                existingFile.Email = fileCV.Email ?? existingFile.Email;
-                existingFile.Phone = fileCV.Phone ?? existingFile.Phone;
-                existingFile.Summary = fileCV.Summary ?? existingFile.Summary;
-                existingFile.Skills = fileCV.Skills ?? existingFile.Skills;
+                //existingFile.FirstName = fileCV.FirstName ?? existingFile.FirstName;
+                //existingFile.LastName = fileCV.LastName ?? existingFile.LastName;
+                //existingFile.Email = fileCV.Email ?? existingFile.Email;
+                //existingFile.Phone = fileCV.Phone ?? existingFile.Phone;
+                //existingFile.Summary = fileCV.Summary ?? existingFile.Summary;
+                //existingFile.Skills = fileCV.Skills ?? existingFile.Skills;
 
-                // עדכון חוויות עבודה וחינוך
-                existingFile.WorkExperiences = fileCV.WorkExperiences ?? existingFile.WorkExperiences;
-                existingFile.Educations = fileCV.Educations ?? existingFile.Educations;
+                //// עדכון חוויות עבודה וחינוך
+                //existingFile.WorkExperiences = fileCV.WorkExperiences ?? existingFile.WorkExperiences;
+                //existingFile.Educations = fileCV.Educations ?? existingFile.Educations;
 
                 await _context.SaveChangesAsync();
             }

@@ -11,6 +11,10 @@ namespace CVBuilder.Core.Repositories
     {
         Task SaveFileRecordAsync(FileCV fileRecord);
         Task DeleteFileCVAsync(int fileId);
-        Task<FileCV> GetFileByUserIdAsync(int fileId, int userId);
+        Task<FileCV> GetFileByUserIdAsync(int fileId, string userId);
+        Task<List<FileCV>> GetFilesByUserIdAsync(string userId);
+        Task<FileCV> GetFileByUrlAsync(string fileUrl);
+        Task UpdateAsync(FileCV fileCV);
+
     }
 }

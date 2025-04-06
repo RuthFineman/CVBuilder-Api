@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Http;
 using CVBuilder.Core.DTOs;
 using CVBuilder.Core.Models;
 using CVBuilder.Core.Repositories;
+using Amazon.S3.Transfer;
+using System.Net;
 
 public class FileUploadService : IFileUploadService
 {
@@ -56,26 +58,63 @@ public class FileUploadService : IFileUploadService
         };
     }
 
+    public async Task<List<object>> GetUserFilesAsync(string userId)
+    {
+        // שליפת קבצים מה-DB
+        var dbFiles = await _fileRepository.GetFilesByUserIdAsync(userId);
+        // שליפת קבצים מ-S3
+        var s3Files = await FetchFilesFromS3Async(userId);
+
+        // יצירת אובייקטים מה-DB עם ID
+        var dbFileDtos = dbFiles.Select(f => new
+        {
+            id = f.Id.ToString(),  // ID מה-DB
+            path = (string)null    // לא נשלף Path מה-DB
+        }).ToList(); // רשימה של קבצים מה-DB
+
+        // יצירת אובייקטים מ-S3 עם Path
+        var s3FileDtos = s3Files.Select(f => new
+        {
+            id = (string)null,     // לא נשלף ID מ-S3
+            path = $"https://cvfilebuilder.s3.amazonaws.com/{f}"
+        }).ToList(); // רשימה של קבצים מ-S3
+
+        // חיבור בין רשימות: ה-ID מה-DB ו-Path מ-S3
+        var result = dbFileDtos.Concat(s3FileDtos).Select(f => new
+        {
+            id = f.id ?? (string)null,         // ID מה-DB או מ-S3 או null
+            path = f.path ?? (string)null      // Path מה-DB או מ-S3 או null
+        }).ToList();
+
+        return result.Cast<object>().ToList();
+    }
+
+    private async Task<List<string>> FetchFilesFromS3Async(string userId)
+    {
+        var request = new ListObjectsV2Request
+        {
+            BucketName = _bucketName,
+            Prefix = $"{userId}/"
+        };
+
+        var response = await _s3Client.ListObjectsV2Async(request);
+        return response.S3Objects.Select(o => o.Key).ToList();
+    }
+
     public async Task UploadFileAsync(IFormFile file, string userId, FileCVDto fileDto)
     {
         if (string.IsNullOrEmpty(userId))
         {
-            //Console.WriteLine("UserId is required");
             throw new ArgumentException("UserId is required");
         }
-
         if (file == null || file.Length == 0)
         {
-            //Console.WriteLine("No file provided or file is empty");
             throw new InvalidOperationException("No file provided or file is empty");
         }
-
         if (fileDto == null)
         {
-            //Console.WriteLine("FileCVDto cannot be null");
             throw new ArgumentException("FileCVDto cannot be null");
         }
-
         try
         {
             // העלאת הקובץ ל-AWS S3
@@ -83,10 +122,8 @@ public class FileUploadService : IFileUploadService
             {
                 if (stream.Length == 0)
                 {
-                    //Console.WriteLine("The file is empty.");
                     throw new InvalidOperationException("The file is empty.");
                 }
-
                 var uploadRequest = new PutObjectRequest
                 {
                     BucketName = _bucketName,
@@ -94,57 +131,138 @@ public class FileUploadService : IFileUploadService
                     InputStream = stream,
                     ContentType = file.ContentType
                 };
-
                 var response = await _s3Client.PutObjectAsync(uploadRequest);
-                //Console.WriteLine($"File uploaded to S3: {response.HttpStatusCode}");
-
                 // המרה מ-FileCVDto ל-FileCV
                 var fileRecord = ConvertToFileCV(fileDto, userId, file);
 
-                // בדוק שהמידע המתקבל ממיר כראוי
                 if (fileRecord == null)
                 {
-                    Console.WriteLine("Error: Failed to convert FileCVDto to FileCV.");
                     throw new InvalidOperationException("Failed to convert FileCVDto to FileCV.");
                 }
-                Console.WriteLine($"Email: {fileRecord.Email}");
-
                 if (string.IsNullOrEmpty(fileRecord.Email))
                 {
                     throw new ArgumentException("Email is required.");
                 }
                 // שמירת הנתונים בבסיס הנתונים
-           
-
                 await _fileRepository.SaveFileRecordAsync(fileRecord);
-
-                Console.WriteLine("File record saved in database");
             }
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Error uploading file: {ex.Message}");
             throw new InvalidOperationException("An error occurred while uploading the file.", ex);
         }
     }
-    public async Task<bool> DeleteFileByUserIdAsync(int fileId, int userId)
+    public async Task<bool> DeleteFileByUserIdAsync(int fileId, string userId)
     {
+        // מחפש את הקובץ לפי fileId ו-userId
         var file = await _fileRepository.GetFileByUserIdAsync(fileId, userId);
-        if (file == null) return false;
+        if (file == null) return false; // אם לא נמצא קובץ כזה או שהקובץ לא שייך למשתמש
 
         // שלב 1: מחיקה מ-AWS S3
         if (!string.IsNullOrEmpty(file.FileName))
         {
-            Console.WriteLine(userId + "/" + file.FileName);
-            Console.WriteLine("FileName: " + file.FileName);
-            Console.WriteLine("FileName: " + file.FileName);
-            await _s3Client.DeleteObjectAsync(_bucketName, userId+"/"+file.FileName); 
-            await _s3Client.DeleteObjectAsync(_bucketName," 115 / קורות_חיים_mmmmm_mmmm_4980.pdf");
+            await _s3Client.DeleteObjectAsync(_bucketName, $"{userId}/{file.FileName}");
         }
 
         // שלב 2: מחיקה מה-Database
         await _fileRepository.DeleteFileCVAsync(file.Id);
-        return true;
+        return true; // מחיקה הצליחה
     }
-
+    public async Task<FileCV> GetFileByUrlAsync(string fileUrl)
+    {
+        var file = await _fileRepository.GetFileByUrlAsync(fileUrl);
+        if (file == null)
+        {
+            // החזרת null ישירות כדי ש-Controller יטפל בשגיאה
+            return null;
+        }
+        return file;
+    }
+   
+    public async Task<FileCV> UpdateFileCVAsync(IFormFile newFile, int id, string userId, FileCVDto fileCVDto)
+    {
+        var key = $"{userId}/{newFile.FileName}";
+        Console.WriteLine(key);
+        // בדוק אם הקובץ קיים לפני מחיקה
+        //var checkRequest = new GetObjectMetadataRequest
+        //{
+        //    BucketName = _bucketName,
+        //    Key = key
+        //};
+        try
+        {
+            // שלב 1: מחיקה מ-AWS S3
+            if (!string.IsNullOrEmpty(newFile.FileName))
+            {
+                await _s3Client.DeleteObjectAsync(_bucketName,key);
+            }
+            //var metadata = await _s3Client.GetObjectMetadataAsync(checkRequest);
+            //// אם הגעת לכאן, הקובץ קיים
+            //Console.WriteLine("הקובץ  קייםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםם");
+            //var deleteRequest = new DeleteObjectRequest
+            //{
+            //    BucketName = _bucketName,
+            //    Key = key
+            //};
+            //var deleteResponse = await _s3Client.DeleteObjectAsync(deleteRequest);
+            //if (deleteResponse.HttpStatusCode != HttpStatusCode.NoContent)
+            //{
+            //    throw new Exception("Error deleting the file.");
+            //}
+        }
+        catch (AmazonS3Exception e)
+        {
+            // לא נמצא הקובץ - טיפלנו בשגיאת "NoSuchKey"
+            if (e.ErrorCode != "NoSuchKey")
+            {
+                throw; // זרוק שגיאה אם הייתה בעיה אחרת
+            }
+            // במקרה שהקובץ לא נמצא - לא עשינו כלום
+            Console.WriteLine("File doesn't exist, skipping delete.");
+        }
+        // העלאת הקובץ החדש
+        using (var stream = new MemoryStream())
+        {
+            await newFile.CopyToAsync(stream);
+            var putRequest = new PutObjectRequest
+            {
+                BucketName = _bucketName,
+                Key = $"{userId}/{newFile.FileName}",  
+                InputStream = stream,
+                ContentType = newFile.ContentType
+            };
+            var response = await _s3Client.PutObjectAsync(putRequest);
+            if (response.HttpStatusCode != HttpStatusCode.OK)
+            {
+                throw new Exception("Failed to upload file to S3");
+            }
+        }
+        // עדכון פרטי הקובץ ב-db
+        var file = await _fileRepository.GetFileByUserIdAsync(id, userId);
+        if (file == null) return null;
+        file.Id = id;
+        file.FirstName = fileCVDto.FirstName ?? file.FirstName;
+        file.LastName = fileCVDto.LastName ?? file.LastName;
+        file.Email = fileCVDto.Email ?? file.Email;
+        file.Phone = fileCVDto.Phone ?? file.Phone;
+        file.Summary = fileCVDto.Summary ?? file.Summary;
+        file.Skills = fileCVDto.Skills ?? new List<string>();
+        // המרת חוויות עבודה עם namespace מלא
+        file.WorkExperiences = fileCVDto.WorkExperiences?.Select(we => new CVBuilder.Core.Models.WorkExperience
+        {
+            Company = we.Company,
+            Position = we.Position,
+            StartDate = we.StartDate,
+            EndDate = we.EndDate,
+            Description = we.Description
+        }).ToList() ?? new List<CVBuilder.Core.Models.WorkExperience>();  // טיפול במצב שבו השדה ריק
+        // המרת חינוך עם namespace מלא
+        file.Educations = fileCVDto.Educations?.Select(e => new CVBuilder.Core.Models.Education
+        {
+            Institution = e.Institution,
+            Degree = e.Degree
+        }).ToList() ?? new List<CVBuilder.Core.Models.Education>();  // טיפול במצב שבו השדה ריק
+        await _fileRepository.UpdateAsync(file);
+        return file;
+    }
 }

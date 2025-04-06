@@ -1,5 +1,5 @@
 {
-  "openapi": "3.0.1",
+  "openapi": "3.0.4",
   "info": {
     "title": "CVBuilder.Api",
     "version": "1.0"
@@ -104,6 +104,27 @@
             "schema": {
               "type": "integer",
               "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/upload/user-files": {
+      "get": {
+        "tags": [
+          "FileUpload"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "query",
+            "schema": {
+              "type": "string"
             }
           }
         ],
@@ -263,6 +284,134 @@
         }
       }
     },
+    "/upload/update/{id}": {
+      "put": {
+        "tags": [
+          "FileUpload"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "Id": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "FileName": {
+                    "type": "string"
+                  },
+                  "FirstName": {
+                    "type": "string"
+                  },
+                  "LastName": {
+                    "type": "string"
+                  },
+                  "Role": {
+                    "type": "string"
+                  },
+                  "Phone": {
+                    "type": "string"
+                  },
+                  "Email": {
+                    "type": "string"
+                  },
+                  "Summary": {
+                    "type": "string"
+                  },
+                  "WorkExperiences": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/WorkExperience"
+                    }
+                  },
+                  "Languages": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/Language"
+                    }
+                  },
+                  "Educations": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/Education"
+                    }
+                  },
+                  "Skills": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "encoding": {
+                "file": {
+                  "style": "form"
+                },
+                "Id": {
+                  "style": "form"
+                },
+                "FileName": {
+                  "style": "form"
+                },
+                "FirstName": {
+                  "style": "form"
+                },
+                "LastName": {
+                  "style": "form"
+                },
+                "Role": {
+                  "style": "form"
+                },
+                "Phone": {
+                  "style": "form"
+                },
+                "Email": {
+                  "style": "form"
+                },
+                "Summary": {
+                  "style": "form"
+                },
+                "WorkExperiences": {
+                  "style": "form"
+                },
+                "Languages": {
+                  "style": "form"
+                },
+                "Educations": {
+                  "style": "form"
+                },
+                "Skills": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Template/files": {
       "get": {
         "tags": [
@@ -383,6 +532,10 @@
           "id": {
             "type": "integer",
             "format": "int32"
+          },
+          "fileName": {
+            "type": "string",
+            "nullable": true
           },
           "firstName": {
             "type": "string",
