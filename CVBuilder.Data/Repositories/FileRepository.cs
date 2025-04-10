@@ -49,12 +49,12 @@ namespace CVBuilder.Data.Repositories
                 .FirstOrDefaultAsync(); // מחזיר את הקובץ אם נמצא או null אם לא נמצא
         }
 
-        public async Task<FileCV> GetFileByUrlAsync(string fileUrl)
-        {
-            return await _context.FileCVs
-                .Where(f => f.FileUrl == fileUrl)
-                .FirstOrDefaultAsync();
-        }
+        //public async Task<FileCV> GetFileByUrlAsync(string fileUrl)
+        //{
+        //    return await _context.FileCVs
+        //        .Where(f => f.FileUrl == fileUrl)
+        //        .FirstOrDefaultAsync();
+        //}
 
         //לעדכון
         public async Task UpdateAsync(FileCV fileCV)
@@ -62,7 +62,6 @@ namespace CVBuilder.Data.Repositories
             var existingFile = await _context.FileCVs.FindAsync(fileCV.Id);
             if (existingFile != null)
             {
-
                 await _context.SaveChangesAsync();
             }
         }

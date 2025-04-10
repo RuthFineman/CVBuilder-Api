@@ -33,8 +33,6 @@ builder.Services.AddDbContext<CVBuilderDbContext>(options =>
 // הוספת השירותים
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
-builder.Services.AddScoped<IFileCVService, FileCVService>();
-builder.Services.AddScoped<IFileCVRepository, FileCVRepository>();
 builder.Services.AddScoped<ITemplateService, TemplateService>();
 builder.Services.AddScoped<ITemplateRepository, TemplateRepository>();
 builder.Services.AddScoped<AuthService>();

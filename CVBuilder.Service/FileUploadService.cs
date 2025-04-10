@@ -58,32 +58,60 @@ public class FileUploadService : IFileUploadService
         };
     }
 
+    //public async Task<List<object>> GetUserFilesAsync(string userId)
+    //{
+    //    // שליפת קבצים מה-DB
+    //    var dbFiles = await _fileRepository.GetFilesByUserIdAsync(userId);
+    //    // שליפת קבצים מ-S3
+    //    var s3Files = await FetchFilesFromS3Async(userId);
+
+    //    // יצירת אובייקטים מה-DB עם ID
+    //    var dbFileDtos = dbFiles.Select(f => new
+    //    {
+    //        id = f.Id.ToString(),  // ID מה-DB
+    //        path = (string)null    // לא נשלף Path מה-DB
+    //    }).ToList(); // רשימה של קבצים מה-DB
+
+    //    // יצירת אובייקטים מ-S3 עם Path
+    //    var s3FileDtos = s3Files.Select(f => new
+    //    {
+    //        id = (string)null,     // לא נשלף ID מ-S3
+    //        path = $"https://cvfilebuilder.s3.amazonaws.com/{f}"
+    //    }).ToList(); // רשימה של קבצים מ-S3
+
+    //    // חיבור בין רשימות: ה-ID מה-DB ו-Path מ-S3
+    //    var result = dbFileDtos.Concat(s3FileDtos).Select(f => new
+    //    {
+    //        id = f.id ?? (string)null,         // ID מה-DB או מ-S3 או null
+    //        path = f.path ?? (string)null      // Path מה-DB או מ-S3 או null
+    //    }).ToList();
+
+    //    return result.Cast<object>().ToList();
+    //}
     public async Task<List<object>> GetUserFilesAsync(string userId)
     {
         // שליפת קבצים מה-DB
         var dbFiles = await _fileRepository.GetFilesByUserIdAsync(userId);
+
         // שליפת קבצים מ-S3
         var s3Files = await FetchFilesFromS3Async(userId);
 
         // יצירת אובייקטים מה-DB עם ID
-        var dbFileDtos = dbFiles.Select(f => new
-        {
+        var dbFileDtos = dbFiles.Select(f => new {
             id = f.Id.ToString(),  // ID מה-DB
             path = (string)null    // לא נשלף Path מה-DB
         }).ToList(); // רשימה של קבצים מה-DB
 
         // יצירת אובייקטים מ-S3 עם Path
-        var s3FileDtos = s3Files.Select(f => new
-        {
+        var s3FileDtos = s3Files.Select(f => new {
             id = (string)null,     // לא נשלף ID מ-S3
-            path = $"https://cvfilebuilder.s3.amazonaws.com/{f}"
+            path = f              // Path מ-S3
         }).ToList(); // רשימה של קבצים מ-S3
 
         // חיבור בין רשימות: ה-ID מה-DB ו-Path מ-S3
-        var result = dbFileDtos.Concat(s3FileDtos).Select(f => new
-        {
-            id = f.id ?? (string)null,         // ID מה-DB או מ-S3 או null
-            path = f.path ?? (string)null      // Path מה-DB או מ-S3 או null
+        var result = dbFileDtos.Zip(s3FileDtos, (dbFile, s3File) => new {
+            id = dbFile.id,         // ID מה-DB
+            path = s3File.path     // Path מ-S3
         }).ToList();
 
         return result.Cast<object>().ToList();
@@ -154,41 +182,35 @@ public class FileUploadService : IFileUploadService
     }
     public async Task<bool> DeleteFileByUserIdAsync(int fileId, string userId)
     {
+
         // מחפש את הקובץ לפי fileId ו-userId
         var file = await _fileRepository.GetFileByUserIdAsync(fileId, userId);
         if (file == null) return false; // אם לא נמצא קובץ כזה או שהקובץ לא שייך למשתמש
-
         // שלב 1: מחיקה מ-AWS S3
         if (!string.IsNullOrEmpty(file.FileName))
         {
             await _s3Client.DeleteObjectAsync(_bucketName, $"{userId}/{file.FileName}");
         }
-
         // שלב 2: מחיקה מה-Database
         await _fileRepository.DeleteFileCVAsync(file.Id);
         return true; // מחיקה הצליחה
     }
-    public async Task<FileCV> GetFileByUrlAsync(string fileUrl)
-    {
-        var file = await _fileRepository.GetFileByUrlAsync(fileUrl);
-        if (file == null)
-        {
-            // החזרת null ישירות כדי ש-Controller יטפל בשגיאה
-            return null;
-        }
-        return file;
-    }
+    //public async Task<FileCV> GetFileByUrlAsync(string fileUrl)
+    //{
+    //    var file = await _fileRepository.GetFileByUrlAsync(fileUrl);
+    //    if (file == null)
+    //    {
+    //        // החזרת null ישירות כדי ש-Controller יטפל בשגיאה
+    //        return null;
+    //    }
+    //    return file;
+    //}
    
     public async Task<FileCV> UpdateFileCVAsync(IFormFile newFile, int id, string userId, FileCVDto fileCVDto)
     {
         var key = $"{userId}/{newFile.FileName}";
         Console.WriteLine(key);
-        // בדוק אם הקובץ קיים לפני מחיקה
-        //var checkRequest = new GetObjectMetadataRequest
-        //{
-        //    BucketName = _bucketName,
-        //    Key = key
-        //};
+  
         try
         {
             // שלב 1: מחיקה מ-AWS S3
@@ -196,19 +218,6 @@ public class FileUploadService : IFileUploadService
             {
                 await _s3Client.DeleteObjectAsync(_bucketName,key);
             }
-            //var metadata = await _s3Client.GetObjectMetadataAsync(checkRequest);
-            //// אם הגעת לכאן, הקובץ קיים
-            //Console.WriteLine("הקובץ  קייםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםם");
-            //var deleteRequest = new DeleteObjectRequest
-            //{
-            //    BucketName = _bucketName,
-            //    Key = key
-            //};
-            //var deleteResponse = await _s3Client.DeleteObjectAsync(deleteRequest);
-            //if (deleteResponse.HttpStatusCode != HttpStatusCode.NoContent)
-            //{
-            //    throw new Exception("Error deleting the file.");
-            //}
         }
         catch (AmazonS3Exception e)
         {
@@ -265,4 +274,32 @@ public class FileUploadService : IFileUploadService
         await _fileRepository.UpdateAsync(file);
         return file;
     }
+    //לעדכון
+    public async Task<FileCV> GetFileCVByIdAsync(int id, string userId)
+    {
+        return await _fileRepository.GetFileByUserIdAsync(id, userId);
+    }
+    public bool DoesFileExist(string key)
+    {
+        try
+        {
+            var request = new GetObjectMetadataRequest
+            {
+                BucketName = _bucketName,
+                Key = key
+            };
+
+            var response = _s3Client.GetObjectMetadataAsync(request).Result;
+            return true;
+        }
+        catch (AmazonS3Exception ex)
+        {
+            if (ex.StatusCode == HttpStatusCode.NotFound)
+                return false;
+
+            throw; // כל שגיאה אחרת תיזרק הלאה
+        }
+    }
+
+
 }

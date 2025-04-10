@@ -1,74 +1,5 @@
 [
   {
-    "ContainingType": "CVBuilder.Api.Controllers.FileCVController",
-    "Method": "UpdateFileCV",
-    "RelativePath": "api/FileCV/modify/{id}",
-    "HttpMethod": "PUT",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      },
-      {
-        "Name": "fileCVDto",
-        "Type": "CVBuilder.Core.DTOs.FileCVDto",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "CVBuilder.Api.Controllers.FileCVController",
-    "Method": "DeleteFile",
-    "RelativePath": "api/FileCV/remove/{id}",
-    "HttpMethod": "DELETE",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "CVBuilder.Api.Controllers.FileCVController",
-    "Method": "GetUserFiles",
-    "RelativePath": "api/FileCV/user-files",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "userId",
-        "Type": "System.String",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "CVBuilder.Api.Controllers.FileCVController",
-    "Method": "GetFileByUserId",
-    "RelativePath": "api/FileCV/user-files/{fileId}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "fileId",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
     "ContainingType": "CVBuilder.Api.Controllers.TemplateController",
     "Method": "GetFile",
     "RelativePath": "api/Template/{index}",
@@ -203,6 +134,43 @@
         "Name": "Skills",
         "Type": "System.Collections.Generic.List\u00601[[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CVBuilder.Api.Controllers.FileUploadController",
+    "Method": "CheckIfFileExists",
+    "RelativePath": "upload/check-filename",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "fileName",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CVBuilder.Api.Controllers.FileUploadController",
+    "Method": "GetFileCV",
+    "RelativePath": "upload/fileCV/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []

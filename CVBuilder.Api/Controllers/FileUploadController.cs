@@ -91,8 +91,41 @@ namespace CVBuilder.Api.Controllers
 
             if (result == null)
                 return NotFound("Resume not found.");
-
             return Ok(result);
+        }
+        //לעדכון
+        [HttpGet("fileCV/{id}")]
+        public async Task<IActionResult> GetFileCV([FromRoute] int id)
+        {
+            try
+            {
+                var userId = GetUserIdFromContext().ToString();
+                if (string.IsNullOrEmpty(userId) || userId == Guid.Empty.ToString())
+                    return BadRequest("User ID is missing or invalid");
+
+                var file = await _fileUploadService.GetFileCVByIdAsync(id, userId);
+
+                if (file == null)
+                    return NotFound();
+
+                return Ok(file);
+            }
+            catch (Exception ex)
+            {
+                // כדאי לרשום ללוג - כאן רק נחזיר את השגיאה למטרת איתור
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+        [HttpGet("check-filename")]
+        public IActionResult CheckIfFileExists([FromQuery] string userId, [FromQuery] string fileName)
+        {
+            var userFolderPath = $"users/{userId}/";
+            var fullKey = $"{userFolderPath}{fileName}";
+
+            // בדיקה ב-S3
+            var exists = _fileUploadService.DoesFileExist(fullKey); // את צריכה לממש את הפונקציה הזו
+
+            return Ok(new { exists });
         }
     }
 }
