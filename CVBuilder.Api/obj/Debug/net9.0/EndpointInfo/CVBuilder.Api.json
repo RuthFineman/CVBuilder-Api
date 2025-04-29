@@ -49,96 +49,11 @@
                   "file": {
                     "type": "string",
                     "format": "binary"
-                  },
-                  "Id": {
-                    "type": "integer",
-                    "format": "int32"
-                  },
-                  "FileName": {
-                    "type": "string"
-                  },
-                  "FirstName": {
-                    "type": "string"
-                  },
-                  "LastName": {
-                    "type": "string"
-                  },
-                  "Role": {
-                    "type": "string"
-                  },
-                  "Phone": {
-                    "type": "string"
-                  },
-                  "Email": {
-                    "type": "string"
-                  },
-                  "Summary": {
-                    "type": "string"
-                  },
-                  "WorkExperiences": {
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/WorkExperience"
-                    }
-                  },
-                  "Languages": {
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/Language"
-                    }
-                  },
-                  "Educations": {
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/Education"
-                    }
-                  },
-                  "Skills": {
-                    "type": "array",
-                    "items": {
-                      "type": "string"
-                    }
                   }
                 }
               },
               "encoding": {
                 "file": {
-                  "style": "form"
-                },
-                "Id": {
-                  "style": "form"
-                },
-                "FileName": {
-                  "style": "form"
-                },
-                "FirstName": {
-                  "style": "form"
-                },
-                "LastName": {
-                  "style": "form"
-                },
-                "Role": {
-                  "style": "form"
-                },
-                "Phone": {
-                  "style": "form"
-                },
-                "Email": {
-                  "style": "form"
-                },
-                "Summary": {
-                  "style": "form"
-                },
-                "WorkExperiences": {
-                  "style": "form"
-                },
-                "Languages": {
-                  "style": "form"
-                },
-                "Educations": {
-                  "style": "form"
-                },
-                "Skills": {
                   "style": "form"
                 }
               }

@@ -8,6 +8,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 using Swashbuckle.AspNetCore.Annotations;
+using CVBuilder.Core.Models;
+using DTO = CVBuilder.Core.DTOs;
+using Newtonsoft.Json;
+
 namespace CVBuilder.Api.Controllers
 {
     [Route("upload")]
@@ -45,21 +49,48 @@ namespace CVBuilder.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> UploadFile(IFormFile file, [FromQuery] string userId, [FromForm] FileCVDto fileDto)
+        public async Task<IActionResult> UploadFile(IFormFile file, [FromQuery] string userId)
         {
+            Console.WriteLine($"File upload started: {DateTime.Now}");
+
             if (file == null || file.Length == 0)
             {
                 return BadRequest("No file uploaded.");
             }
-
             try
             {
-                // העברת כל המידע כולל ה-DTO
+                // קריאה מה-Form של כל שדה כטקסט
+                var title = Request.Form["Title"];
+                var description = Request.Form["Description"];
+                var workExperiencesJson = Request.Form["WorkExperiences"];
+                var educationsJson = Request.Form["Educations"];
+                var languagesJson = Request.Form["Languages"];
+
+                // המרות JSON
+                var workExperiences = JsonConvert.DeserializeObject<List<DTO.WorkExperience>>(workExperiencesJson);
+                var educations = JsonConvert.DeserializeObject<List<DTO.Education>>(educationsJson);
+                var languages = JsonConvert.DeserializeObject<List<DTO.Language>>(languagesJson);
+
+                var fileDto = new FileCVDto
+                {
+                    FileName = Request.Form["FileName"],
+                    FirstName = Request.Form["FirstName"],
+                    LastName = Request.Form["LastName"],
+                    Role = Request.Form["Role"],
+                    Phone = Request.Form["Phone"],
+                    Email = Request.Form["Email"],
+                    Summary = Request.Form["Summary"],
+                    WorkExperiences = JsonConvert.DeserializeObject<List<DTO.WorkExperience>>(Request.Form["WorkExperiences"]),
+                    Educations = JsonConvert.DeserializeObject<List<DTO.Education>>(Request.Form["Educations"]),
+                    Languages = JsonConvert.DeserializeObject<List<DTO.Language>>(Request.Form["Languages"]),
+                    Skills = JsonConvert.DeserializeObject<List<string>>(Request.Form["Skills"])
+                };
                 await _fileUploadService.UploadFileAsync(file, userId, fileDto);
                 return Ok(new { message = "File uploaded successfully" });
             }
             catch (Exception ex)
             {
+                Console.WriteLine($"Error during upload: {ex.Message}");
                 return BadRequest($"Error uploading file: {ex.Message}");
             }
         }
@@ -94,12 +125,16 @@ namespace CVBuilder.Api.Controllers
             return Ok(result);
         }
         //לעדכון
+        [Authorize]
         [HttpGet("fileCV/{id}")]
         public async Task<IActionResult> GetFileCV([FromRoute] int id)
         {
             try
             {
                 var userId = GetUserIdFromContext().ToString();
+                Console.WriteLine("=======================================77777777777777============================");
+                Console.WriteLine("userId from token: " + userId);
+                Console.WriteLine("=========================================7777777777================================");
                 if (string.IsNullOrEmpty(userId) || userId == Guid.Empty.ToString())
                     return BadRequest("User ID is missing or invalid");
 
@@ -112,7 +147,6 @@ namespace CVBuilder.Api.Controllers
             }
             catch (Exception ex)
             {
-                // כדאי לרשום ללוג - כאן רק נחזיר את השגיאה למטרת איתור
                 return StatusCode(500, $"Internal server error: {ex.Message}");
             }
         }

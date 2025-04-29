@@ -329,7 +329,6 @@ C:\Users\user1\Documents\תכנות ו\פרויקט גמר\CVBuilder\CVBuilder.A
 C:\Users\user1\Documents\תכנות ו\פרויקט גמר\CVBuilder\CVBuilder.Api\obj\Debug\net9.0\staticwebassets\msbuild.buildMultiTargeting.CVBuilder.Api.props
 C:\Users\user1\Documents\תכנות ו\פרויקט גמר\CVBuilder\CVBuilder.Api\obj\Debug\net9.0\staticwebassets\msbuild.buildTransitive.CVBuilder.Api.props
 C:\Users\user1\Documents\תכנות ו\פרויקט גמר\CVBuilder\CVBuilder.Api\obj\Debug\net9.0\staticwebassets.pack.json
-C:\Users\user1\Documents\תכנות ו\פרויקט גמר\CVBuilder\CVBuilder.Api\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt
 C:\Users\user1\Documents\תכנות ו\פרויקט גמר\CVBuilder\CVBuilder.Api\obj\Debug\net9.0\CVBuilde.2CAC6F68.Up2Date
 C:\Users\user1\Documents\תכנות ו\פרויקט גמר\CVBuilder\CVBuilder.Api\obj\Debug\net9.0\CVBuilder.Api.dll
 C:\Users\user1\Documents\תכנות ו\פרויקט גמר\CVBuilder\CVBuilder.Api\obj\Debug\net9.0\refint\CVBuilder.Api.dll
@@ -344,3 +343,4 @@ C:\Users\user1\Documents\תכנות ו\פרויקט גמר\CVBuilder\CVBuilder.A
 C:\Users\user1\Documents\תכנות ו\פרויקט גמר\CVBuilder\CVBuilder.Api\bin\Debug\net9.0\Microsoft.Extensions.Configuration.Binder.dll
 C:\Users\user1\Documents\תכנות ו\פרויקט גמר\CVBuilder\CVBuilder.Api\bin\Debug\net9.0\Newtonsoft.Json.dll
 C:\Users\user1\Documents\תכנות ו\פרויקט גמר\CVBuilder\CVBuilder.Api\bin\Debug\net9.0\Swashbuckle.AspNetCore.Annotations.dll
+C:\Users\user1\Documents\תכנות ו\פרויקט גמר\CVBuilder\CVBuilder.Api\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt

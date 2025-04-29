@@ -57,37 +57,6 @@ public class FileUploadService : IFileUploadService
             Skills = fileDto.Skills ?? new List<string>()
         };
     }
-
-    //public async Task<List<object>> GetUserFilesAsync(string userId)
-    //{
-    //    // שליפת קבצים מה-DB
-    //    var dbFiles = await _fileRepository.GetFilesByUserIdAsync(userId);
-    //    // שליפת קבצים מ-S3
-    //    var s3Files = await FetchFilesFromS3Async(userId);
-
-    //    // יצירת אובייקטים מה-DB עם ID
-    //    var dbFileDtos = dbFiles.Select(f => new
-    //    {
-    //        id = f.Id.ToString(),  // ID מה-DB
-    //        path = (string)null    // לא נשלף Path מה-DB
-    //    }).ToList(); // רשימה של קבצים מה-DB
-
-    //    // יצירת אובייקטים מ-S3 עם Path
-    //    var s3FileDtos = s3Files.Select(f => new
-    //    {
-    //        id = (string)null,     // לא נשלף ID מ-S3
-    //        path = $"https://cvfilebuilder.s3.amazonaws.com/{f}"
-    //    }).ToList(); // רשימה של קבצים מ-S3
-
-    //    // חיבור בין רשימות: ה-ID מה-DB ו-Path מ-S3
-    //    var result = dbFileDtos.Concat(s3FileDtos).Select(f => new
-    //    {
-    //        id = f.id ?? (string)null,         // ID מה-DB או מ-S3 או null
-    //        path = f.path ?? (string)null      // Path מה-DB או מ-S3 או null
-    //    }).ToList();
-
-    //    return result.Cast<object>().ToList();
-    //}
     public async Task<List<object>> GetUserFilesAsync(string userId)
     {
         // שליפת קבצים מה-DB
@@ -195,17 +164,6 @@ public class FileUploadService : IFileUploadService
         await _fileRepository.DeleteFileCVAsync(file.Id);
         return true; // מחיקה הצליחה
     }
-    //public async Task<FileCV> GetFileByUrlAsync(string fileUrl)
-    //{
-    //    var file = await _fileRepository.GetFileByUrlAsync(fileUrl);
-    //    if (file == null)
-    //    {
-    //        // החזרת null ישירות כדי ש-Controller יטפל בשגיאה
-    //        return null;
-    //    }
-    //    return file;
-    //}
-   
     public async Task<FileCV> UpdateFileCVAsync(IFormFile newFile, int id, string userId, FileCVDto fileCVDto)
     {
         var key = $"{userId}/{newFile.FileName}";
@@ -247,8 +205,11 @@ public class FileUploadService : IFileUploadService
             }
         }
         // עדכון פרטי הקובץ ב-db
+        Console.WriteLine("===============================================");
+        Console.WriteLine($"===> Looking for fileId: {id}, userId: {userId}");
+        Console.WriteLine("===============================================");
         var file = await _fileRepository.GetFileByUserIdAsync(id, userId);
-        if (file == null) return null;
+        if (file == null) return null; 
         file.Id = id;
         file.FirstName = fileCVDto.FirstName ?? file.FirstName;
         file.LastName = fileCVDto.LastName ?? file.LastName;
@@ -256,6 +217,10 @@ public class FileUploadService : IFileUploadService
         file.Phone = fileCVDto.Phone ?? file.Phone;
         file.Summary = fileCVDto.Summary ?? file.Summary;
         file.Skills = fileCVDto.Skills ?? new List<string>();
+        //צריך לבדוק מה קורה האם לא מעדכנים את הכישורים, האם זה מתאפס או לא?
+        //if (fileCVDto.Skills != null)
+        //    file.Skills = fileCVDto.Skills;
+
         // המרת חוויות עבודה עם namespace מלא
         file.WorkExperiences = fileCVDto.WorkExperiences?.Select(we => new CVBuilder.Core.Models.WorkExperience
         {
@@ -277,6 +242,7 @@ public class FileUploadService : IFileUploadService
     //לעדכון
     public async Task<FileCV> GetFileCVByIdAsync(int id, string userId)
     {
+        Console.WriteLine($"Parsed userId = {int.Parse(userId)}");
         return await _fileRepository.GetFileByUserIdAsync(id, userId);
     }
     public bool DoesFileExist(string key)
@@ -300,6 +266,4 @@ public class FileUploadService : IFileUploadService
             throw; // כל שגיאה אחרת תיזרק הלאה
         }
     }
-
-
 }
