@@ -42,12 +42,23 @@ namespace CVBuilder.Data.Repositories
             }
         }
         //והעדכון בשביל המחיקה
+        //public async Task<FileCV> GetFileByUserIdAsync(int fileId, string userId)
+        //{
+        //    return await _context.FileCVs
+        //        .Where(f => f.Id == fileId && f.UserId.ToString() == userId) // המרה של UserId מ- int ל-string להשוואה
+        //        .FirstOrDefaultAsync(); // מחזיר את הקובץ אם נמצא או null אם לא נמצא
+        //}
         public async Task<FileCV> GetFileByUserIdAsync(int fileId, string userId)
         {
-            return await _context.FileCVs
-                .Where(f => f.Id == fileId && f.UserId.ToString() == userId) // המרה של UserId מ- int ל-string להשוואה
-                .FirstOrDefaultAsync(); // מחזיר את הקובץ אם נמצא או null אם לא נמצא
+              return await _context.FileCVs
+    .Include(f => f.WorkExperiences)
+    .Include(f => f.Educations)
+    .Include(f => f.Languages)
+    .Where(f => f.Id == fileId && f.UserId.ToString() == userId)
+    .FirstOrDefaultAsync();
         }
+  
+
         //public async Task<FileCV> GetFileByUserIdAsync(int fileId, string userId)
         //{
         //    int parsedUserId = int.Parse(userId);

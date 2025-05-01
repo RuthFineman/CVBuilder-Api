@@ -115,7 +115,7 @@ namespace CVBuilder.Api.Controllers
         }
         [HttpPut("update/{id}")]
         [SwaggerOperation(Summary = "Update resume with file upload", Description = "Allows updating a resume with the file and other details.")]
-        public async Task<IActionResult> UpdateFileCV(IFormFile file, int id, [FromForm] FileCVDto fileCVDto)
+        public async Task<IActionResult> UpdateFileCV([FromRoute] int id, IFormFile file, [FromForm] FileCVDto fileCVDto)
         {
             var userId = GetUserIdFromContext().ToString();
             var result = await _fileUploadService.UpdateFileCVAsync(file, id, userId, fileCVDto);

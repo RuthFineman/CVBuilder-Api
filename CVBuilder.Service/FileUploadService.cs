@@ -166,15 +166,19 @@ public class FileUploadService : IFileUploadService
     }
     public async Task<FileCV> UpdateFileCVAsync(IFormFile newFile, int id, string userId, FileCVDto fileCVDto)
     {
-        var key = $"{userId}/{newFile.FileName}";
-        Console.WriteLine(key);
-  
+        var oldFile = await _fileRepository.GetFileByUserIdAsync(id, userId);
+        if (oldFile == null) return null;
+
+        // שלב 2: מחיקת הקובץ הישן מה-S3 לפי שם הקובץ הישן ששמור ב-DB
+        var oldKey = $"{userId}/{oldFile.FileName}";
         try
         {
             // שלב 1: מחיקה מ-AWS S3
-            if (!string.IsNullOrEmpty(newFile.FileName))
+            if (!string.IsNullOrEmpty(fileCVDto.FileName))
             {
-                await _s3Client.DeleteObjectAsync(_bucketName,key);
+                await _s3Client.DeleteObjectAsync(_bucketName, oldKey);
+                Console.WriteLine("deleteeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
+      
             }
         }
         catch (AmazonS3Exception e)
@@ -213,10 +217,13 @@ public class FileUploadService : IFileUploadService
         file.Id = id;
         file.FirstName = fileCVDto.FirstName ?? file.FirstName;
         file.LastName = fileCVDto.LastName ?? file.LastName;
+        file.FileName = newFile.FileName;
         file.Email = fileCVDto.Email ?? file.Email;
         file.Phone = fileCVDto.Phone ?? file.Phone;
         file.Summary = fileCVDto.Summary ?? file.Summary;
-        file.Skills = fileCVDto.Skills ?? new List<string>();
+        if (fileCVDto.Skills != null)
+            file.Skills = fileCVDto.Skills;
+
         //צריך לבדוק מה קורה האם לא מעדכנים את הכישורים, האם זה מתאפס או לא?
         //if (fileCVDto.Skills != null)
         //    file.Skills = fileCVDto.Skills;
