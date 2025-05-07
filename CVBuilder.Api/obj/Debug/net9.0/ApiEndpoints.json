@@ -58,7 +58,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "CVBuilder.Api.Controllers.FileUploadController",
+    "ContainingType": "CVBuilder.Api.Controllers.FileCVController",
     "Method": "UploadFile",
     "RelativePath": "upload",
     "HttpMethod": "POST",
@@ -79,7 +79,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "CVBuilder.Api.Controllers.FileUploadController",
+    "ContainingType": "CVBuilder.Api.Controllers.FileCVController",
     "Method": "CheckIfFileExists",
     "RelativePath": "upload/check-filename",
     "HttpMethod": "GET",
@@ -100,7 +100,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "CVBuilder.Api.Controllers.FileUploadController",
+    "ContainingType": "CVBuilder.Api.Controllers.FileCVController",
     "Method": "GetFileCV",
     "RelativePath": "upload/fileCV/{id}",
     "HttpMethod": "GET",
@@ -116,7 +116,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "CVBuilder.Api.Controllers.FileUploadController",
+    "ContainingType": "CVBuilder.Api.Controllers.FileCVController",
     "Method": "DeleteFile",
     "RelativePath": "upload/remove/{id}",
     "HttpMethod": "DELETE",
@@ -132,7 +132,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "CVBuilder.Api.Controllers.FileUploadController",
+    "ContainingType": "CVBuilder.Api.Controllers.FileCVController",
     "Method": "UpdateFileCV",
     "RelativePath": "upload/update/{id}",
     "HttpMethod": "PUT",
@@ -213,7 +213,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "CVBuilder.Api.Controllers.FileUploadController",
+    "ContainingType": "CVBuilder.Api.Controllers.FileCVController",
     "Method": "GetUserFiles",
     "RelativePath": "upload/user-files",
     "HttpMethod": "GET",

@@ -1,14 +1,10 @@
 ﻿using Amazon.S3;
 using CVBuilder.Core.DTOs;
 using CVBuilder.Core.Services;
-using CVBuilder.Data;
-using CVBuilder.Service;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 using Swashbuckle.AspNetCore.Annotations;
-using CVBuilder.Core.Models;
 using DTO = CVBuilder.Core.DTOs;
 using Newtonsoft.Json;
 
@@ -16,11 +12,11 @@ namespace CVBuilder.Api.Controllers
 {
     [Route("upload")]
     [ApiController]
-    public class FileUploadController : ControllerBase
+    public class FileCVController : ControllerBase
     {
-        private readonly IFileUploadService _fileUploadService;
+        private readonly IFileCVService _fileUploadService;
 
-        public FileUploadController(IFileUploadService fileUploadService)
+        public FileCVController(IFileCVService fileUploadService)
         {
             _fileUploadService = fileUploadService;
         }
@@ -47,18 +43,22 @@ namespace CVBuilder.Api.Controllers
                 return StatusCode(500, "שגיאה בטעינת הקבצים: " + ex.Message);
             }
         }
-
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> UploadFile(IFormFile file, [FromQuery] string userId)
         {
             Console.WriteLine($"File upload started: {DateTime.Now}");
-
             if (file == null || file.Length == 0)
             {
                 return BadRequest("No file uploaded.");
             }
             try
             {
+                var userFileCount = await _fileUploadService.GetFileCountByUserIdAsync(userId);
+                if (userFileCount >= 5)
+                {
+                    return BadRequest("ניתן לשמור עד 5 קורות חיים בלבד למשתמש.");
+                }
                 // קריאה מה-Form של כל שדה כטקסט
                 var title = Request.Form["Title"];
                 var description = Request.Form["Description"];
@@ -159,7 +159,8 @@ namespace CVBuilder.Api.Controllers
             // בדיקה ב-S3
             var exists = _fileUploadService.DoesFileExist(fullKey); // את צריכה לממש את הפונקציה הזו
 
-            return Ok(new { exists });
+            //return Ok(new { exists });
+            return BadRequest(new { message = "ניתן לשמור עד 5 קורות חיים בלבד למשתמש." });
         }
     }
 }

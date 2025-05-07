@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CVBuilder.Core.Services
 {
-    public interface IFileUploadService
+    public interface IFileCVService
     {
         Task UploadFileAsync(IFormFile file, string userId, FileCVDto fileDto);
         Task<bool> DeleteFileByUserIdAsync(int fileId, string userId);
@@ -17,5 +17,6 @@ namespace CVBuilder.Core.Services
         Task<FileCV> UpdateFileCVAsync(IFormFile newFile, int id, string userId, FileCVDto fileCVDto);
         Task<FileCV> GetFileCVByIdAsync(int id, string userId);
         bool DoesFileExist(string key);
+        Task<int> GetFileCountByUserIdAsync(string userId);
     }
 }

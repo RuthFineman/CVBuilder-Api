@@ -17,6 +17,7 @@ namespace CVBuilder.Core.Models
         public int UserId { get; set; }
         public string FileName { get; set; }
         public string FileUrl { get; set; }
+        public string Template { get; set; }
         public DateTime UploadedAt { get; set; }
         public User User { get; set; }
        
@@ -47,19 +48,19 @@ namespace CVBuilder.Core.Models
         public List<Education> Educations { get; set; } = new List<Education>();
 
         [JsonPropertyName("skills")]
-        public List<string> Skills { get; set; } = new List<string>
-        {
-            "כישורי ארגון",
-            "פתרון בעיות",
-            "עבודה בצוות",
-            "יצירתיות",
-            "אחריות",
-            "תפקוד במצבי לחץ",
-            "מוסר עבודה גבוה",
-            "ניהול זמן יעיל",
-            "חשיבה אנליטית",
-            "יחסי אנוש מעולים"
-        };
+        public List<string> Skills { get; set; } = new List<string>();
+        //{
+        //    "כישורי ארגון",
+        //    "פתרון בעיות",
+        //    "עבודה בצוות",
+        //    "יצירתיות",
+        //    "אחריות",
+        //    "תפקוד במצבי לחץ",
+        //    "מוסר עבודה גבוה",
+        //    "ניהול זמן יעיל",
+        //    "חשיבה אנליטית",
+        //    "יחסי אנוש מעולים"
+        //};
     }
     //[Owned]
     public class WorkExperience

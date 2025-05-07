@@ -40,19 +40,19 @@ namespace CVBuilder.Core.DTOs
         public List<Education>? Educations { get; set; } = new List<Education>();
 
         [JsonPropertyName("skills")]
-        public List<string>? Skills { get; set; } = new List<string>
-        {
-            "כישורי ארגון",
-            "פתרון בעיות",
-            "עבודה בצוות",
-            "יצירתיות",
-            "אחריות",
-            "תפקוד במצבי לחץ",
-            "מוסר עבודה גבוה",
-            "ניהול זמן יעיל",
-            "חשיבה אנליטית",
-            "יחסי אנוש מעולים"
-        };
+        public List<string>? Skills { get; set; } = new List<string>();
+        //{
+        //    "כישורי ארגון",
+        //    "פתרון בעיות",
+        //    "עבודה בצוות",
+        //    "יצירתיות",
+        //    "אחריות",
+        //    "תפקוד במצבי לחץ",
+        //    "מוסר עבודה גבוה",
+        //    "ניהול זמן יעיל",
+        //    "חשיבה אנליטית",
+        //    "יחסי אנוש מעולים"
+        //};
     }
 
     public class WorkExperience

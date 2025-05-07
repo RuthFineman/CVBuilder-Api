@@ -8,16 +8,16 @@ using CVBuilder.Core.Repositories;
 using Amazon.S3.Transfer;
 using System.Net;
 
-public class FileUploadService : IFileUploadService
+public class FileCVService : IFileCVService
 {
     private readonly IAmazonS3 _s3Client;
     private readonly string _bucketName = "cvfilebuilder";
-    private readonly IFileRepository _fileRepository;  // נדרש לשמור את המידע על הקובץ ב-DB
+    private readonly IFileCVRepository _fileCVRepository;  // נדרש לשמור את המידע על הקובץ ב-DB
 
-    public FileUploadService(IAmazonS3 s3Client, IFileRepository fileRepository)
+    public FileCVService(IAmazonS3 s3Client, IFileCVRepository fileRepository)
     {
         _s3Client = s3Client;
-        _fileRepository = fileRepository;
+        _fileCVRepository = fileRepository;
     }
 
     private FileCV ConvertToFileCV(FileCVDto fileDto, string userId, IFormFile file)
@@ -60,7 +60,7 @@ public class FileUploadService : IFileUploadService
     public async Task<List<object>> GetUserFilesAsync(string userId)
     {
         // שליפת קבצים מה-DB
-        var dbFiles = await _fileRepository.GetFilesByUserIdAsync(userId);
+        var dbFiles = await _fileCVRepository.GetFilesByUserIdAsync(userId);
 
         // שליפת קבצים מ-S3
         var s3Files = await FetchFilesFromS3Async(userId);
@@ -141,7 +141,7 @@ public class FileUploadService : IFileUploadService
                     throw new ArgumentException("Email is required.");
                 }
                 // שמירת הנתונים בבסיס הנתונים
-                await _fileRepository.SaveFileRecordAsync(fileRecord);
+                await _fileCVRepository.SaveFileRecordAsync(fileRecord);
             }
         }
         catch (Exception ex)
@@ -153,7 +153,7 @@ public class FileUploadService : IFileUploadService
     {
 
         // מחפש את הקובץ לפי fileId ו-userId
-        var file = await _fileRepository.GetFileByUserIdAsync(fileId, userId);
+        var file = await _fileCVRepository.GetFileByUserIdAsync(fileId, userId);
         if (file == null) return false; // אם לא נמצא קובץ כזה או שהקובץ לא שייך למשתמש
         // שלב 1: מחיקה מ-AWS S3
         if (!string.IsNullOrEmpty(file.FileName))
@@ -161,12 +161,12 @@ public class FileUploadService : IFileUploadService
             await _s3Client.DeleteObjectAsync(_bucketName, $"{userId}/{file.FileName}");
         }
         // שלב 2: מחיקה מה-Database
-        await _fileRepository.DeleteFileCVAsync(file.Id);
+        await _fileCVRepository.DeleteFileCVAsync(file.Id);
         return true; // מחיקה הצליחה
     }
     public async Task<FileCV> UpdateFileCVAsync(IFormFile newFile, int id, string userId, FileCVDto fileCVDto)
     {
-        var oldFile = await _fileRepository.GetFileByUserIdAsync(id, userId);
+        var oldFile = await _fileCVRepository.GetFileByUserIdAsync(id, userId);
         if (oldFile == null) return null;
 
         // שלב 2: מחיקת הקובץ הישן מה-S3 לפי שם הקובץ הישן ששמור ב-DB
@@ -212,7 +212,7 @@ public class FileUploadService : IFileUploadService
         Console.WriteLine("===============================================");
         Console.WriteLine($"===> Looking for fileId: {id}, userId: {userId}");
         Console.WriteLine("===============================================");
-        var file = await _fileRepository.GetFileByUserIdAsync(id, userId);
+        var file = await _fileCVRepository.GetFileByUserIdAsync(id, userId);
         if (file == null) return null; 
         file.Id = id;
         file.FirstName = fileCVDto.FirstName ?? file.FirstName;
@@ -243,14 +243,14 @@ public class FileUploadService : IFileUploadService
             Institution = e.Institution,
             Degree = e.Degree
         }).ToList() ?? new List<CVBuilder.Core.Models.Education>();  // טיפול במצב שבו השדה ריק
-        await _fileRepository.UpdateAsync(file);
+        await _fileCVRepository.UpdateAsync(file);
         return file;
     }
     //לעדכון
     public async Task<FileCV> GetFileCVByIdAsync(int id, string userId)
     {
         Console.WriteLine($"Parsed userId = {int.Parse(userId)}");
-        return await _fileRepository.GetFileByUserIdAsync(id, userId);
+        return await _fileCVRepository.GetFileByUserIdAsync(id, userId);
     }
     public bool DoesFileExist(string key)
     {
@@ -273,4 +273,9 @@ public class FileUploadService : IFileUploadService
             throw; // כל שגיאה אחרת תיזרק הלאה
         }
     }
+    public async Task<int> GetFileCountByUserIdAsync(string userId)
+    {
+        return await _fileCVRepository.GetFileCountByUserIdAsync(userId);
+    }
+
 }

@@ -7,12 +7,14 @@ using System.Threading.Tasks;
 
 namespace CVBuilder.Core.Repositories
 {
-    public interface IFileRepository
+    public interface IFileCVRepository
     {
         Task SaveFileRecordAsync(FileCV fileRecord);
         Task DeleteFileCVAsync(int fileId);
         Task<FileCV> GetFileByUserIdAsync(int fileId, string userId);
         Task<List<FileCV>> GetFilesByUserIdAsync(string userId);
         Task UpdateAsync(FileCV fileCV);
+        Task<int> GetFileCountByUserIdAsync(string userId);
+
     }
 }

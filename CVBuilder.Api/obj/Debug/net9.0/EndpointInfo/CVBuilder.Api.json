@@ -8,7 +8,7 @@
     "/upload/user-files": {
       "get": {
         "tags": [
-          "FileUpload"
+          "FileCV"
         ],
         "parameters": [
           {
@@ -29,7 +29,7 @@
     "/upload": {
       "post": {
         "tags": [
-          "FileUpload"
+          "FileCV"
         ],
         "parameters": [
           {
@@ -70,7 +70,7 @@
     "/upload/remove/{id}": {
       "delete": {
         "tags": [
-          "FileUpload"
+          "FileCV"
         ],
         "parameters": [
           {
@@ -93,7 +93,7 @@
     "/upload/update/{id}": {
       "put": {
         "tags": [
-          "FileUpload"
+          "FileCV"
         ],
         "parameters": [
           {
@@ -221,7 +221,7 @@
     "/upload/fileCV/{id}": {
       "get": {
         "tags": [
-          "FileUpload"
+          "FileCV"
         ],
         "parameters": [
           {
@@ -244,7 +244,7 @@
     "/upload/check-filename": {
       "get": {
         "tags": [
-          "FileUpload"
+          "FileCV"
         ],
         "parameters": [
           {
