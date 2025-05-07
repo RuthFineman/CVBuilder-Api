@@ -7,6 +7,7 @@ using System.Security.Claims;
 using Swashbuckle.AspNetCore.Annotations;
 using DTO = CVBuilder.Core.DTOs;
 using Newtonsoft.Json;
+using CVBuilder.Core.Models;
 
 namespace CVBuilder.Api.Controllers
 {
@@ -74,6 +75,7 @@ namespace CVBuilder.Api.Controllers
                 var fileDto = new FileCVDto
                 {
                     FileName = Request.Form["FileName"],
+                    Template = Request.Form["Template"],
                     FirstName = Request.Form["FirstName"],
                     LastName = Request.Form["LastName"],
                     Role = Request.Form["Role"],
@@ -86,6 +88,7 @@ namespace CVBuilder.Api.Controllers
                     Skills = JsonConvert.DeserializeObject<List<string>>(Request.Form["Skills"])
                 };
                 await _fileUploadService.UploadFileAsync(file, userId, fileDto);
+
                 return Ok(new { message = "File uploaded successfully" });
             }
             catch (Exception ex)

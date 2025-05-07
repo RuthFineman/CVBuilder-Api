@@ -28,6 +28,7 @@ public class FileCVService : IFileCVService
             FileName = file.FileName,
             FileUrl = $"https://{_bucketName}.s3.amazonaws.com/{userId}/{file.FileName}",
             UploadedAt = DateTime.UtcNow,
+            Template=fileDto.Template,
             FirstName = fileDto.FirstName,
             LastName = fileDto.LastName,
             Role = fileDto.Role,
@@ -45,7 +46,7 @@ public class FileCVService : IFileCVService
             Languages = fileDto.Languages?.Select(l => new CVBuilder.Core.Models.Language
             {
                 LanguageName = l.LanguageName,
-                Proficiency = l.Proficiency
+                Level = l.Level
             }).ToList() ?? new List<CVBuilder.Core.Models.Language>(),
 
             Educations = fileDto.Educations?.Select(e => new CVBuilder.Core.Models.Education
@@ -93,7 +94,6 @@ public class FileCVService : IFileCVService
             BucketName = _bucketName,
             Prefix = $"{userId}/"
         };
-
         var response = await _s3Client.ListObjectsV2Async(request);
         return response.S3Objects.Select(o => o.Key).ToList();
     }
@@ -217,6 +217,7 @@ public class FileCVService : IFileCVService
         file.Id = id;
         file.FirstName = fileCVDto.FirstName ?? file.FirstName;
         file.LastName = fileCVDto.LastName ?? file.LastName;
+        file.Template = fileCVDto.Template ?? file.Template;
         file.FileName = newFile.FileName;
         file.Email = fileCVDto.Email ?? file.Email;
         file.Phone = fileCVDto.Phone ?? file.Phone;

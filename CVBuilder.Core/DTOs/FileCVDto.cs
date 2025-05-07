@@ -16,6 +16,8 @@ namespace CVBuilder.Core.DTOs
 
         [JsonPropertyName("fileName")]
         public string FileName { get; set; }
+        [JsonPropertyName("template")]
+        public string Template { get; set; }
         [JsonPropertyName("firstName")]
         public string FirstName { get; set; }
         [JsonPropertyName("lastName")]
@@ -77,8 +79,8 @@ namespace CVBuilder.Core.DTOs
         [JsonPropertyName("languageName")]
         public string LanguageName { get; set; }
 
-        [JsonPropertyName("proficiency")]
-        public string Proficiency { get; set; }
+        [JsonPropertyName("level")]
+        public string Level { get; set; }
     }
 
     public class Education

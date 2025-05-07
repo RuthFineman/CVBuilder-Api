@@ -29,6 +29,10 @@ namespace CVBuilder.Data.Repositories
         public async Task SaveFileRecordAsync(FileCV fileRecord)
         {
             await _context.FileCVs.AddAsync(fileRecord);
+            Console.WriteLine("Template value::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: ");
+            Console.WriteLine("Template value: " + fileRecord.Template);
+            Console.WriteLine("Template value::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: ");
+
             await _context.SaveChangesAsync(); // וזה שומר הכל יחד
         }
 

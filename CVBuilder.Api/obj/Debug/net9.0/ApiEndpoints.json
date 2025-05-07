@@ -160,6 +160,11 @@
         "IsRequired": false
       },
       {
+        "Name": "Template",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
         "Name": "FirstName",
         "Type": "System.String",
         "IsRequired": false

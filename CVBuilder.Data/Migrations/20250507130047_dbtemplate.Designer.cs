@@ -4,6 +4,7 @@ using CVBuilder.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CVBuilder.Data.Migrations
 {
     [DbContext(typeof(CVBuilderDbContext))]
-    partial class CVBuilderDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250507130047_dbtemplate")]
+    partial class dbtemplate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -190,7 +193,7 @@ namespace CVBuilder.Data.Migrations
                                 .HasColumnType("longtext")
                                 .HasAnnotation("Relational:JsonPropertyName", "languageName");
 
-                            b1.Property<string>("Level")
+                            b1.Property<string>("Proficiency")
                                 .IsRequired()
                                 .HasColumnType("longtext")
                                 .HasAnnotation("Relational:JsonPropertyName", "proficiency");

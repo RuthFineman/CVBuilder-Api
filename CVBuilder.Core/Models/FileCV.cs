@@ -20,7 +20,6 @@ namespace CVBuilder.Core.Models
         public string Template { get; set; }
         public DateTime UploadedAt { get; set; }
         public User User { get; set; }
-       
         [JsonPropertyName("firstName")]
         public string FirstName { get; set; }
         [JsonPropertyName("lastName")]
@@ -96,7 +95,7 @@ namespace CVBuilder.Core.Models
         public string LanguageName { get; set; }
 
         [JsonPropertyName("proficiency")]
-        public string Proficiency { get; set; }
+        public string Level { get; set; }
         //public int FileCVId { get; set; }
         //public FileCV FileCV { get; set; }
 

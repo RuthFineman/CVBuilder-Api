@@ -123,6 +123,9 @@
                   "FileName": {
                     "type": "string"
                   },
+                  "Template": {
+                    "type": "string"
+                  },
                   "FirstName": {
                     "type": "string"
                   },
@@ -175,6 +178,9 @@
                   "style": "form"
                 },
                 "FileName": {
+                  "style": "form"
+                },
+                "Template": {
                   "style": "form"
                 },
                 "FirstName": {
@@ -390,7 +396,7 @@
             "type": "string",
             "nullable": true
           },
-          "proficiency": {
+          "level": {
             "type": "string",
             "nullable": true
           }
