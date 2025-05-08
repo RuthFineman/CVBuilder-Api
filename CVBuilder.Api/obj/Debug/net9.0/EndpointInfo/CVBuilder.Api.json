@@ -247,34 +247,6 @@
         }
       }
     },
-    "/upload/check-filename": {
-      "get": {
-        "tags": [
-          "FileCV"
-        ],
-        "parameters": [
-          {
-            "name": "userId",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "fileName",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
     "/api/Template/files": {
       "get": {
         "tags": [

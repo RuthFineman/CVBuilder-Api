@@ -1,5 +1,4 @@
-﻿using Amazon.S3;
-using CVBuilder.Core.DTOs;
+﻿using CVBuilder.Core.DTOs;
 using CVBuilder.Core.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -7,15 +6,15 @@ using System.Security.Claims;
 using Swashbuckle.AspNetCore.Annotations;
 using DTO = CVBuilder.Core.DTOs;
 using Newtonsoft.Json;
-using CVBuilder.Core.Models;
 
 namespace CVBuilder.Api.Controllers
 {
     [Route("upload")]
+    [Authorize]
     [ApiController]
     public class FileCVController : ControllerBase
     {
-        private readonly IFileCVService _fileUploadService;
+        private readonly IFileCVService _fileCVService;
 
         public FileCVController(IFileCVService fileUploadService)
         {
@@ -30,7 +29,8 @@ namespace CVBuilder.Api.Controllers
             }
             throw new UnauthorizedAccessException("User not authenticated.");
         }
-        [Authorize]
+        //לבדוק למה צריך את זה
+       
         [HttpGet("user-files")]
         public async Task<IActionResult> GetUserFiles(string userId)
         {
@@ -44,7 +44,6 @@ namespace CVBuilder.Api.Controllers
                 return StatusCode(500, "שגיאה בטעינת הקבצים: " + ex.Message);
             }
         }
-        [Authorize]
         [HttpPost]
         public async Task<IActionResult> UploadFile(IFormFile file, [FromQuery] string userId)
         {
@@ -55,11 +54,6 @@ namespace CVBuilder.Api.Controllers
             }
             try
             {
-                var userFileCount = await _fileUploadService.GetFileCountByUserIdAsync(userId);
-                if (userFileCount >= 5)
-                {
-                    return BadRequest("ניתן לשמור עד 5 קורות חיים בלבד למשתמש.");
-                }
                 // קריאה מה-Form של כל שדה כטקסט
                 var title = Request.Form["Title"];
                 var description = Request.Form["Description"];
@@ -97,7 +91,6 @@ namespace CVBuilder.Api.Controllers
                 return BadRequest($"Error uploading file: {ex.Message}");
             }
         }
-        [Authorize]
         [HttpDelete("remove/{id}")]
         public async Task<IActionResult> DeleteFile(int id)
         {
@@ -128,7 +121,6 @@ namespace CVBuilder.Api.Controllers
             return Ok(result);
         }
         //לעדכון
-        [Authorize]
         [HttpGet("fileCV/{id}")]
         public async Task<IActionResult> GetFileCV([FromRoute] int id)
         {
@@ -153,17 +145,6 @@ namespace CVBuilder.Api.Controllers
                 return StatusCode(500, $"Internal server error: {ex.Message}");
             }
         }
-        [HttpGet("check-filename")]
-        public IActionResult CheckIfFileExists([FromQuery] string userId, [FromQuery] string fileName)
-        {
-            var userFolderPath = $"users/{userId}/";
-            var fullKey = $"{userFolderPath}{fileName}";
-
-            // בדיקה ב-S3
-            var exists = _fileUploadService.DoesFileExist(fullKey); // את צריכה לממש את הפונקציה הזו
-
-            //return Ok(new { exists });
-            return BadRequest(new { message = "ניתן לשמור עד 5 קורות חיים בלבד למשתמש." });
-        }
+    
     }
 }

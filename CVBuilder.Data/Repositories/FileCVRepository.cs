@@ -11,11 +11,11 @@ using System.Threading.Tasks;
 
 namespace CVBuilder.Data.Repositories
 {
-    public class FileRepository : IFileCVRepository
+    public class FileCVRepository : IFileCVRepository
     {
         private readonly CVBuilderDbContext _context;
 
-        public FileRepository(CVBuilderDbContext context)
+        public FileCVRepository(CVBuilderDbContext context)
         {
             _context = context;
         }
@@ -60,12 +60,5 @@ namespace CVBuilder.Data.Repositories
             _context.FileCVs.Update(updatedFile);
             await _context.SaveChangesAsync();
         }
-        public async Task<int> GetFileCountByUserIdAsync(string userId)
-        {
-            return await _context.FileCVs
-                .Where(f => f.UserId.ToString() == userId)
-                .CountAsync();
-        }
-
     }
 }

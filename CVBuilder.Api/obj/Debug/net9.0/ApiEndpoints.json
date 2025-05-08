@@ -80,27 +80,6 @@
   },
   {
     "ContainingType": "CVBuilder.Api.Controllers.FileCVController",
-    "Method": "CheckIfFileExists",
-    "RelativePath": "upload/check-filename",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "userId",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "fileName",
-        "Type": "System.String",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "CVBuilder.Api.Controllers.FileCVController",
     "Method": "GetFileCV",
     "RelativePath": "upload/fileCV/{id}",
     "HttpMethod": "GET",

@@ -39,7 +39,7 @@ builder.Services.AddScoped<AuthService>();
 builder.Services.AddTransient<UserValidator>();
 builder.Services.AddAWSService<IAmazonS3>();
 builder.Services.AddScoped<IFileCVService, FileCVService>();
-builder.Services.AddScoped<IFileCVRepository,FileRepository>();
+builder.Services.AddScoped<IFileCVRepository,FileCVRepository>();
 builder.Services.AddSingleton<IConfiguration>(builder.Configuration);
 IConfiguration Configuration = builder.Configuration;
 builder.Services.AddScoped<ITemplateService, TemplateService>();

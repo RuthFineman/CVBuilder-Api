@@ -253,30 +253,4 @@ public class FileCVService : IFileCVService
         Console.WriteLine($"Parsed userId = {int.Parse(userId)}");
         return await _fileCVRepository.GetFileByUserIdAsync(id, userId);
     }
-    public bool DoesFileExist(string key)
-    {
-        try
-        {
-            var request = new GetObjectMetadataRequest
-            {
-                BucketName = _bucketName,
-                Key = key
-            };
-
-            var response = _s3Client.GetObjectMetadataAsync(request).Result;
-            return true;
-        }
-        catch (AmazonS3Exception ex)
-        {
-            if (ex.StatusCode == HttpStatusCode.NotFound)
-                return false;
-
-            throw; // כל שגיאה אחרת תיזרק הלאה
-        }
-    }
-    public async Task<int> GetFileCountByUserIdAsync(string userId)
-    {
-        return await _fileCVRepository.GetFileCountByUserIdAsync(userId);
-    }
-
 }

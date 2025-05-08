@@ -38,8 +38,6 @@ namespace CVBuilder.Core.Models
 
         [JsonPropertyName("workExperiences")]
         public List<WorkExperience> WorkExperiences { get; set; } = new List<WorkExperience>();
-        //public List<WorkExperience> WorkExperiences { get; set; } = new();
-
         [JsonPropertyName("languages")]
         public List<Language> Languages { get; set; } = new List<Language>();
 
@@ -61,12 +59,8 @@ namespace CVBuilder.Core.Models
         //    "יחסי אנוש מעולים"
         //};
     }
-    //[Owned]
     public class WorkExperience
     {
-        //[Key] // הוספת מפתח ראשי
-        //public int Id { get; set; }
-
         [JsonPropertyName("company")]
         public string Company { get; set; }
 
@@ -81,37 +75,20 @@ namespace CVBuilder.Core.Models
 
         [JsonPropertyName("description")]
         public string Description { get; set; }
-        //public int FileCVId { get; set; }
-        //public FileCV FileCV { get; set; }
-
-
     }
-    //[Owned]
     public class Language
     {
-        //[Key]
-        //public int Id { get; set; }
         [JsonPropertyName("languageName")]
         public string LanguageName { get; set; }
-
         [JsonPropertyName("proficiency")]
         public string Level { get; set; }
-        //public int FileCVId { get; set; }
-        //public FileCV FileCV { get; set; }
-
     }
-    //[Owned]
     public class Education
     {
-        //[Key]
-        //public int Id { get; set; }  
         [JsonPropertyName("institution")]
         public string Institution { get; set; }
-
         [JsonPropertyName("degree")]
         public string Degree { get; set; }
-        //public int FileCVId { get; set; }
-        //public FileCV FileCV { get; set; }
     }
 }
 

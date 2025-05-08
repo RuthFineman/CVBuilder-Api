@@ -14,7 +14,5 @@ namespace CVBuilder.Core.Repositories
         Task<FileCV> GetFileByUserIdAsync(int fileId, string userId);
         Task<List<FileCV>> GetFilesByUserIdAsync(string userId);
         Task UpdateAsync(FileCV fileCV);
-        Task<int> GetFileCountByUserIdAsync(string userId);
-
     }
 }
