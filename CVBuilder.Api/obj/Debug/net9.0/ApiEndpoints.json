@@ -59,8 +59,8 @@
   },
   {
     "ContainingType": "CVBuilder.Api.Controllers.FileCVController",
-    "Method": "UploadFile",
-    "RelativePath": "upload",
+    "Method": "SaveCVAndDetails",
+    "RelativePath": "file-cv",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -69,27 +69,6 @@
         "Name": "file",
         "Type": "Microsoft.AspNetCore.Http.IFormFile",
         "IsRequired": false
-      },
-      {
-        "Name": "userId",
-        "Type": "System.String",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "CVBuilder.Api.Controllers.FileCVController",
-    "Method": "GetFileCV",
-    "RelativePath": "upload/fileCV/{id}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
       }
     ],
     "ReturnTypes": []
@@ -97,7 +76,7 @@
   {
     "ContainingType": "CVBuilder.Api.Controllers.FileCVController",
     "Method": "DeleteFile",
-    "RelativePath": "upload/remove/{id}",
+    "RelativePath": "file-cv/delete/{id}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
@@ -112,8 +91,24 @@
   },
   {
     "ContainingType": "CVBuilder.Api.Controllers.FileCVController",
+    "Method": "GetFileCV",
+    "RelativePath": "file-cv/fileCV/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CVBuilder.Api.Controllers.FileCVController",
     "Method": "UpdateFileCV",
-    "RelativePath": "upload/update/{id}",
+    "RelativePath": "file-cv/update/{id}",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
@@ -199,17 +194,11 @@
   {
     "ContainingType": "CVBuilder.Api.Controllers.FileCVController",
     "Method": "GetUserFiles",
-    "RelativePath": "upload/user-files",
+    "RelativePath": "file-cv/user-files",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
-    "Parameters": [
-      {
-        "Name": "userId",
-        "Type": "System.String",
-        "IsRequired": false
-      }
-    ],
+    "Parameters": [],
     "ReturnTypes": []
   }
 ]

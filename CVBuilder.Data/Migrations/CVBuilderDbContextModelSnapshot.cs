@@ -193,7 +193,7 @@ namespace CVBuilder.Data.Migrations
                             b1.Property<string>("Level")
                                 .IsRequired()
                                 .HasColumnType("longtext")
-                                .HasAnnotation("Relational:JsonPropertyName", "proficiency");
+                                .HasAnnotation("Relational:JsonPropertyName", "level");
 
                             b1.HasKey("FileCVId", "Id");
 

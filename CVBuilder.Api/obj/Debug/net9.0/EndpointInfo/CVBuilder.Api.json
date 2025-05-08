@@ -5,19 +5,10 @@
     "version": "1.0"
   },
   "paths": {
-    "/upload/user-files": {
+    "/file-cv/user-files": {
       "get": {
         "tags": [
           "FileCV"
-        ],
-        "parameters": [
-          {
-            "name": "userId",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          }
         ],
         "responses": {
           "200": {
@@ -26,19 +17,10 @@
         }
       }
     },
-    "/upload": {
+    "/file-cv": {
       "post": {
         "tags": [
           "FileCV"
-        ],
-        "parameters": [
-          {
-            "name": "userId",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          }
         ],
         "requestBody": {
           "content": {
@@ -67,30 +49,7 @@
         }
       }
     },
-    "/upload/remove/{id}": {
-      "delete": {
-        "tags": [
-          "FileCV"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/upload/update/{id}": {
+    "/file-cv/update/{id}": {
       "put": {
         "tags": [
           "FileCV"
@@ -224,7 +183,30 @@
         }
       }
     },
-    "/upload/fileCV/{id}": {
+    "/file-cv/delete/{id}": {
+      "delete": {
+        "tags": [
+          "FileCV"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/file-cv/fileCV/{id}": {
       "get": {
         "tags": [
           "FileCV"

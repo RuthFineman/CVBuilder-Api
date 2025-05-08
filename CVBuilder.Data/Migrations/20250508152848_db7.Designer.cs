@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CVBuilder.Data.Migrations
 {
     [DbContext(typeof(CVBuilderDbContext))]
-    [Migration("20250507161005_dbtemplate2")]
-    partial class dbtemplate2
+    [Migration("20250508152848_db7")]
+    partial class db7
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -77,6 +77,7 @@ namespace CVBuilder.Data.Migrations
                         .HasAnnotation("Relational:JsonPropertyName", "summary");
 
                     b.Property<string>("Template")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<DateTime>("UploadedAt")

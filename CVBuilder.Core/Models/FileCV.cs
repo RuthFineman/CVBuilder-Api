@@ -46,18 +46,6 @@ namespace CVBuilder.Core.Models
 
         [JsonPropertyName("skills")]
         public List<string> Skills { get; set; } = new List<string>();
-        //{
-        //    "כישורי ארגון",
-        //    "פתרון בעיות",
-        //    "עבודה בצוות",
-        //    "יצירתיות",
-        //    "אחריות",
-        //    "תפקוד במצבי לחץ",
-        //    "מוסר עבודה גבוה",
-        //    "ניהול זמן יעיל",
-        //    "חשיבה אנליטית",
-        //    "יחסי אנוש מעולים"
-        //};
     }
     public class WorkExperience
     {
@@ -80,7 +68,7 @@ namespace CVBuilder.Core.Models
     {
         [JsonPropertyName("languageName")]
         public string LanguageName { get; set; }
-        [JsonPropertyName("proficiency")]
+        [JsonPropertyName("level")]
         public string Level { get; set; }
     }
     public class Education

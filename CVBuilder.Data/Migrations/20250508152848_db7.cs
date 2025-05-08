@@ -5,24 +5,18 @@
 namespace CVBuilder.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class dbtemplate5 : Migration
+    public partial class db7 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.RenameColumn(
-                name: "Level",
-                table: "Language",
-                newName: "Level");
+
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.RenameColumn(
-                name: "Level",
-                table: "Language",
-                newName: "Level");
+
         }
     }
 }

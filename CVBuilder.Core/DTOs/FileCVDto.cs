@@ -13,7 +13,6 @@ namespace CVBuilder.Core.DTOs
     public class FileCVDto
     {
         public int Id { get; set; }
-
         [JsonPropertyName("fileName")]
         public string FileName { get; set; }
         [JsonPropertyName("template")]
@@ -26,35 +25,18 @@ namespace CVBuilder.Core.DTOs
         public string Role { get; set; }
         [JsonPropertyName("Phone")]
         public string Phone { get; set; }
-
         [JsonPropertyName("email")]
         public string Email { get; set; }
-
         [JsonPropertyName("summary")]
         public string Summary { get; set; }
-
         [JsonPropertyName("workExperiences")]
         public List<WorkExperience>? WorkExperiences { get; set; } = new List<WorkExperience>();
         [JsonPropertyName("languages")]
         public List<Language>? Languages { get; set; } = new List<Language>();
-
         [JsonPropertyName("educations")]
         public List<Education>? Educations { get; set; } = new List<Education>();
-
         [JsonPropertyName("skills")]
         public List<string>? Skills { get; set; } = new List<string>();
-        //{
-        //    "כישורי ארגון",
-        //    "פתרון בעיות",
-        //    "עבודה בצוות",
-        //    "יצירתיות",
-        //    "אחריות",
-        //    "תפקוד במצבי לחץ",
-        //    "מוסר עבודה גבוה",
-        //    "ניהול זמן יעיל",
-        //    "חשיבה אנליטית",
-        //    "יחסי אנוש מעולים"
-        //};
     }
 
     public class WorkExperience
@@ -91,5 +73,4 @@ namespace CVBuilder.Core.DTOs
         [JsonPropertyName("degree")]
         public string Degree { get; set; }
     }
-
 }
