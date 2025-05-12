@@ -1,4 +1,5 @@
 ﻿using CVBuilder.Core.Models;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,12 +10,16 @@ namespace CVBuilder.Core.Services
 {
     public interface ITemplateService
     {
+        //הוספת תבנית
+        Task<string> AddTemplateAsync(IFormFile file, string fileName);
+        Task<bool> DeleteTemplateAsync(string fileName);
         Task<List<string>> GetAllTamplatesAsync();
         Task<string> GetFileAsync(int index);
+        //Task<string> GetFileAsync(int index);
         //Task<string?> GetFirstFileAsync();
         //Task<List<string>> GetLastFiveFilesAsync();
         //Template? GetTemplateByIdAndUserId(int id, int userId); 
-        void AddTemplate(Template template);
-        bool DeleteTemplate(int id);
+        //void AddTemplate(Template template);
+        //bool DeleteTemplate(int id);
     }
 }

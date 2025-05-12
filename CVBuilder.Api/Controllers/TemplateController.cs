@@ -12,6 +12,7 @@ using CVBuilder.Service;
 
 namespace CVBuilder.Api.Controllers
 {
+    //אולי להוסיף רק למנהל
     [Route("api/[controller]")]
     [ApiController]
     public class TemplateController : ControllerBase
@@ -21,13 +22,48 @@ namespace CVBuilder.Api.Controllers
         public TemplateController(ITemplateService templateService)
         {
             _templateService = templateService;
-        }     
+        }
+        //העלאת תבנית
+        [HttpPost("upload")]
+        public async Task<IActionResult> UploadFile(IFormFile file)
+        {
+            if (file == null || file.Length == 0)
+            {
+                return BadRequest("No file uploaded.");
+            }
+
+            // קריאה לפונקציה שמעלה את הקובץ ל-S3 ושומרת את פרטי התבנית
+            var fileUrl = await _templateService.AddTemplateAsync(file, file.FileName);
+            return Ok(new { FileUrl = fileUrl });
+        }
+        //מחיקת תבנית
+        [HttpDelete("{fileName}")]
+        public async Task<IActionResult> DeleteTemplateAsync(string fileName)
+        {
+            try
+            {
+                var result = await _templateService.DeleteTemplateAsync(fileName);
+                if (result)
+                {
+                    return Ok("The file was deleted successfully.");
+                }
+                else
+                {
+                    return NotFound("File not found.");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+
         [HttpGet("files")]
-        [Authorize] 
         public async Task<IActionResult> GetTemplates()
         {
             var files = await _templateService.GetAllTamplatesAsync();
             return Ok(files);
+
         }
         [HttpGet("{index}")]
         public async Task<IActionResult> GetFile(int index)

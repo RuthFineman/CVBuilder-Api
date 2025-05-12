@@ -79,16 +79,12 @@ namespace CVBuilder.Api.Controllers
         [SwaggerOperation(Summary = "Update resume with file upload", Description = "Allows updating a resume with the file and other details.")]
         public async Task<IActionResult> UpdateFileCV([FromRoute] int id, IFormFile file, [FromForm] FileCVDto fileCVDto)
         {
-            Console.WriteLine("**********************************************************");
-            Console.WriteLine(fileCVDto.Languages[0].Level);
-            Console.WriteLine("**********************************************************");
             var userId = GetUserIdFromContext().ToString();
             var result = await _fileCVService.UpdateFileCVAsync(file, id, userId, fileCVDto);
             if (result == null)
                 return NotFound("Resume not found.");
             return Ok(result);
         }
-
         [HttpDelete("delete/{id}")]
         public async Task<IActionResult> DeleteFile(int id)
         {

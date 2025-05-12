@@ -1,13 +1,6 @@
 ﻿using CVBuilder.Core.Models;
 using CVBuilder.Core.Repositories;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace CVBuilder.Data.Repositories
 {
     public class UserRepository : IUserRepository

@@ -8,10 +8,9 @@ namespace CVBuilder.Core.Models
 {
     public class Template
     {
-        public int? Id { get; set; }
-        public string?   Name { get; set; }
-
-        //public string? CssFilePath { get; set; }
+        public int Id { get; set; }
+        public string   Name { get; set; }
+        public string TemplateUrl { get; set; }
     }
 }
 

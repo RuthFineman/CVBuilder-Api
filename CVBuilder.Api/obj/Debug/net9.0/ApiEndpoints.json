@@ -1,6 +1,22 @@
 [
   {
     "ContainingType": "CVBuilder.Api.Controllers.TemplateController",
+    "Method": "DeleteTemplateAsync",
+    "RelativePath": "api/Template/{fileName}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "fileName",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CVBuilder.Api.Controllers.TemplateController",
     "Method": "GetFile",
     "RelativePath": "api/Template/{index}",
     "HttpMethod": "GET",
@@ -23,6 +39,22 @@
     "IsController": true,
     "Order": 0,
     "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CVBuilder.Api.Controllers.TemplateController",
+    "Method": "UploadFile",
+    "RelativePath": "api/Template/upload",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "file",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      }
+    ],
     "ReturnTypes": []
   },
   {

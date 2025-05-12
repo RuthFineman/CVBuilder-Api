@@ -1,14 +1,8 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using System;
-using System.Collections.Generic;
-using System.Data;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
 using System.Text;
-using System.Threading.Tasks;
-
 namespace CVBuilder.Service
 {
     public class AuthService
@@ -37,10 +31,8 @@ namespace CVBuilder.Service
                 expires: DateTime.Now.AddYears(10),
                 signingCredentials: credentials
             );
-
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
-
     }
 }
 

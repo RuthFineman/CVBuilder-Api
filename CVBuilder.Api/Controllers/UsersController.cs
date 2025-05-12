@@ -33,8 +33,6 @@ namespace CVBuilder.Api.Controllers
 
             try
             {
-               
-
                 var isValidPassword = await _userValidator.IsValidPasswordAsync(userDto.Email, userDto.Password);
                 if (!isValidPassword)
                 {
@@ -46,20 +44,17 @@ namespace CVBuilder.Api.Controllers
                 var user = await _userService.LoginAsync(userDto.Email, userDto.Password);
                 var token = _authService.GenerateJwtToken(user.Email, user.Id, user.Role);
 
-                // החזרת ה-Token למשתמש
                 return Ok(new { token, user.Id });
             }
             catch (InvalidOperationException ex)
             {
-                return BadRequest(ex.Message); // החזרת הודעת שגיאה אם המייל לא תקין
+                return BadRequest(ex.Message); 
             }
             catch (Exception ex)
             {
-                return StatusCode(500, "An error occurred: " + ex.Message); // טיפול בשגיאות כלליות
+                return StatusCode(500, "An error occurred: " + ex.Message);
             }
-
         }
-
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] UserLoginModel userDto)
         {
@@ -68,9 +63,9 @@ namespace CVBuilder.Api.Controllers
             if (user == null)
                 return Unauthorized("Invalid credentials.");
 
-            var token = _authService.GenerateJwtToken(user.Email, user.Id,user.Role);  // יצירת ה-JWT
+            var token = _authService.GenerateJwtToken(user.Email, user.Id,user.Role);  
             Console.WriteLine(user.Id);
-            return Ok(new { token,user.Id });  // מחזיר את ה-Token למשתמש
+            return Ok(new { token,user.Id });  
         }
     }
 }

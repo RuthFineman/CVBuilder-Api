@@ -9,10 +9,15 @@ namespace CVBuilder.Core.Repositories
 {
     public interface ITemplateRepository
     {
-        Task<List<string>> GetAllTamplatesAsync();
-        Task<string> GetFileByIndexAsync(int index);
+        //העלאת תבנית
+        Task AddTemplateAsync(Template template);
+        Task DeleteTemplateAsync(string fileName);
+        Task<List<string>> GetAllTemplateUrlsAsync();
+        Task<string> GetFileNameByIndexAsync(int index);
+        //Task<List<string>> GetAllTamplatesAsync();
+        //Task<string> GetFileByIndexAsync(int index);
         //Task<string?> GetFirstFileAsync();
-        Template? GetByIdAndUserId(int id, int userId);
+        //Template? GetByIdAndUserId(int id, int userId);
         void Add(Template template);
         bool Delete(int id);
     }

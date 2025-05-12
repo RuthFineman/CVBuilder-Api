@@ -229,6 +229,60 @@
         }
       }
     },
+    "/api/Template/upload": {
+      "post": {
+        "tags": [
+          "Template"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "file": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Template/{fileName}": {
+      "delete": {
+        "tags": [
+          "Template"
+        ],
+        "parameters": [
+          {
+            "name": "fileName",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Template/files": {
       "get": {
         "tags": [
@@ -333,12 +387,10 @@
         "type": "object",
         "properties": {
           "institution": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "degree": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           }
         },
         "additionalProperties": false
@@ -347,12 +399,10 @@
         "type": "object",
         "properties": {
           "languageName": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "level": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           }
         },
         "additionalProperties": false
@@ -361,12 +411,10 @@
         "type": "object",
         "properties": {
           "email": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "password": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           }
         },
         "additionalProperties": false
@@ -375,16 +423,13 @@
         "type": "object",
         "properties": {
           "fullName": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "email": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "password": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           }
         },
         "additionalProperties": false
@@ -393,24 +438,19 @@
         "type": "object",
         "properties": {
           "company": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "position": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "startDate": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "endDate": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "description": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           }
         },
         "additionalProperties": false

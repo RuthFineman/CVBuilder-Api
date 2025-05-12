@@ -29,11 +29,7 @@ namespace CVBuilder.Data.Repositories
         public async Task SaveFileRecordAsync(FileCV fileRecord)
         {
             await _context.FileCVs.AddAsync(fileRecord);
-            Console.WriteLine("Template value::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: ");
-            Console.WriteLine("Template value: " + fileRecord.Template);
-            Console.WriteLine("Template value::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: ");
-
-            await _context.SaveChangesAsync(); // וזה שומר הכל יחד
+            await _context.SaveChangesAsync();
         }
 
         public async Task DeleteFileCVAsync(int fileId)
@@ -41,19 +37,19 @@ namespace CVBuilder.Data.Repositories
             var file = await _context.FileCVs.FindAsync(fileId);
             if (file != null)
             {
-                _context.FileCVs.Remove(file); // מסיר את הקובץ מה-DB
-                await _context.SaveChangesAsync(); // שומר את השינויים
+                _context.FileCVs.Remove(file);
+                await _context.SaveChangesAsync();
             }
         }
-       
+
         public async Task<FileCV> GetFileByUserIdAsync(int fileId, string userId)
         {
-              return await _context.FileCVs
-    .Include(f => f.WorkExperiences)
-    .Include(f => f.Educations)
-    .Include(f => f.Languages)
-    .Where(f => f.Id == fileId && f.UserId.ToString() == userId)
-    .FirstOrDefaultAsync();
+            return await _context.FileCVs
+  .Include(f => f.WorkExperiences)
+  .Include(f => f.Educations)
+  .Include(f => f.Languages)
+  .Where(f => f.Id == fileId && f.UserId.ToString() == userId)
+  .FirstOrDefaultAsync();
         }
         public async Task UpdateAsync(FileCV updatedFile)
         {

@@ -1,71 +1,84 @@
 ﻿using CVBuilder.Core.Models;
 using CVBuilder.Core.Repositories;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Amazon;
-using Amazon.S3;
 using Amazon.S3.Model;
+using Microsoft.EntityFrameworkCore;
 namespace CVBuilder.Data.Repositories
 {
     public class TemplateRepository : ITemplateRepository
     {
         private readonly CVBuilderDbContext _context;
-        private readonly IAmazonS3 _s3Client;
+        //private readonly IAmazonS3 _s3Client;
         private readonly string _bucketName = "cvfilebuilder";
 
-        public TemplateRepository(IAmazonS3 s3Client)
+        public TemplateRepository(CVBuilderDbContext context)
         {
-            _s3Client = s3Client;
+            _context = context;
         }
-        public async Task<List<string>> GetAllTamplatesAsync()
+        //העלאת תבנית
+        public async Task AddTemplateAsync(Template template)
         {
-            var request = new ListObjectsV2Request
-            {
-                BucketName = _bucketName,
-                Prefix = "exampleCV/"
-            };
+            _context.Templates.Add(template);
+            await _context.SaveChangesAsync();
+        }
+        //מחיקת תבנית
+        public async Task DeleteTemplateAsync(string fileName)
+        {
+            // חיפוש התבנית על פי שם הקובץ
+            var template = await _context.Templates.FirstOrDefaultAsync(t => t.Name == fileName);
 
-            var response = await _s3Client.ListObjectsV2Async(request);
-            var fileUrls = new List<string>();
-
-            foreach (var s3Object in response.S3Objects)
+            if (template != null)
             {
-                if (s3Object.Key.EndsWith("/") || s3Object.Size == 0)
-                {
-                    continue;
-                }
-                string fileUrl = $"https://{_bucketName}.s3.amazonaws.com/{s3Object.Key}";
-                fileUrls.Add(fileUrl);
+                // מחיקת התבנית ממסד הנתונים
+                _context.Templates.Remove(template);
+                await _context.SaveChangesAsync();
             }
-            return fileUrls;
-        }
-        public async Task<string> GetFileByIndexAsync(int index)
-        {
-            var request = new ListObjectsV2Request
+            else
             {
-                BucketName = _bucketName,
-                Prefix = "CVFilebuilder/"
-            };
-
-            var response = await _s3Client.ListObjectsV2Async(request);
-
-            var fileList = response.S3Objects
-                .Where(obj => !obj.Key.EndsWith("/") && obj.Size > 0)
-                .Select(obj => obj.Key)
-                .OrderBy(name => name) // למקרה שהשמות לא בסדר מסודר
-                .ToList();
-
-            if (index < 0 || index >= fileList.Count)
-                return null;
-
-            string fileName = fileList[index ];
-
-            return $"https://{_bucketName}.s3.amazonaws.com/{fileName}";
+                throw new KeyNotFoundException("Template not found.");
+            }
         }
+        //קבלת כל התבניות
+        public async Task<List<string>> GetAllTemplateUrlsAsync()
+        {
+            return await _context.Templates
+                .Where(t => !string.IsNullOrEmpty(t.TemplateUrl))
+                .Select(t => t.TemplateUrl)
+                .ToListAsync();
+        }
+        //קבלת תבנית אחת
+        public async Task<string> GetFileNameByIndexAsync(int index)
+        {
+            var template = await _context.Templates
+                .OrderBy(t => t.Id) // או כל סדר שתרצה
+                .Skip(index)
+                .Take(1)
+                .FirstOrDefaultAsync();
+
+            return template?.Name; // או כל שדה שמכיל את שם הקובץ ב-S3
+        }
+        //public async Task<string> GetFileByIndexAsync(int index)
+        //{
+        //    var request = new ListObjectsV2Request
+        //    {
+        //        BucketName = _bucketName,
+        //        Prefix = "CVFilebuilder/"
+        //    };
+
+        //var response = await _s3Client.ListObjectsV2Async(request);
+
+        //var fileList = response.S3Objects
+        //    .Where(obj => !obj.Key.EndsWith("/") && obj.Size > 0)
+        //    .Select(obj => obj.Key)
+        //    .OrderBy(name => name) // למקרה שהשמות לא בסדר מסודר
+        //    .ToList();
+
+        //if (index < 0 || index >= fileList.Count)
+        //        return null;
+
+        //    string fileName = fileList[index];
+
+        //    return $"https://{_bucketName}.s3.amazonaws.com/{fileName}";
+        //}
         //public async Task<string?> GetFirstFileAsync()
         //{
         //    var request = new ListObjectsV2Request
@@ -88,7 +101,6 @@ namespace CVBuilder.Data.Repositories
             _context.Templates.Add(template);
             _context.SaveChanges();
         }
-
         public bool Delete(int id)
         {
             var template = _context.Templates.Find(id);

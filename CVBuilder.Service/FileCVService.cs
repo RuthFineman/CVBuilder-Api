@@ -86,73 +86,133 @@ public class FileCVService : IFileCVService
     public async Task UploadFileAsync(IFormFile file, string userId, FileCVDto fileDto)
     {
         if (string.IsNullOrEmpty(userId))
-        {
             throw new ArgumentException("UserId is required");
-        }
+
         if (file == null || file.Length == 0)
-        {
             throw new InvalidOperationException("No file provided or file is empty");
-        }
+
         if (fileDto == null)
-        {
             throw new ArgumentException("FileCVDto cannot be null");
-        }
+
+        var fileRecord = ConvertToFileCV(fileDto, userId, file);
+        if (fileRecord == null)
+            throw new InvalidOperationException("Failed to convert FileCVDto to FileCV.");
+
+        if (string.IsNullOrEmpty(fileRecord.Email))
+            throw new ArgumentException("Email is required.");
+
         try
         {
-            // העלאת הקובץ ל-AWS S3
-            using (var stream = file.OpenReadStream())
-            {
-                if (stream.Length == 0)
-                {
-                    throw new InvalidOperationException("The file is empty.");
-                }
-                var uploadRequest = new PutObjectRequest
-                {
-                    BucketName = _bucketName,
-                    Key = $"{userId}/{file.FileName}", // ודא שאין בעיה בשמות הקבצים כאן
-                    InputStream = stream,
-                    ContentType = file.ContentType
-                };
-                var response = await _s3Client.PutObjectAsync(uploadRequest);
-                // המרה מ-FileCVDto ל-FileCV
-                var fileRecord = ConvertToFileCV(fileDto, userId, file);
+            await _fileCVRepository.SaveFileRecordAsync(fileRecord);
 
-                if (fileRecord == null)
-                {
-                    throw new InvalidOperationException("Failed to convert FileCVDto to FileCV.");
-                }
-                if (string.IsNullOrEmpty(fileRecord.Email))
-                {
-                    throw new ArgumentException("Email is required.");
-                }
-                // שמירת הנתונים בבסיס הנתונים
-                await _fileCVRepository.SaveFileRecordAsync(fileRecord);
-            }
+            using var stream = file.OpenReadStream();
+            if (stream.Length == 0)
+                throw new InvalidOperationException("The file is empty.");
+
+            var uploadRequest = new PutObjectRequest
+            {
+                BucketName = _bucketName,
+                Key = $"{userId}/{file.FileName}",
+                InputStream = stream,
+                ContentType = file.ContentType
+            };
+
+            await _s3Client.PutObjectAsync(uploadRequest);
         }
         catch (Exception ex)
         {
-            throw new InvalidOperationException("An error occurred while uploading the file.", ex);
+            if (fileRecord?.Id != 0)
+            {
+                await _fileCVRepository.DeleteFileCVAsync(fileRecord.Id);
+            }
+
+            throw new InvalidOperationException("An error occurred while saving the file or uploading to AWS.", ex);
         }
     }
+
+    //public async Task<bool> DeleteFileByUserIdAsync(int fileId, string userId)
+    //{
+
+    //    // מחפש את הקובץ לפי fileId ו-userId
+    //    var file = await _fileCVRepository.GetFileByUserIdAsync(fileId, userId);
+    //    if (file == null) return false; // אם לא נמצא קובץ כזה או שהקובץ לא שייך למשתמש
+    //    // שלב 1: מחיקה מ-AWS S3
+    //    if (!string.IsNullOrEmpty(file.FileName))
+    //    {
+    //        await _s3Client.DeleteObjectAsync(_bucketName, $"{userId}/{file.FileName}");
+    //        Console.WriteLine("מחיקה מה AWS!!!!!!!!!!!!!!!!!!!!!!!!!");
+    //    }
+    //    // שלב 2: מחיקה מה-Database
+    //    await _fileCVRepository.DeleteFileCVAsync(file.Id);
+    //    return true; // מחיקה הצליחה
+    //}
     public async Task<bool> DeleteFileByUserIdAsync(int fileId, string userId)
     {
-
         // מחפש את הקובץ לפי fileId ו-userId
         var file = await _fileCVRepository.GetFileByUserIdAsync(fileId, userId);
         if (file == null) return false; // אם לא נמצא קובץ כזה או שהקובץ לא שייך למשתמש
-        // שלב 1: מחיקה מ-AWS S3
+
+        // שלב 1: מחיקה מה-Database
+        try
+        {
+            await _fileCVRepository.DeleteFileCVAsync(file.Id);
+        }
+        catch (Exception ex)
+        {
+            // אם קרתה שגיאה במחיקת הקובץ מה-Database, מחיקת הקובץ מ-AWS לא תתבצע
+            Console.WriteLine($"שגיאה במחיקת הקובץ מה-Database: {ex.Message}");
+            return false;
+        }
+
+        // שלב 2: מחיקה מ-AWS S3
         if (!string.IsNullOrEmpty(file.FileName))
         {
             await _s3Client.DeleteObjectAsync(_bucketName, $"{userId}/{file.FileName}");
             Console.WriteLine("מחיקה מה AWS!!!!!!!!!!!!!!!!!!!!!!!!!");
         }
-        // שלב 2: מחיקה מה-Database
-        await _fileCVRepository.DeleteFileCVAsync(file.Id);
+
         return true; // מחיקה הצליחה
     }
-
     public async Task<FileCV> UpdateFileCVAsync(IFormFile newFile, int id, string userId, FileCVDto fileCVDto)
     {
+        // בדיקה אם הקובץ כבר קיים ב-S3
+        //try
+        //{
+        //    var headResponse = await _s3Client.GetObjectMetadataAsync(_bucketName, $"{userId}/{newFile.FileName}");
+        //    // אם קיבלתם תשובה, הקובץ קיים. במקרה כזה אפשר לבחור לא להעלות אותו שוב.
+        //    Console.WriteLine("The file already exists in S3.");
+        //}
+        //catch (AmazonS3Exception e)
+        //{
+        //    if (e.ErrorCode == "NoSuchKey")
+        //    {
+        //        // קובץ לא קיים, נמשיך להעלות אותו
+        //        await UploadNewFileToS3(newFile, userId);
+        //    }
+        //    else
+        //    {
+        //        throw; // אם יש בעיה אחרת - זרוק שגיאה
+        //    }
+        //}
+        //try
+        //{
+        //    var headResponse = await _s3Client.GetObjectMetadataAsync(_bucketName, oldKey);
+        //    await _s3Client.DeleteObjectAsync(_bucketName, oldKey);
+        //    Console.WriteLine("Deleted old file from S3.");
+        //}
+        //catch (AmazonS3Exception e)
+        //{
+        //    if (e.ErrorCode == "NoSuchKey")
+        //    {
+        //        // אם הקובץ לא קיים, זה אומר שלא צריך למחוק אותו
+        //        Console.WriteLine("File doesn't exist, skipping delete.");
+        //    }
+        //    else
+        //    {
+        //        throw; // שגיאה אחרת, זרוק אותה
+        //    }
+        //}
+
         var oldFile = await _fileCVRepository.GetFileByUserIdAsync(id, userId);
         if (oldFile == null) return null;
 
@@ -164,8 +224,6 @@ public class FileCVService : IFileCVService
             if (!string.IsNullOrEmpty(fileCVDto.FileName))
             {
                 await _s3Client.DeleteObjectAsync(_bucketName, oldKey);
-                Console.WriteLine("deleteeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
-
             }
         }
         catch (AmazonS3Exception e)
@@ -196,9 +254,9 @@ public class FileCVService : IFileCVService
             }
         }
         // עדכון פרטי הקובץ ב-db
-        Console.WriteLine("===============================================");
-        Console.WriteLine($"===> Looking for fileId: {id}, userId: {userId}");
-        Console.WriteLine("===============================================");
+        //Console.WriteLine("===============================================");
+        //Console.WriteLine($"===> Looking for fileId: {id}, userId: {userId}");
+        //Console.WriteLine("===============================================");
         var file = await _fileCVRepository.GetFileByUserIdAsync(id, userId);
         if (file == null) return null;
         file.Id = id;
@@ -223,9 +281,9 @@ public class FileCVService : IFileCVService
         }).ToList() ?? new List<CVBuilder.Core.Models.Language>();
 
         // המרת חוויות עבודה עם namespace מלא
-        Console.WriteLine("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
+        //Console.WriteLine("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
         //Console.WriteLine(fileCVDto.Educations[0]);
-        Console.WriteLine("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
+        //Console.WriteLine("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
         file.WorkExperiences = fileCVDto.WorkExperiences?.Select(we => new CVBuilder.Core.Models.WorkExperience
         {
             Company = we.Company,
@@ -243,95 +301,6 @@ public class FileCVService : IFileCVService
         await _fileCVRepository.UpdateAsync(file);
         return file;
     }
-    //public async Task<FileCV> UpdateFileCVAsync(IFormFile newFile, int id, string userId, FileCVDto fileCVDto)
-    //{
-    //    var oldFile = await _fileCVRepository.GetFileByUserIdAsync(id, userId);
-    //    if (oldFile == null) return null;
-
-    //    // שלב 2: מחיקת הקובץ הישן מה-S3 לפי שם הקובץ הישן ששמור ב-DB
-    //    var oldKey = $"{userId}/{oldFile.FileName}";
-    //    try
-    //    {
-    //        // שלב 1: מחיקה מ-AWS S3
-    //        if (!string.IsNullOrEmpty(fileCVDto.FileName))
-    //        {
-    //            await _s3Client.DeleteObjectAsync(_bucketName, oldKey);
-    //            Console.WriteLine("deleteeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
-
-    //        }
-    //    }
-    //    catch (AmazonS3Exception e)
-    //    {
-    //        // לא נמצא הקובץ - טיפלנו בשגיאת "NoSuchKey"
-    //        if (e.ErrorCode != "NoSuchKey")
-    //        {
-    //            throw; // זרוק שגיאה אם הייתה בעיה אחרת
-    //        }
-    //        // במקרה שהקובץ לא נמצא - לא עשינו כלום
-    //        Console.WriteLine("File doesn't exist, skipping delete.");
-    //    }
-    //    // העלאת הקובץ החדש
-    //    using (var stream = new MemoryStream())
-    //    {
-    //        await newFile.CopyToAsync(stream);
-    //        var putRequest = new PutObjectRequest
-    //        {
-    //            BucketName = _bucketName,
-    //            Key = $"{userId}/{newFile.FileName}",  
-    //            InputStream = stream,
-    //            ContentType = newFile.ContentType
-    //        };
-    //        var response = await _s3Client.PutObjectAsync(putRequest);
-    //        if (response.HttpStatusCode != HttpStatusCode.OK)
-    //        {
-    //            throw new Exception("Failed to upload file to S3");
-    //        }
-    //    }
-    //    // עדכון פרטי הקובץ ב-db
-    //    Console.WriteLine("===============================================");
-    //    Console.WriteLine($"===> Looking for fileId: {id}, userId: {userId}");
-    //    Console.WriteLine("===============================================");
-    //    var file = await _fileCVRepository.GetFileByUserIdAsync(id, userId);
-    //    if (file == null) return null; 
-    //    //file.Id = id;
-    //    file.FirstName = fileCVDto.FirstName ?? file.FirstName;
-    //    file.LastName = fileCVDto.LastName ?? file.LastName;
-    //    file.Template = fileCVDto.Template ?? file.Template;
-    //    file.FileName = newFile.FileName;
-    //    file.Email = fileCVDto.Email ?? file.Email;
-    //    file.Phone = fileCVDto.Phone ?? file.Phone;
-    //    file.Summary = fileCVDto.Summary ?? file.Summary;
-    //    if (fileCVDto.Skills != null)
-    //        file.Skills = fileCVDto.Skills;
-    //    file.Languages = fileCVDto.Languages?.Select(l => new CVBuilder.Core.Models.Language
-    //    {
-    //        LanguageName = l.LanguageName,
-    //        Level = l.Level
-    //    }).ToList() ?? new List<CVBuilder.Core.Models.Language>();
-
-
-    //    //צריך לבדוק מה קורה האם לא מעדכנים את הכישורים, האם זה מתאפס או לא?
-    //    //if (fileCVDto.Skills != null)
-    //    //    file.Skills = fileCVDto.Skills;
-
-    //    // המרת חוויות עבודה עם namespace מלא
-    //    file.WorkExperiences = fileCVDto.WorkExperiences?.Select(we => new CVBuilder.Core.Models.WorkExperience
-    //    {
-    //        Company = we.Company,
-    //        Position = we.Position,
-    //        StartDate = we.StartDate,
-    //        EndDate = we.EndDate,
-    //        Description = we.Description
-    //    }).ToList() ?? new List<CVBuilder.Core.Models.WorkExperience>();  // טיפול במצב שבו השדה ריק
-    //    // המרת חינוך עם namespace מלא
-    //    file.Educations = fileCVDto.Educations?.Select(e => new CVBuilder.Core.Models.Education
-    //    {
-    //        Institution = e.Institution,
-    //        Degree = e.Degree
-    //    }).ToList() ?? new List<CVBuilder.Core.Models.Education>();  // טיפול במצב שבו השדה ריק
-    //    await _fileCVRepository.UpdateAsync(file);
-    //    return file;
-    //}
     public async Task<FileCV> GetFileCVByIdAsync(int id, string userId)
     {
         return await _fileCVRepository.GetFileByUserIdAsync(id, userId);

@@ -2,15 +2,8 @@
 using CVBuilder.Core.Repositories;
 using CVBuilder.Core.Services;
 using CVBuilder.Core.Validators;
-using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
-
-
 
 namespace CVBuilder.Service
 {
@@ -22,13 +15,10 @@ namespace CVBuilder.Service
         {
             _userRepository = userRepository;
         }
-
         public bool ValidateEmail(string email)
         {
             return UserValidator.IsValidEmail(email);
         }
-
-
         public async Task<bool> RegisterAsync(string fullName, string email, string password)
         {
             if (!ValidateEmail(email))
@@ -62,7 +52,6 @@ namespace CVBuilder.Service
 
             return user;
         }
-
         private string HashPassword(string password)
         {
             using (SHA256 sha256 = SHA256.Create())
@@ -71,7 +60,6 @@ namespace CVBuilder.Service
                 return Convert.ToBase64String(bytes);
             }
         }
-
         private bool VerifyPassword(string inputPassword, string storedHashedPassword)
         {
             return HashPassword(inputPassword) == storedHashedPassword;
