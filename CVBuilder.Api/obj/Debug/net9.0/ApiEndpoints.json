@@ -17,6 +17,27 @@
   },
   {
     "ContainingType": "CVBuilder.Api.Controllers.TemplateController",
+    "Method": "UpdateTemplateStatus",
+    "RelativePath": "api/Template/{id}/status",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "template",
+        "Type": "CVBuilder.Core.Models.Template",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CVBuilder.Api.Controllers.TemplateController",
     "Method": "GetFile",
     "RelativePath": "api/Template/{index}",
     "HttpMethod": "GET",
@@ -53,6 +74,37 @@
         "Name": "file",
         "Type": "Microsoft.AspNetCore.Http.IFormFile",
         "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CVBuilder.Api.Controllers.UsersController",
+    "Method": "GetAllUsers",
+    "RelativePath": "api/Users",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CVBuilder.Api.Controllers.UsersController",
+    "Method": "BlockUser",
+    "RelativePath": "api/Users/{id}/block/{isBlocked}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "isBlocked",
+        "Type": "System.Boolean",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []

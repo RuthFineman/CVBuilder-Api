@@ -52,6 +52,21 @@ namespace CVBuilder.Service
 
             return user;
         }
+        public async Task<IEnumerable<User>> GetAllUsersAsync()
+        {
+            return await _userRepository.GetAllAsync();
+        }
+        public async Task<bool> SetBlockStatusAsync(int userId, bool isBlocked)
+        {
+            var user = await _userRepository.GetByIdAsync(userId);
+            if (user == null)
+                return false;
+
+            user.IsBlocked = isBlocked;
+            await _userRepository.UpdateAsync(user);
+            return true;
+        }
+
         private string HashPassword(string password)
         {
             using (SHA256 sha256 = SHA256.Create())

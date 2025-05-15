@@ -1,6 +1,4 @@
 using Amazon.S3;
-using Amazon.Runtime;
-using Amazon;
 using CVBuilder.Core.Repositories;
 using CVBuilder.Core.Services;
 using CVBuilder.Data.Repositories;
@@ -12,10 +10,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
 using CVBuilder.Core.Validators;
-using MySqlX.XDevAPI;
-using Amazon.Extensions.NETCore.Setup;
-using System.Configuration;
-using CVBuilder.Api.Controllers;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -42,7 +37,6 @@ builder.Services.AddScoped<IFileCVService, FileCVService>();
 builder.Services.AddScoped<IFileCVRepository,FileCVRepository>();
 builder.Services.AddSingleton<IConfiguration>(builder.Configuration);
 IConfiguration Configuration = builder.Configuration;
-builder.Services.AddScoped<ITemplateService, TemplateService>();
 
 
 builder.Services.AddAuthentication(options =>
@@ -65,13 +59,22 @@ builder.Services.AddAuthentication(options =>
 });
 
 builder.Services.AddControllers();
+
+//לנסות
+//builder.Services.AddCors(options =>
+//{
+//    options.AddPolicy("AllowLocalhost", builder => builder.WithOrigins("http://localhost:4200")
+//                                                          .AllowAnyMethod()
+//                                                          .AllowAnyHeader()
+//                                                          .AllowCredentials());
+//});
+
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowLocalhost", builder => builder.WithOrigins("http://localhost:3000")
-                                                      .AllowAnyMethod()
-                                                      .AllowAnyHeader());
+    options.AddPolicy("AllowLocalhost", builder => builder.WithOrigins("http://localhost:3000", "http://localhost:4000", "http://localhost:4200")
+                                                          .AllowAnyMethod()
+                                                          .AllowAnyHeader());
 });
-
 builder.Services.AddSwaggerGen(options =>
 {
     options.SupportNonNullableReferenceTypes(); 
@@ -100,24 +103,21 @@ builder.Services.AddSwaggerGen(options =>
     });
 
 });
-
 var app = builder.Build();
-
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
 }
 app.UseCors("AllowLocalhost");
-app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
-app.MapControllers();
 
+app.UseHttpsRedirection();
+app.MapControllers();
 app.UseSwagger();
 app.UseSwaggerUI(c =>
 {
     c.SwaggerEndpoint("/swagger/v1/swagger.json", "CVBuilder API V1");
     c.RoutePrefix = string.Empty;
 });
-
 app.Run();

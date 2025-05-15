@@ -11,5 +11,7 @@ namespace CVBuilder.Core.Services
     {
         Task<bool> RegisterAsync(string fullName, string email, string password);
         Task<User> LoginAsync(string email, string password);
+        Task<IEnumerable<User>> GetAllUsersAsync();
+        Task<bool> SetBlockStatusAsync(int userId, bool isBlocked);
     }
 }

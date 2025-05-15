@@ -20,5 +20,8 @@ namespace CVBuilder.Core.Repositories
         //Template? GetByIdAndUserId(int id, int userId);
         void Add(Template template);
         bool Delete(int id);
+        Task<Template?> GetByIdAsync(int id);
+        Task UpdateAsync(Template template);
+
     }
 }

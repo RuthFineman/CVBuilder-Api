@@ -59,6 +59,7 @@ namespace CVBuilder.Api.Controllers
         }
 
         [HttpGet("files")]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> GetTemplates()
         {
             var files = await _templateService.GetAllTamplatesAsync();
@@ -74,6 +75,16 @@ namespace CVBuilder.Api.Controllers
                 return NotFound("File not found");
 
             return Ok(fileUrl);
+        }
+        [HttpPatch("{id}/status")]
+        [Authorize(Roles = "admin")]
+        public async Task<IActionResult> UpdateTemplateStatus(int id, [FromBody] Template template)
+        {
+            var updatedTemplate = await _templateService.UpdateTemplateStatusAsync(id, template.InUse);
+            if (updatedTemplate == null)
+                return NotFound("Template not found.");
+
+            return Ok(updatedTemplate);
         }
 
 

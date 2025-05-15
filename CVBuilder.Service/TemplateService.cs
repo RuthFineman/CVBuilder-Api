@@ -127,27 +127,16 @@ namespace CVBuilder.Service
             return url;
         }
 
-        //public async Task<string> GetFileAsync(int index)
-        //{
-        //    return await _templateRepository.GetFileByIndexAsync(index);
-        //}
-        //public async Task<string?> GetFirstFileAsync()
-        //{
-        //    return await _templateRepository.GetFirstFileAsync();
-        //}
-        //public Template? GetTemplateByIdAndUserId(int id, int userId)
-        //{
-        //    return _templateRepository.GetByIdAndUserId(id, userId);
-        //}
+        public async Task<Template?> UpdateTemplateStatusAsync(int id, bool newStatus)
+        {
+            var template = await _templateRepository.GetByIdAsync(id);
+            if (template == null)
+                return null;
 
-        //public void AddTemplate(Template template)
-        //{
-        //    _templateRepository.Add(template);
-        //}
+            template.InUse = newStatus;
+            await _templateRepository.UpdateAsync(template);
 
-        //public bool DeleteTemplate(int id)
-        //{
-        //    return _templateRepository.Delete(id);
-        //}
+            return template;
+        }
     }
 }

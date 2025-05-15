@@ -11,5 +11,8 @@ namespace CVBuilder.Core.Repositories
     {
         Task<User> GetByEmailAsync(string email);
         Task AddAsync(User user);
+        Task<IEnumerable<User>> GetAllAsync();
+        Task<User> GetByIdAsync(int id);
+        Task UpdateAsync(User user);
     }
 }

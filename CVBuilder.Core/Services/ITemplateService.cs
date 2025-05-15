@@ -15,6 +15,8 @@ namespace CVBuilder.Core.Services
         Task<bool> DeleteTemplateAsync(string fileName);
         Task<List<string>> GetAllTamplatesAsync();
         Task<string> GetFileAsync(int index);
+        Task<Template?> UpdateTemplateStatusAsync(int id, bool newStatus);
+
         //Task<string> GetFileAsync(int index);
         //Task<string?> GetFirstFileAsync();
         //Task<List<string>> GetLastFiveFilesAsync();

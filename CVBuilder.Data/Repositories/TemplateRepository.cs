@@ -56,6 +56,16 @@ namespace CVBuilder.Data.Repositories
 
             return template?.Name; // או כל שדה שמכיל את שם הקובץ ב-S3
         }
+        public async Task<Template?> GetByIdAsync(int id)
+        {
+            return await _context.Templates.FindAsync(id);
+        }
+
+        public async Task UpdateAsync(Template template)
+        {
+            _context.Templates.Update(template);
+            await _context.SaveChangesAsync();
+        }
         //public async Task<string> GetFileByIndexAsync(int index)
         //{
         //    var request = new ListObjectsV2Request

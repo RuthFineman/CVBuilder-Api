@@ -1,13 +1,9 @@
 ﻿using CVBuilder.Api.Models;
-using CVBuilder.Core.Models;
 using CVBuilder.Core.Services;
 using CVBuilder.Core.Validators;
-using CVBuilder.Data;
 using CVBuilder.Service;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace CVBuilder.Api.Controllers
@@ -66,6 +62,24 @@ namespace CVBuilder.Api.Controllers
             var token = _authService.GenerateJwtToken(user.Email, user.Id,user.Role);  
             Console.WriteLine(user.Id);
             return Ok(new { token,user.Id });  
+        }
+        [HttpGet]
+        [Authorize(Roles = "admin")] // 👈 רק למנהלים
+        public async Task<IActionResult> GetAllUsers()
+        {
+            var users = await _userService.GetAllUsersAsync();
+            return Ok(users);
+        }
+        [HttpPut("{id}/block/{isBlocked}")]
+        [Authorize(Roles = "admin")]
+        public async Task<IActionResult> BlockUser(int id, bool isBlocked)
+        {
+            var success = await _userService.SetBlockStatusAsync(id, isBlocked);
+
+            if (!success)
+                return NotFound(new { message = "User not found" });
+
+            return NoContent();
         }
     }
 }
