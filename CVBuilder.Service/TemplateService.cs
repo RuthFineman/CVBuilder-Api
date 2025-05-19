@@ -95,36 +95,36 @@ namespace CVBuilder.Service
 
             return fileUrls;
         }
-        //שליפה של קובץ בודד
-        //public async Task<string?> GetFileAsync(int templateId)
-        //{
-        //    // שלב 1: שלוף מהמסד
-        //    var fileName = await _templateRepository.GetFileNameByIdAsync(templateId);
-        //    if (string.IsNullOrEmpty(fileName))
-        //        return null;
-
-        //    // שלב 2: בדוק אם קיים ב-AWS
-        //    var fileUrl = await _templateRepository.GetS3FileUrlIfExistsAsync(fileName);
-        //    return fileUrl;
-        //}
-        //קבלת תבנית אחת
         public async Task<string> GetFileAsync(int index)
         {
-            // קבל את שם הקובץ מה-DB
-            var fileName = await _templateRepository.GetFileNameByIndexAsync(index);
-            if (string.IsNullOrEmpty(fileName))
-                return null;
-
-            // צור URL זמני להורדה מ-AWS S3
-            var request = new GetPreSignedUrlRequest
+            try
             {
-                BucketName = _bucketName,
-                Key = $"CVFilebuilder/{fileName}",
-                Expires = DateTime.UtcNow.AddMinutes(30)
-            };
+                var fileName = await _templateRepository.GetFileNameByIndexAsync(index);
 
-            var url = _s3Client.GetPreSignedURL(request);
-            return url;
+                if (string.IsNullOrEmpty(fileName))
+                {
+                    // לוג - לא נמצא קובץ עם האינדקס הזה
+                    Console.WriteLine($"GetFileAsync: No file found for index {index}");
+                    return null;
+                }
+
+                // בדיקה אם הסיומת כבר קיימת
+                if (!fileName.EndsWith(".png", StringComparison.OrdinalIgnoreCase))
+                {
+                    fileName += ".png";
+                }
+
+                var url = $"https://cvfilebuilder.s3.eu-north-1.amazonaws.com/exampleCV/{fileName}";
+                //Console.WriteLine($"GetFileAsync: Generated URL: {url}");
+
+                return url;
+            }
+            catch (Exception ex)
+            {
+                // לוג - הדפס את השגיאה המלאה
+                Console.WriteLine($"GetFileAsync: Exception: {ex.Message}\n{ex.StackTrace}");
+                throw new Exception("Error creating file URL", ex);
+            }
         }
 
         public async Task<Template?> UpdateTemplateStatusAsync(int id, bool newStatus)
@@ -138,5 +138,11 @@ namespace CVBuilder.Service
 
             return template;
         }
+        //מקבל קישור ומחזיר מזהה
+        public async Task<int?> GetTemplateIdByUrlAsync(string url)
+        {
+            return await _templateRepository.GetTemplateIdByUrlAsync(url);
+        }
+
     }
 }

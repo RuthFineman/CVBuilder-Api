@@ -14,5 +14,7 @@ namespace CVBuilder.Core.Repositories
         Task<IEnumerable<User>> GetAllAsync();
         Task<User> GetByIdAsync(int id);
         Task UpdateAsync(User user);
+        bool IsUserBlocked(int userId);
+
     }
 }

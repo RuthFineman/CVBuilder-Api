@@ -59,45 +59,54 @@ namespace CVBuilder.Api.Controllers
         }
 
         [HttpGet("files")]
-        [Authorize(Roles = "admin")]
         public async Task<IActionResult> GetTemplates()
         {
             var files = await _templateService.GetAllTamplatesAsync();
             return Ok(files);
-
         }
+        //לקבלת URL של תבנית בודדה
         [HttpGet("{index}")]
         public async Task<IActionResult> GetFile(int index)
         {
-            var fileUrl = await _templateService.GetFileAsync(index);
+            try
+            {
+                var fileUrl = await _templateService.GetFileAsync(index);
 
-            if (string.IsNullOrEmpty(fileUrl))
-                return NotFound("File not found");
+                if (string.IsNullOrEmpty(fileUrl))
+                    return NotFound("File not found");
 
-            return Ok(fileUrl);
+                return Ok(fileUrl);
+            }
+            catch (Exception ex)
+            {
+                // לוג שגיאה - מומלץ להוסיף לוג פה
+                return StatusCode(500, "Internal server error: " + ex.Message);
+            }
         }
+
         [HttpPatch("{id}/status")]
-        [Authorize(Roles = "admin")]
-        public async Task<IActionResult> UpdateTemplateStatus(int id, [FromBody] Template template)
+        //[Authorize(Roles = "admin")]
+        public async Task<IActionResult> UpdateTemplateStatus(int id, [FromBody] bool inUse)
         {
-            var updatedTemplate = await _templateService.UpdateTemplateStatusAsync(id, template.InUse);
+            var updatedTemplate = await _templateService.UpdateTemplateStatusAsync(id, inUse);
             if (updatedTemplate == null)
                 return NotFound("Template not found.");
 
             return Ok(updatedTemplate);
         }
+        //מקבל קישור ומחזיר מזהה
+        [HttpGet("get-id-by-url")]
+        public async Task<IActionResult> GetTemplateIdByUrl([FromQuery] string url)
+        {
+            if (string.IsNullOrEmpty(url))
+                return BadRequest("URL is required");
 
+            var id = await _templateService.GetTemplateIdByUrlAsync(url);
 
-        //להפוך את זה ללפי ID
-        //[HttpGet("first")]
-        //public async Task<IActionResult> GetFirstFile()
-        //{
-        //    var fileKey = await _templateService.GetFirstFileAsync();
-        //    if (fileKey == null)
-        //        return NotFound("לא נמצאו קבצים ב-S3");
+            if (id == null)
+                return NotFound("Template not found");
 
-        //    return Ok(fileKey);
-        //}
-
+            return Ok(id);
+        }
     }
 }

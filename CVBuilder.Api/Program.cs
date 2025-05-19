@@ -10,6 +10,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
 using CVBuilder.Core.Validators;
+using CVBuilder.Api.Middlewares;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -39,6 +40,7 @@ builder.Services.AddSingleton<IConfiguration>(builder.Configuration);
 IConfiguration Configuration = builder.Configuration;
 
 
+
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -60,14 +62,7 @@ builder.Services.AddAuthentication(options =>
 
 builder.Services.AddControllers();
 
-//לנסות
-//builder.Services.AddCors(options =>
-//{
-//    options.AddPolicy("AllowLocalhost", builder => builder.WithOrigins("http://localhost:4200")
-//                                                          .AllowAnyMethod()
-//                                                          .AllowAnyHeader()
-//                                                          .AllowCredentials());
-//});
+
 
 builder.Services.AddCors(options =>
 {
@@ -110,8 +105,9 @@ if (app.Environment.IsDevelopment())
 }
 app.UseCors("AllowLocalhost");
 app.UseAuthentication();
-app.UseAuthorization();
 
+app.UseAuthorization();
+app.UseBlockedUserMiddleware();
 app.UseHttpsRedirection();
 app.MapControllers();
 app.UseSwagger();

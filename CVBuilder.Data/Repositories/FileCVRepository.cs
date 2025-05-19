@@ -56,5 +56,25 @@ namespace CVBuilder.Data.Repositories
             _context.FileCVs.Update(updatedFile);
             await _context.SaveChangesAsync();
         }
+        //לקבלת URL של תבנית בודדה
+        public async Task<string> GetFileNameByIndexAsync(int index)
+        {
+            try
+            {
+                var template = await _context.Templates.FindAsync(index);
+                if (template == null)
+                {
+                    // לא נמצא תבנית עם האינדקס המבוקש
+                    return null;
+                }
+                // נניח שהעמודה שנושאת את שם הקובץ נקראת FileName, לא Name
+                return template.Name;
+            }
+            catch (Exception ex)
+            {
+                // לוג שגיאה - מומלץ להוסיף לוג פה
+                throw new Exception("Error fetching file name from DB", ex);
+            }
+        }
     }
 }

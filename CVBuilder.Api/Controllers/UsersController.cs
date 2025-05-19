@@ -58,10 +58,12 @@ namespace CVBuilder.Api.Controllers
 
             if (user == null)
                 return Unauthorized("Invalid credentials.");
+            if (user.IsBlocked)
+                return StatusCode(StatusCodes.Status403Forbidden, "משתמש חסום");
 
-            var token = _authService.GenerateJwtToken(user.Email, user.Id,user.Role);  
+            var token = _authService.GenerateJwtToken(user.Email, user.Id, user.Role);
             Console.WriteLine(user.Id);
-            return Ok(new { token,user.Id });  
+            return Ok(new { token, user.Id });
         }
         [HttpGet]
         [Authorize(Roles = "admin")] // 👈 רק למנהלים
@@ -80,6 +82,12 @@ namespace CVBuilder.Api.Controllers
                 return NotFound(new { message = "User not found" });
 
             return NoContent();
+        }
+        [HttpGet("is-blocked/{userId}")]
+        public IActionResult IsUserBlocked(int userId)
+        {
+            var isBlocked = _userService.IsUserBlocked(userId);
+            return Ok(isBlocked);
         }
     }
 }

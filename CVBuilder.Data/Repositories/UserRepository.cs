@@ -35,6 +35,13 @@ namespace CVBuilder.Data.Repositories
             _context.Users.Update(user);
             await _context.SaveChangesAsync();
         }
+        //האם המשתמש חסום או לא
+        public bool IsUserBlocked(int userId)
+        {
+            var user = _context.Users.FirstOrDefault(u => u.Id == userId);
+            return user != null && user.IsBlocked;
+        }
+
     }
 }
 

@@ -121,5 +121,15 @@ namespace CVBuilder.Data.Repositories
             _context.SaveChanges();
             return true;
         }
+        //מקבל קישור ומחזיר מזהה
+        public async Task<int?> GetTemplateIdByUrlAsync(string url)
+        {
+            var template = await _context.Templates
+                .FirstOrDefaultAsync(t => t.TemplateUrl == url);
+
+            return template?.Id;
+        }
+
     }
 }
+

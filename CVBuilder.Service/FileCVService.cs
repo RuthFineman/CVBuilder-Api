@@ -6,6 +6,7 @@ using CVBuilder.Core.DTOs;
 using CVBuilder.Core.Models;
 using CVBuilder.Core.Repositories;
 using System.Net;
+using Microsoft.EntityFrameworkCore;
 
 public class FileCVService : IFileCVService
 {
@@ -56,6 +57,7 @@ public class FileCVService : IFileCVService
             Skills = fileDto.Skills ?? new List<string>()
         };
     }
+ 
     public async Task<List<object>> GetUserFilesAsync(string userId)
     {
         var dbFiles = await _fileCVRepository.GetFilesByUserIdAsync(userId);

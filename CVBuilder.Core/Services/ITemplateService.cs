@@ -17,11 +17,7 @@ namespace CVBuilder.Core.Services
         Task<string> GetFileAsync(int index);
         Task<Template?> UpdateTemplateStatusAsync(int id, bool newStatus);
 
-        //Task<string> GetFileAsync(int index);
-        //Task<string?> GetFirstFileAsync();
-        //Task<List<string>> GetLastFiveFilesAsync();
-        //Template? GetTemplateByIdAndUserId(int id, int userId); 
-        //void AddTemplate(Template template);
-        //bool DeleteTemplate(int id);
+        Task<int?> GetTemplateIdByUrlAsync(string url);
+
     }
 }

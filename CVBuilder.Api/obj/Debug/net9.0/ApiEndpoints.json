@@ -29,8 +29,8 @@
         "IsRequired": true
       },
       {
-        "Name": "template",
-        "Type": "CVBuilder.Core.Models.Template",
+        "Name": "inUse",
+        "Type": "System.Boolean",
         "IsRequired": true
       }
     ],
@@ -60,6 +60,22 @@
     "IsController": true,
     "Order": 0,
     "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CVBuilder.Api.Controllers.TemplateController",
+    "Method": "GetTemplateIdByUrl",
+    "RelativePath": "api/Template/get-id-by-url",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "url",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
     "ReturnTypes": []
   },
   {
@@ -104,6 +120,22 @@
       {
         "Name": "isBlocked",
         "Type": "System.Boolean",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CVBuilder.Api.Controllers.UsersController",
+    "Method": "IsUserBlocked",
+    "RelativePath": "api/Users/is-blocked/{userId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.Int32",
         "IsRequired": true
       }
     ],

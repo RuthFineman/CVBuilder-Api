@@ -14,12 +14,10 @@ namespace CVBuilder.Core.Repositories
         Task DeleteTemplateAsync(string fileName);
         Task<List<string>> GetAllTemplateUrlsAsync();
         Task<string> GetFileNameByIndexAsync(int index);
-        //Task<List<string>> GetAllTamplatesAsync();
-        //Task<string> GetFileByIndexAsync(int index);
-        //Task<string?> GetFirstFileAsync();
-        //Template? GetByIdAndUserId(int id, int userId);
-        void Add(Template template);
-        bool Delete(int id);
+        Task<int?> GetTemplateIdByUrlAsync(string url);
+
+        //void Add(Template template);
+        //bool Delete(int id);
         Task<Template?> GetByIdAsync(int id);
         Task UpdateAsync(Template template);
 
