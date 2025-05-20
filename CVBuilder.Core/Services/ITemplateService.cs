@@ -13,11 +13,8 @@ namespace CVBuilder.Core.Services
         //הוספת תבנית
         Task<string> AddTemplateAsync(IFormFile file, string fileName);
         Task<bool> DeleteTemplateAsync(string fileName);
-        Task<List<string>> GetAllTamplatesAsync();
+        Task<List<Template>> GetAllTemplatesCombinedAsync();
         Task<string> GetFileAsync(int index);
         Task<Template?> UpdateTemplateStatusAsync(int id, bool newStatus);
-
-        Task<int?> GetTemplateIdByUrlAsync(string url);
-
     }
 }

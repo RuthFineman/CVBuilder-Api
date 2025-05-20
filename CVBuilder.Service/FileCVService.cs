@@ -307,4 +307,9 @@ public class FileCVService : IFileCVService
     {
         return await _fileCVRepository.GetFileByUserIdAsync(id, userId);
     }
+    //עבור הגרףףףףף
+    public async Task<List<ResumeStatsDto>> GetUploadStats()
+    {
+        return await _fileCVRepository.GetUploadStatsAsync();
+    }
 }

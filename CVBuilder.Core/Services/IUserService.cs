@@ -1,4 +1,5 @@
-﻿using CVBuilder.Core.Models;
+﻿using CVBuilder.Core.DTOs;
+using CVBuilder.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,5 +15,6 @@ namespace CVBuilder.Core.Services
         Task<IEnumerable<User>> GetAllUsersAsync();
         Task<bool> SetBlockStatusAsync(int userId, bool isBlocked);
         bool IsUserBlocked(int userId);
+       
     }
 }

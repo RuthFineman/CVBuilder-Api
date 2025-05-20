@@ -12,7 +12,7 @@ using CVBuilder.Service;
 
 namespace CVBuilder.Api.Controllers
 {
-    //אולי להוסיף רק למנהל
+    //  אבל לא כל הפונקציות אולי להוסיף רק למנהל
     [Route("api/[controller]")]
     [ApiController]
     public class TemplateController : ControllerBase
@@ -57,12 +57,12 @@ namespace CVBuilder.Api.Controllers
                 return StatusCode(500, $"Internal server error: {ex.Message}");
             }
         }
-
+      //קבלת כל התבניות
         [HttpGet("files")]
         public async Task<IActionResult> GetTemplates()
         {
-            var files = await _templateService.GetAllTamplatesAsync();
-            return Ok(files);
+            var templates = await _templateService.GetAllTemplatesCombinedAsync();
+            return Ok(templates);
         }
         //לקבלת URL של תבנית בודדה
         [HttpGet("{index}")]
@@ -85,7 +85,7 @@ namespace CVBuilder.Api.Controllers
         }
 
         [HttpPatch("{id}/status")]
-        //[Authorize(Roles = "admin")]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> UpdateTemplateStatus(int id, [FromBody] bool inUse)
         {
             var updatedTemplate = await _templateService.UpdateTemplateStatusAsync(id, inUse);
@@ -93,20 +93,6 @@ namespace CVBuilder.Api.Controllers
                 return NotFound("Template not found.");
 
             return Ok(updatedTemplate);
-        }
-        //מקבל קישור ומחזיר מזהה
-        [HttpGet("get-id-by-url")]
-        public async Task<IActionResult> GetTemplateIdByUrl([FromQuery] string url)
-        {
-            if (string.IsNullOrEmpty(url))
-                return BadRequest("URL is required");
-
-            var id = await _templateService.GetTemplateIdByUrlAsync(url);
-
-            if (id == null)
-                return NotFound("Template not found");
-
-            return Ok(id);
         }
     }
 }

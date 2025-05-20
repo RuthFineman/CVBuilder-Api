@@ -10,7 +10,6 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
 using CVBuilder.Core.Validators;
-using CVBuilder.Api.Middlewares;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -38,8 +37,8 @@ builder.Services.AddScoped<IFileCVService, FileCVService>();
 builder.Services.AddScoped<IFileCVRepository,FileCVRepository>();
 builder.Services.AddSingleton<IConfiguration>(builder.Configuration);
 IConfiguration Configuration = builder.Configuration;
-
-
+//tאם בסוף לא השתמשתי בשורה אז למחוקקק
+builder.Services.AddScoped<IStatisticsService, StatisticsService>();
 
 builder.Services.AddAuthentication(options =>
 {
@@ -107,7 +106,6 @@ app.UseCors("AllowLocalhost");
 app.UseAuthentication();
 
 app.UseAuthorization();
-app.UseBlockedUserMiddleware();
 app.UseHttpsRedirection();
 app.MapControllers();
 app.UseSwagger();

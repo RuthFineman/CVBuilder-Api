@@ -38,11 +38,10 @@ namespace CVBuilder.Data.Repositories
             }
         }
         //קבלת כל התבניות
-        public async Task<List<string>> GetAllTemplateUrlsAsync()
+        public async Task<List<Template>> GetAllTemplatesFromDbAsync()
         {
             return await _context.Templates
                 .Where(t => !string.IsNullOrEmpty(t.TemplateUrl))
-                .Select(t => t.TemplateUrl)
                 .ToListAsync();
         }
         //קבלת תבנית אחת
@@ -66,41 +65,6 @@ namespace CVBuilder.Data.Repositories
             _context.Templates.Update(template);
             await _context.SaveChangesAsync();
         }
-        //public async Task<string> GetFileByIndexAsync(int index)
-        //{
-        //    var request = new ListObjectsV2Request
-        //    {
-        //        BucketName = _bucketName,
-        //        Prefix = "CVFilebuilder/"
-        //    };
-
-        //var response = await _s3Client.ListObjectsV2Async(request);
-
-        //var fileList = response.S3Objects
-        //    .Where(obj => !obj.Key.EndsWith("/") && obj.Size > 0)
-        //    .Select(obj => obj.Key)
-        //    .OrderBy(name => name) // למקרה שהשמות לא בסדר מסודר
-        //    .ToList();
-
-        //if (index < 0 || index >= fileList.Count)
-        //        return null;
-
-        //    string fileName = fileList[index];
-
-        //    return $"https://{_bucketName}.s3.amazonaws.com/{fileName}";
-        //}
-        //public async Task<string?> GetFirstFileAsync()
-        //{
-        //    var request = new ListObjectsV2Request
-        //    {
-        //        BucketName = _bucketName,
-        //        MaxKeys = 1
-        //    };
-
-        //    var response = await _s3Client.ListObjectsV2Async(request);
-        //    return response.S3Objects.FirstOrDefault()?.Key;
-        //}
-
         public Template? GetByIdAndUserId(int id, int userId)
         {
             return _context.Templates.FirstOrDefault(t => t.Id == id);
@@ -121,15 +85,6 @@ namespace CVBuilder.Data.Repositories
             _context.SaveChanges();
             return true;
         }
-        //מקבל קישור ומחזיר מזהה
-        public async Task<int?> GetTemplateIdByUrlAsync(string url)
-        {
-            var template = await _context.Templates
-                .FirstOrDefaultAsync(t => t.TemplateUrl == url);
-
-            return template?.Id;
-        }
-
     }
 }
 

@@ -29,3 +29,5 @@ C:\Users\user1\Documents\תכנות ו\פרויקט גמר\CVBuilder\CVBuilder.S
 C:\Users\user1\Documents\תכנות ו\פרויקט גמר\CVBuilder\CVBuilder.Service\obj\Debug\net9.0\CVBuilder.Service.pdb
 C:\Users\user1\Documents\תכנות ו\פרויקט גמר\CVBuilder\CVBuilder.Service\obj\Debug\net9.0\ref\CVBuilder.Service.dll
 C:\Users\user1\Documents\תכנות ו\פרויקט גמר\CVBuilder\CVBuilder.Service\obj\Debug\net9.0\CVBuilder.Service.sourcelink.json
+C:\Users\user1\Documents\תכנות ו\פרויקט גמר\CVBuilder\CVBuilder.Service\bin\Debug\net9.0\CVBuilder.Data.dll
+C:\Users\user1\Documents\תכנות ו\פרויקט גמר\CVBuilder\CVBuilder.Service\bin\Debug\net9.0\CVBuilder.Data.pdb

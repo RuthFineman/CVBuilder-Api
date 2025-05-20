@@ -76,5 +76,18 @@ namespace CVBuilder.Data.Repositories
                 throw new Exception("Error fetching file name from DB", ex);
             }
         }
+        //עבור הגגרףףף
+        public async Task<List<ResumeStatsDto>> GetUploadStatsAsync()
+        {
+            return await _context.FileCVs
+                .GroupBy(r => r.UploadedAt.Hour)
+                .Select(g => new ResumeStatsDto
+                {
+                    Time = DateTime.Today.AddHours(g.Key),
+                    Count = g.Count()
+                })
+                .OrderBy(g => g.Time)
+                .ToListAsync();
+        }
     }
 }

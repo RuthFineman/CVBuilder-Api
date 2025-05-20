@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace CVBuilder.Service
 {
-    public class TemplateService: ITemplateService
+    public class TemplateService : ITemplateService
     {
         private readonly ITemplateRepository _templateRepository;
         private readonly IAmazonS3 _s3Client;
@@ -72,8 +72,7 @@ namespace CVBuilder.Service
                 throw new ApplicationException("Error deleting file", ex);
             }
         }
-
-        public async Task<List<string>> GetAllTamplatesAsync()
+        private async Task<List<Template>> GetAllTemplatesFromS3Async()
         {
             var request = new ListObjectsV2Request
             {
@@ -82,7 +81,7 @@ namespace CVBuilder.Service
             };
 
             var response = await _s3Client.ListObjectsV2Async(request);
-            var fileUrls = new List<string>();
+            var templates = new List<Template>();
 
             foreach (var s3Object in response.S3Objects)
             {
@@ -90,10 +89,34 @@ namespace CVBuilder.Service
                     continue;
 
                 string fileUrl = $"https://{_bucketName}.s3.amazonaws.com/{s3Object.Key}";
-                fileUrls.Add(fileUrl);
+
+                templates.Add(new Template
+                {
+                    Id = 0, // כי אין ID ב-S3
+                    Name = Path.GetFileNameWithoutExtension(s3Object.Key),
+                    TemplateUrl = fileUrl,
+                    InUse = false // ברירת מחדל, אלא אם יש לך דרך לדעת
+                });
             }
 
-            return fileUrls;
+            return templates;
+        }
+        public async Task<List<Template>> GetAllTemplatesCombinedAsync()
+        {
+            var s3Templates = await GetAllTemplatesFromS3Async(); // שומר על הפונקציה כפי שהיא
+            var dbTemplates = await _templateRepository.GetAllTemplatesFromDbAsync();
+
+            foreach (var s3Template in s3Templates)
+            {
+                var dbMatch = dbTemplates.FirstOrDefault(t => t.TemplateUrl == s3Template.TemplateUrl);
+                if (dbMatch != null)
+                {
+                    s3Template.Id = dbMatch.Id;
+                    s3Template.InUse = dbMatch.InUse; // כאן אנחנו מעדכנים את הערך לפי DB
+                }
+            }
+
+            return s3Templates;
         }
         public async Task<string> GetFileAsync(int index)
         {
@@ -138,11 +161,5 @@ namespace CVBuilder.Service
 
             return template;
         }
-        //מקבל קישור ומחזיר מזהה
-        public async Task<int?> GetTemplateIdByUrlAsync(string url)
-        {
-            return await _templateRepository.GetTemplateIdByUrlAsync(url);
-        }
-
     }
 }

@@ -1,5 +1,25 @@
 [
   {
+    "ContainingType": "CVBuilder.Api.Controllers.StatisticsController",
+    "Method": "GetCVTemplateUsage",
+    "RelativePath": "api/Statistics/cv/templates",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CVBuilder.Api.Controllers.StatisticsController",
+    "Method": "GetDashboardStatistics",
+    "RelativePath": "api/Statistics/dashboard",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "CVBuilder.Api.Controllers.TemplateController",
     "Method": "DeleteTemplateAsync",
     "RelativePath": "api/Template/{fileName}",
@@ -60,22 +80,6 @@
     "IsController": true,
     "Order": 0,
     "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "CVBuilder.Api.Controllers.TemplateController",
-    "Method": "GetTemplateIdByUrl",
-    "RelativePath": "api/Template/get-id-by-url",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "url",
-        "Type": "System.String",
-        "IsRequired": false
-      }
-    ],
     "ReturnTypes": []
   },
   {
@@ -220,6 +224,26 @@
       }
     ],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CVBuilder.Api.Controllers.FileCVController",
+    "Method": "GetUploadStats",
+    "RelativePath": "file-cv/resumes-by-hour",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[CVBuilder.Core.DTOs.ResumeStatsDto, CVBuilder.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   },
   {
     "ContainingType": "CVBuilder.Api.Controllers.FileCVController",

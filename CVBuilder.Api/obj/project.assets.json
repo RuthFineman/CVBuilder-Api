@@ -1918,6 +1918,7 @@
           "AutoMapper": "14.0.0",
           "BCrypt.Net-Next": "4.0.3",
           "CVBuilder.Core": "1.0.0",
+          "CVBuilder.Data": "1.0.0",
           "Microsoft.AspNetCore.Http": "2.3.0",
           "Microsoft.Extensions.Configuration.Abstractions": "9.0.0",
           "Microsoft.Extensions.Identity.Core": "9.0.3",

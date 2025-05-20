@@ -119,5 +119,14 @@ namespace CVBuilder.Api.Controllers
                 return StatusCode(500, $"Internal server error: {ex.Message}");
             }
         }
+
+        //עבור הגרף
+
+        [HttpGet("resumes-by-hour")]
+        public async Task<ActionResult<List<ResumeStatsDto>>> GetUploadStats()
+        {
+            var stats = await _fileCVService.GetUploadStats();
+            return Ok(stats);
+        }
     }
 }

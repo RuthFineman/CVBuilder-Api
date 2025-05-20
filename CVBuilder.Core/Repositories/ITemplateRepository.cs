@@ -12,12 +12,8 @@ namespace CVBuilder.Core.Repositories
         //העלאת תבנית
         Task AddTemplateAsync(Template template);
         Task DeleteTemplateAsync(string fileName);
-        Task<List<string>> GetAllTemplateUrlsAsync();
+        Task<List<Template>> GetAllTemplatesFromDbAsync();
         Task<string> GetFileNameByIndexAsync(int index);
-        Task<int?> GetTemplateIdByUrlAsync(string url);
-
-        //void Add(Template template);
-        //bool Delete(int id);
         Task<Template?> GetByIdAsync(int id);
         Task UpdateAsync(Template template);
 
