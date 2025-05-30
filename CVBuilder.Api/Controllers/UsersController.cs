@@ -25,8 +25,6 @@ namespace CVBuilder.Api.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] UserRegisterModel userDto)
         {
-            Console.WriteLine($"FullName: {userDto.FullName}, Email: {userDto.Email}, Password: {userDto.Password}");
-
             try
             {
                 var isValidPassword = await _userValidator.IsValidPasswordAsync(userDto.Email, userDto.Password);

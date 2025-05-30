@@ -23,7 +23,7 @@ namespace CVBuilder.Core.DTOs
         public string LastName { get; set; }
         [JsonPropertyName("role")]
         public string Role { get; set; }
-        [JsonPropertyName("Phone")]
+        [JsonPropertyName("phone")]
         public string Phone { get; set; }
         [JsonPropertyName("email")]
         public string Email { get; set; }

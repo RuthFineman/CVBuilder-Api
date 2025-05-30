@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace CVBuilder.Core.DTOs
 {
-    public class UserDto
+    public class FileCVStatsDto
     {
+        public DateTime Time { get; set; }
+        public int Count { get; set; }
     }
 }

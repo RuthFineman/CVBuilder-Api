@@ -15,8 +15,10 @@ namespace CVBuilder.Core.Models
     {
         public int Id { get; set; }
         public int UserId { get; set; }
+        [JsonPropertyName("fileName")]
         public string FileName { get; set; }
         public string FileUrl { get; set; }
+        [JsonPropertyName("template")]
         public string Template { get; set; }
         public DateTime UploadedAt { get; set; }
         public User User { get; set; }
@@ -27,7 +29,7 @@ namespace CVBuilder.Core.Models
         [JsonPropertyName("role")]
         public string Role { get; set; }
 
-        [JsonPropertyName("Phone")]
+        [JsonPropertyName("phone")]
         public string Phone { get; set; }
 
         [JsonPropertyName("email")]

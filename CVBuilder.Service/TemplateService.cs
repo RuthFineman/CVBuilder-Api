@@ -20,42 +20,34 @@ namespace CVBuilder.Service
             _templateRepository = ITemplateRepository;
             _s3Client = s3Client;
         }
-        //הוספת תבנית
         public async Task<string> AddTemplateAsync(IFormFile file, string fileName)
         {
-            // יצירת בקשה להעלאת הקובץ ל-S3
             var fileTransferUtility = new TransferUtility(_s3Client);
             var uploadRequest = new TransferUtilityUploadRequest
             {
-                InputStream = file.OpenReadStream(),  // שימוש ב-InputStream של ה-File
-                Key = $"exampleCV/{fileName}",  // כאן אנחנו מוסיפים את התיקיה exampleCV/
-                BucketName = _bucketName,  // שם הבקט שלך
-                ContentType = file.ContentType,  // סוג הקובץ המתאים
+                InputStream = file.OpenReadStream(),  
+                Key = $"cv-example/{fileName}",  
+                BucketName = _bucketName,
+                ContentType = file.ContentType, 
             };
 
-            // העלאת הקובץ ל-S3
             await fileTransferUtility.UploadAsync(uploadRequest);
 
-            // יצירת פרטי התבנית להוספה למסד הנתונים
             var template = new Template
             {
                 Name = fileName,
-                // ה-URL מעודכן, כולל התיקיה exampleCV/
-                TemplateUrl = $"https://{_bucketName}.s3.amazonaws.com/exampleCV/{fileName}",
+                TemplateUrl = $"https://{_bucketName}.s3.amazonaws.com/cv-example/{fileName}",
             };
 
-            // שמירת פרטי התבנית במסד הנתונים
             await _templateRepository.AddTemplateAsync(template);
 
             return template.TemplateUrl;
         }
-        //מחיקת תבנית
         public async Task<bool> DeleteTemplateAsync(string fileName)
         {
             try
             {
-                // קריאה למחיקת הקובץ ב-S3
-                var isFileDeleted = await _s3Client.DeleteObjectAsync(_bucketName, $"exampleCV/{fileName}");
+                var isFileDeleted = await _s3Client.DeleteObjectAsync(_bucketName, $"cv-example/{fileName}");
                 if (isFileDeleted.HttpStatusCode == System.Net.HttpStatusCode.NoContent)
                 {
                     await _templateRepository.DeleteTemplateAsync(fileName);
@@ -68,7 +60,6 @@ namespace CVBuilder.Service
             }
             catch (Exception ex)
             {
-                // טיפול בשגיאות
                 throw new ApplicationException("Error deleting file", ex);
             }
         }
@@ -77,7 +68,7 @@ namespace CVBuilder.Service
             var request = new ListObjectsV2Request
             {
                 BucketName = _bucketName,
-                Prefix = "exampleCV/"
+                Prefix = "cv-example/"
             };
 
             var response = await _s3Client.ListObjectsV2Async(request);
@@ -92,10 +83,10 @@ namespace CVBuilder.Service
 
                 templates.Add(new Template
                 {
-                    Id = 0, // כי אין ID ב-S3
+                    Id = 0, 
                     Name = Path.GetFileNameWithoutExtension(s3Object.Key),
                     TemplateUrl = fileUrl,
-                    InUse = false // ברירת מחדל, אלא אם יש לך דרך לדעת
+                    InUse = false 
                 });
             }
 
@@ -103,7 +94,7 @@ namespace CVBuilder.Service
         }
         public async Task<List<Template>> GetAllTemplatesCombinedAsync()
         {
-            var s3Templates = await GetAllTemplatesFromS3Async(); // שומר על הפונקציה כפי שהיא
+            var s3Templates = await GetAllTemplatesFromS3Async(); 
             var dbTemplates = await _templateRepository.GetAllTemplatesFromDbAsync();
 
             foreach (var s3Template in s3Templates)
@@ -112,7 +103,7 @@ namespace CVBuilder.Service
                 if (dbMatch != null)
                 {
                     s3Template.Id = dbMatch.Id;
-                    s3Template.InUse = dbMatch.InUse; // כאן אנחנו מעדכנים את הערך לפי DB
+                    s3Template.InUse = dbMatch.InUse; 
                 }
             }
 
@@ -126,26 +117,20 @@ namespace CVBuilder.Service
 
                 if (string.IsNullOrEmpty(fileName))
                 {
-                    // לוג - לא נמצא קובץ עם האינדקס הזה
-                    Console.WriteLine($"GetFileAsync: No file found for index {index}");
                     return null;
                 }
 
-                // בדיקה אם הסיומת כבר קיימת
                 if (!fileName.EndsWith(".png", StringComparison.OrdinalIgnoreCase))
                 {
                     fileName += ".png";
                 }
 
                 var url = $"https://cvfilebuilder.s3.eu-north-1.amazonaws.com/exampleCV/{fileName}";
-                //Console.WriteLine($"GetFileAsync: Generated URL: {url}");
 
                 return url;
             }
             catch (Exception ex)
             {
-                // לוג - הדפס את השגיאה המלאה
-                Console.WriteLine($"GetFileAsync: Exception: {ex.Message}\n{ex.StackTrace}");
                 throw new Exception("Error creating file URL", ex);
             }
         }

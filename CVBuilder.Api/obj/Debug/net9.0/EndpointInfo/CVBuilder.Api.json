@@ -5,6 +5,37 @@
     "version": "1.0"
   },
   "paths": {
+    "/api/Chat": {
+      "post": {
+        "tags": [
+          "Chat"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GptRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GptRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/GptRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/file-cv/user-files": {
       "get": {
         "tags": [
@@ -242,7 +273,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/ResumeStatsDto"
+                    "$ref": "#/components/schemas/FileCVStatsDto"
                   }
                 }
               },
@@ -250,7 +281,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/ResumeStatsDto"
+                    "$ref": "#/components/schemas/FileCVStatsDto"
                   }
                 }
               },
@@ -258,7 +289,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/ResumeStatsDto"
+                    "$ref": "#/components/schemas/FileCVStatsDto"
                   }
                 }
               }
@@ -268,18 +299,6 @@
       }
     },
     "/api/Statistics/dashboard": {
-      "get": {
-        "tags": [
-          "Statistics"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/api/Statistics/cv/templates": {
       "get": {
         "tags": [
           "Statistics"
@@ -565,19 +584,7 @@
         },
         "additionalProperties": false
       },
-      "Language": {
-        "type": "object",
-        "properties": {
-          "languageName": {
-            "type": "string"
-          },
-          "level": {
-            "type": "string"
-          }
-        },
-        "additionalProperties": false
-      },
-      "ResumeStatsDto": {
+      "FileCVStatsDto": {
         "type": "object",
         "properties": {
           "time": {
@@ -587,6 +594,30 @@
           "count": {
             "type": "integer",
             "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GptRequest": {
+        "type": "object",
+        "properties": {
+          "prompt": {
+            "type": "string"
+          },
+          "question": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Language": {
+        "type": "object",
+        "properties": {
+          "languageName": {
+            "type": "string"
+          },
+          "level": {
+            "type": "string"
           }
         },
         "additionalProperties": false

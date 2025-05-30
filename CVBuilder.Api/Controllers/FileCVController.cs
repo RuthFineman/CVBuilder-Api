@@ -120,10 +120,8 @@ namespace CVBuilder.Api.Controllers
             }
         }
 
-        //עבור הגרף
-
         [HttpGet("resumes-by-hour")]
-        public async Task<ActionResult<List<ResumeStatsDto>>> GetUploadStats()
+        public async Task<ActionResult<List<FileCVStatsDto>>> GetUploadStats()
         {
             var stats = await _fileCVService.GetUploadStats();
             return Ok(stats);

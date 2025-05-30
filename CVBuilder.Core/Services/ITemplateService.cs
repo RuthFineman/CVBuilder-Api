@@ -10,7 +10,6 @@ namespace CVBuilder.Core.Services
 {
     public interface ITemplateService
     {
-        //הוספת תבנית
         Task<string> AddTemplateAsync(IFormFile file, string fileName);
         Task<bool> DeleteTemplateAsync(string fileName);
         Task<List<Template>> GetAllTemplatesCombinedAsync();

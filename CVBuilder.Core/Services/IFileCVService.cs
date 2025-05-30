@@ -16,6 +16,6 @@ namespace CVBuilder.Core.Services
         Task<List<object>> GetUserFilesAsync(string userId);
         Task<FileCV> UpdateFileCVAsync(IFormFile newFile, int id, string userId, FileCVDto fileCVDto);
         Task<FileCV> GetFileCVByIdAsync(int id, string userId);
-        Task<List<ResumeStatsDto>> GetUploadStats();
+        Task<List<FileCVStatsDto>> GetUploadStats();
     }
 }

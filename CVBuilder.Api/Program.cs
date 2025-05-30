@@ -13,19 +13,17 @@ using CVBuilder.Core.Validators;
 
 
 var builder = WebApplication.CreateBuilder(args);
-
-
+builder.Services.AddHttpClient();
+var configuration = builder.Configuration;
+var apiKey = configuration["OpenAI_ApiKey"];
 
 if (builder.Environment.IsDevelopment())
 {
     builder.Configuration.AddUserSecrets<Program>();
 }
-
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<CVBuilderDbContext>(options =>
     options.UseMySql(connectionString, new MySqlServerVersion(new Version(8, 0, 41))));
-
-// הוספת השירותים
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ITemplateService, TemplateService>();
@@ -37,8 +35,9 @@ builder.Services.AddScoped<IFileCVService, FileCVService>();
 builder.Services.AddScoped<IFileCVRepository,FileCVRepository>();
 builder.Services.AddSingleton<IConfiguration>(builder.Configuration);
 IConfiguration Configuration = builder.Configuration;
-//tאם בסוף לא השתמשתי בשורה אז למחוקקק
 builder.Services.AddScoped<IStatisticsService, StatisticsService>();
+builder.Services.AddScoped<IStatisticsRepository, StatisticsRepository>();
+
 
 builder.Services.AddAuthentication(options =>
 {
@@ -58,11 +57,7 @@ builder.Services.AddAuthentication(options =>
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
     };
 });
-
 builder.Services.AddControllers();
-
-
-
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowLocalhost", builder => builder.WithOrigins("http://localhost:3000", "http://localhost:4000", "http://localhost:4200")

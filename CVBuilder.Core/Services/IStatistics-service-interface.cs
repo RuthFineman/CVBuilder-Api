@@ -8,6 +8,5 @@ namespace CVBuilder.Core.Services
     public interface IStatisticsService
     {
         Task<DashboardStatisticsDto> GetDashboardStatisticsAsync();
-        Task<List<TemplateUsageDto>> GetTemplateUsageStatisticsAsync();
     }
 }

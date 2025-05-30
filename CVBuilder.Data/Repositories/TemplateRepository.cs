@@ -7,28 +7,22 @@ namespace CVBuilder.Data.Repositories
     public class TemplateRepository : ITemplateRepository
     {
         private readonly CVBuilderDbContext _context;
-        //private readonly IAmazonS3 _s3Client;
-        private readonly string _bucketName = "cvfilebuilder";
 
         public TemplateRepository(CVBuilderDbContext context)
         {
             _context = context;
         }
-        //העלאת תבנית
         public async Task AddTemplateAsync(Template template)
         {
             _context.Templates.Add(template);
             await _context.SaveChangesAsync();
         }
-        //מחיקת תבנית
         public async Task DeleteTemplateAsync(string fileName)
         {
-            // חיפוש התבנית על פי שם הקובץ
             var template = await _context.Templates.FirstOrDefaultAsync(t => t.Name == fileName);
 
             if (template != null)
             {
-                // מחיקת התבנית ממסד הנתונים
                 _context.Templates.Remove(template);
                 await _context.SaveChangesAsync();
             }
@@ -37,23 +31,21 @@ namespace CVBuilder.Data.Repositories
                 throw new KeyNotFoundException("Template not found.");
             }
         }
-        //קבלת כל התבניות
         public async Task<List<Template>> GetAllTemplatesFromDbAsync()
         {
             return await _context.Templates
                 .Where(t => !string.IsNullOrEmpty(t.TemplateUrl))
                 .ToListAsync();
         }
-        //קבלת תבנית אחת
         public async Task<string> GetFileNameByIndexAsync(int index)
         {
             var template = await _context.Templates
-                .OrderBy(t => t.Id) // או כל סדר שתרצה
+                .OrderBy(t => t.Id) 
                 .Skip(index)
                 .Take(1)
                 .FirstOrDefaultAsync();
 
-            return template?.Name; // או כל שדה שמכיל את שם הקובץ ב-S3
+            return template?.Name; 
         }
         public async Task<Template?> GetByIdAsync(int id)
         {

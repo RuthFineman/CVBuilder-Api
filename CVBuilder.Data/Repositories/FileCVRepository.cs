@@ -56,7 +56,6 @@ namespace CVBuilder.Data.Repositories
             _context.FileCVs.Update(updatedFile);
             await _context.SaveChangesAsync();
         }
-        //לקבלת URL של תבנית בודדה
         public async Task<string> GetFileNameByIndexAsync(int index)
         {
             try
@@ -64,24 +63,20 @@ namespace CVBuilder.Data.Repositories
                 var template = await _context.Templates.FindAsync(index);
                 if (template == null)
                 {
-                    // לא נמצא תבנית עם האינדקס המבוקש
                     return null;
                 }
-                // נניח שהעמודה שנושאת את שם הקובץ נקראת FileName, לא Name
                 return template.Name;
             }
             catch (Exception ex)
             {
-                // לוג שגיאה - מומלץ להוסיף לוג פה
                 throw new Exception("Error fetching file name from DB", ex);
             }
         }
-        //עבור הגגרףףף
-        public async Task<List<ResumeStatsDto>> GetUploadStatsAsync()
+        public async Task<List<FileCVStatsDto>> GetUploadStatsAsync()
         {
             return await _context.FileCVs
                 .GroupBy(r => r.UploadedAt.Hour)
-                .Select(g => new ResumeStatsDto
+                .Select(g => new FileCVStatsDto
                 {
                     Time = DateTime.Today.AddHours(g.Key),
                     Count = g.Count()

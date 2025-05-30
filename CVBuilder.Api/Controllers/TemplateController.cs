@@ -12,7 +12,6 @@ using CVBuilder.Service;
 
 namespace CVBuilder.Api.Controllers
 {
-    //  אבל לא כל הפונקציות אולי להוסיף רק למנהל
     [Route("api/[controller]")]
     [ApiController]
     public class TemplateController : ControllerBase
@@ -23,8 +22,8 @@ namespace CVBuilder.Api.Controllers
         {
             _templateService = templateService;
         }
-        //העלאת תבנית
         [HttpPost("upload")]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> UploadFile(IFormFile file)
         {
             if (file == null || file.Length == 0)
@@ -32,12 +31,11 @@ namespace CVBuilder.Api.Controllers
                 return BadRequest("No file uploaded.");
             }
 
-            // קריאה לפונקציה שמעלה את הקובץ ל-S3 ושומרת את פרטי התבנית
             var fileUrl = await _templateService.AddTemplateAsync(file, file.FileName);
             return Ok(new { FileUrl = fileUrl });
         }
-        //מחיקת תבנית
         [HttpDelete("{fileName}")]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> DeleteTemplateAsync(string fileName)
         {
             try
@@ -57,14 +55,12 @@ namespace CVBuilder.Api.Controllers
                 return StatusCode(500, $"Internal server error: {ex.Message}");
             }
         }
-      //קבלת כל התבניות
         [HttpGet("files")]
         public async Task<IActionResult> GetTemplates()
         {
             var templates = await _templateService.GetAllTemplatesCombinedAsync();
             return Ok(templates);
         }
-        //לקבלת URL של תבנית בודדה
         [HttpGet("{index}")]
         public async Task<IActionResult> GetFile(int index)
         {
@@ -79,7 +75,6 @@ namespace CVBuilder.Api.Controllers
             }
             catch (Exception ex)
             {
-                // לוג שגיאה - מומלץ להוסיף לוג פה
                 return StatusCode(500, "Internal server error: " + ex.Message);
             }
         }

@@ -79,7 +79,6 @@ namespace CVBuilder.Service
         {
             return HashPassword(inputPassword) == storedHashedPassword;
         }
-        //האם המשתמש חסום או לא
         public bool IsUserBlocked(int userId)
         {
             return _userRepository.IsUserBlocked(userId);

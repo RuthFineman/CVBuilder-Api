@@ -31,21 +31,6 @@ namespace CVBuilder.Api.Controllers
             {
                 return StatusCode(500, $"Internal server error: {ex.Message}");
             }
-             }
-
-        [HttpGet("cv/templates")]
-        public async Task<IActionResult> GetCVTemplateUsage()
-        {
-            try
-            {
-                var data = await _statisticsService.GetTemplateUsageStatisticsAsync();
-                return Ok(data);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, $"Internal server error: {ex.Message}");
-            }
         }
-
     }
 }

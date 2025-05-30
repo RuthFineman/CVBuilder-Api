@@ -1,12 +1,18 @@
 [
   {
-    "ContainingType": "CVBuilder.Api.Controllers.StatisticsController",
-    "Method": "GetCVTemplateUsage",
-    "RelativePath": "api/Statistics/cv/templates",
-    "HttpMethod": "GET",
+    "ContainingType": "ChatController",
+    "Method": "Post",
+    "RelativePath": "api/Chat",
+    "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
+    "Parameters": [
+      {
+        "Name": "gptRequest",
+        "Type": "CVBuilder.Core.Models.GptRequest",
+        "IsRequired": true
+      }
+    ],
     "ReturnTypes": []
   },
   {
@@ -235,7 +241,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.List\u00601[[CVBuilder.Core.DTOs.ResumeStatsDto, CVBuilder.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.List\u00601[[CVBuilder.Core.DTOs.FileCVStatsDto, CVBuilder.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",

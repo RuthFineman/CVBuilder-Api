@@ -27,7 +27,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CVBuilder.Data\CVBuilder.Data.csproj" />
     <ProjectReference Include="..\CVBuilder.Service\CVBuilder.Service.csproj" />
   </ItemGroup>
 

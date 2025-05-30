@@ -344,3 +344,5 @@ C:\Users\user1\Documents\תכנות ו\פרויקט גמר\CVBuilder\CVBuilder.A
 C:\Users\user1\Documents\תכנות ו\פרויקט גמר\CVBuilder\CVBuilder.Api\bin\Debug\net9.0\Newtonsoft.Json.dll
 C:\Users\user1\Documents\תכנות ו\פרויקט גמר\CVBuilder\CVBuilder.Api\bin\Debug\net9.0\Swashbuckle.AspNetCore.Annotations.dll
 C:\Users\user1\Documents\תכנות ו\פרויקט גמר\CVBuilder\CVBuilder.Api\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt
+C:\Users\user1\Documents\תכנות ו\פרויקט גמר\CVBuilder\CVBuilder.Api\bin\Debug\net9.0\Duende.IdentityModel.dll
+C:\Users\user1\Documents\תכנות ו\פרויקט גמר\CVBuilder\CVBuilder.Api\bin\Debug\net9.0\Duende.IdentityServer.Storage.dll
