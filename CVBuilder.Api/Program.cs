@@ -21,9 +21,18 @@ if (builder.Environment.IsDevelopment())
 {
     builder.Configuration.AddUserSecrets<Program>();
 }
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
+
+
+//var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+//builder.Services.AddDbContext<CVBuilderDbContext>(options =>
+//    options.UseMySql(connectionString, new MySqlServerVersion(new Version(8, 0, 41))));
+
+
+var connectionString = builder.Configuration["ConnectionString:connectDB"];
 builder.Services.AddDbContext<CVBuilderDbContext>(options =>
-    options.UseMySql(connectionString, new MySqlServerVersion(new Version(8, 0, 41))));
+    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString), options => options.CommandTimeout(60)));
+
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ITemplateService, TemplateService>();
@@ -37,6 +46,11 @@ builder.Services.AddSingleton<IConfiguration>(builder.Configuration);
 IConfiguration Configuration = builder.Configuration;
 builder.Services.AddScoped<IStatisticsService, StatisticsService>();
 builder.Services.AddScoped<IStatisticsRepository, StatisticsRepository>();
+//builder.Services.AddDbContext<YourDbContext>(options =>
+//    options.UseMySql(
+//        builder.Configuration.GetConnectionString("DefaultConnection"),
+//        new MySqlServerVersion(new Version(8, 0, 32))
+//    ));
 
 
 builder.Services.AddAuthentication(options =>
