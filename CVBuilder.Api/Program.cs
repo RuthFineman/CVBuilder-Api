@@ -30,16 +30,17 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ITemplateService, TemplateService>();
 builder.Services.AddScoped<ITemplateRepository, TemplateRepository>();
-builder.Services.AddScoped<AuthService>();
-builder.Services.AddTransient<UserValidator>();
-builder.Services.AddAWSService<IAmazonS3>();
 builder.Services.AddScoped<IFileCVService, FileCVService>();
 builder.Services.AddScoped<IFileCVRepository,FileCVRepository>();
-builder.Services.AddSingleton<IConfiguration>(builder.Configuration);
-IConfiguration Configuration = builder.Configuration;
 builder.Services.AddScoped<IStatisticsService, StatisticsService>();
 builder.Services.AddScoped<IStatisticsRepository, StatisticsRepository>();
+builder.Services.AddScoped<AuthService>();
+builder.Services.AddTransient<UserValidator>();
+builder.Services.AddScoped<UserValidator>();
 
+builder.Services.AddAWSService<IAmazonS3>();
+builder.Services.AddSingleton<IConfiguration>(builder.Configuration);
+IConfiguration Configuration = builder.Configuration;
 
 builder.Services.AddAuthentication(options =>
 {
@@ -62,11 +63,11 @@ builder.Services.AddAuthentication(options =>
 builder.Services.AddControllers();
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowLocalhost", builder => builder.WithOrigins(
+    options.AddPolicy("AllowFrontend", builder => builder.WithOrigins(
         "http://localhost:3000",
         "http://localhost:4000",
         "http://localhost:4200",
-        "https://cvbuilder-r9zr.onrender.com") 
+        "https://cvbuilder-r9zr.onrender.com")
         .AllowAnyMethod()
         .AllowAnyHeader()
         .AllowCredentials()); 
@@ -105,11 +106,11 @@ if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
 }
-app.UseCors("AllowLocalhost");
-app.UseAuthentication();
-
-app.UseAuthorization();
 app.UseHttpsRedirection();
+app.UseCors("AllowFrontend");
+app.UseAuthentication();
+app.UseAuthorization();
+
 app.MapControllers();
 app.UseSwagger();
 app.UseSwaggerUI(c =>
