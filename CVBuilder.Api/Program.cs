@@ -22,14 +22,13 @@ if (builder.Environment.IsDevelopment())
     builder.Configuration.AddUserSecrets<Program>();
 }
 
-
-
 //var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 //builder.Services.AddDbContext<CVBuilderDbContext>(options =>
 //    options.UseMySql(connectionString, new MySqlServerVersion(new Version(8, 0, 41))));
 
+//var connectionString = builder.Configuration["ConnectionStrings:connectDB"];
 
-var connectionString = builder.Configuration["ConnectionString:connectDB"];
+var connectionString = builder.Configuration.GetConnectionString("connectDB");
 builder.Services.AddDbContext<CVBuilderDbContext>(options =>
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString), options => options.CommandTimeout(60)));
 
