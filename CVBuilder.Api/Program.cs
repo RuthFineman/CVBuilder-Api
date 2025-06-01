@@ -37,7 +37,8 @@ builder.Services.AddScoped<IFileCVRepository,FileCVRepository>();
 builder.Services.AddScoped<IStatisticsService, StatisticsService>();
 builder.Services.AddScoped<IStatisticsRepository, StatisticsRepository>();
 builder.Services.AddScoped<AuthService>();
-builder.Services.AddTransient<UserValidator>();
+builder.Services.AddScoped<UserValidator>();
+
 
 builder.Services.AddAWSService<IAmazonS3>();
 
@@ -60,18 +61,27 @@ builder.Services.AddAuthentication(options =>
     };
 });
 builder.Services.AddControllers();
+//builder.Services.AddCors(options =>
+//{
+//    options.AddPolicy("AllowFrontend", builder => builder.WithOrigins(
+//        "http://localhost:3000",
+//        "http://localhost:4000",
+//        "http://localhost:4200",
+//        "https://cvbuilder-r9zr.onrender.com")
+//        .AllowAnyMethod()
+//        .AllowAnyHeader()
+//        .AllowCredentials()); 
+//});
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowFrontend", builder => builder.WithOrigins(
-        "http://localhost:3000",
-        "http://localhost:4000",
-        "http://localhost:4200",
-        "https://cvbuilder-r9zr.onrender.com")
-        .AllowAnyMethod()
-        .AllowAnyHeader()
-        .AllowCredentials()); 
+    options.AddPolicy("AllowAll",
+        policy =>
+        {
+            policy.AllowAnyOrigin()
+                  .AllowAnyMethod()
+                  .AllowAnyHeader();
+        });
 });
-
 builder.Services.AddSwaggerGen(options =>
 {
     options.SupportNonNullableReferenceTypes(); 
@@ -106,7 +116,8 @@ if (app.Environment.IsDevelopment())
     app.UseDeveloperExceptionPage();
 }
 app.UseHttpsRedirection();
-app.UseCors("AllowFrontend");
+//app.UseCors("AllowFrontend");
+app.UseCors("AllowAll");
 app.UseAuthentication();
 app.UseAuthorization();
 
