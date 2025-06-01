@@ -15,6 +15,8 @@ using CVBuilder.Core.Validators;
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddHttpClient();
 var configuration = builder.Configuration;
+builder.Services.AddSingleton<IConfiguration>(builder.Configuration);
+
 var apiKey = configuration["OpenAI_ApiKey"];
 
 if (builder.Environment.IsDevelopment())
@@ -36,11 +38,8 @@ builder.Services.AddScoped<IStatisticsService, StatisticsService>();
 builder.Services.AddScoped<IStatisticsRepository, StatisticsRepository>();
 builder.Services.AddScoped<AuthService>();
 builder.Services.AddTransient<UserValidator>();
-builder.Services.AddScoped<UserValidator>();
 
 builder.Services.AddAWSService<IAmazonS3>();
-builder.Services.AddSingleton<IConfiguration>(builder.Configuration);
-IConfiguration Configuration = builder.Configuration;
 
 builder.Services.AddAuthentication(options =>
 {
