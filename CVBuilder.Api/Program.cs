@@ -22,12 +22,6 @@ if (builder.Environment.IsDevelopment())
     builder.Configuration.AddUserSecrets<Program>();
 }
 
-//var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-//builder.Services.AddDbContext<CVBuilderDbContext>(options =>
-//    options.UseMySql(connectionString, new MySqlServerVersion(new Version(8, 0, 41))));
-
-//var connectionString = builder.Configuration["ConnectionStrings:connectDB"];
-
 var connectionString = builder.Configuration.GetConnectionString("connectDB");
 builder.Services.AddDbContext<CVBuilderDbContext>(options =>
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString), options => options.CommandTimeout(60)));
@@ -45,11 +39,6 @@ builder.Services.AddSingleton<IConfiguration>(builder.Configuration);
 IConfiguration Configuration = builder.Configuration;
 builder.Services.AddScoped<IStatisticsService, StatisticsService>();
 builder.Services.AddScoped<IStatisticsRepository, StatisticsRepository>();
-//builder.Services.AddDbContext<YourDbContext>(options =>
-//    options.UseMySql(
-//        builder.Configuration.GetConnectionString("DefaultConnection"),
-//        new MySqlServerVersion(new Version(8, 0, 32))
-//    ));
 
 
 builder.Services.AddAuthentication(options =>
@@ -73,10 +62,16 @@ builder.Services.AddAuthentication(options =>
 builder.Services.AddControllers();
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowLocalhost", builder => builder.WithOrigins("http://localhost:3000", "http://localhost:4000", "http://localhost:4200")
-                                                          .AllowAnyMethod()
-                                                          .AllowAnyHeader());
+    options.AddPolicy("AllowLocalhost", builder => builder.WithOrigins(
+        "http://localhost:3000",
+        "http://localhost:4000",
+        "http://localhost:4200",
+        "https://cvbuilder-r9zr.onrender.com") 
+        .AllowAnyMethod()
+        .AllowAnyHeader()
+        .AllowCredentials()); 
 });
+
 builder.Services.AddSwaggerGen(options =>
 {
     options.SupportNonNullableReferenceTypes(); 
