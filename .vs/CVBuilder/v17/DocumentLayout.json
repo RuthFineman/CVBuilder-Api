@@ -3,24 +3,24 @@
   "WorkspaceRootPath": "C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA \u05D5\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 \u05D2\u05DE\u05E8\\CVBuilder\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{D3CE3097-3FF7-4261-8F89-A5509EE5CEA4}|CVBuilder.Api\\CVBuilder.Api.csproj|c:\\users\\user1\\documents\\\u05EA\u05DB\u05E0\u05D5\u05EA \u05D5\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 \u05D2\u05DE\u05E8\\cvbuilder\\cvbuilder.api\\controllers\\templatecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D3CE3097-3FF7-4261-8F89-A5509EE5CEA4}|CVBuilder.Api\\CVBuilder.Api.csproj|solutionrelative:cvbuilder.api\\controllers\\templatecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F849470C-D7A5-4EEC-882B-F23EC8283EB9}|CVBuilder.Core\\CVBuilder.Core.csproj|c:\\users\\user1\\documents\\\u05EA\u05DB\u05E0\u05D5\u05EA \u05D5\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 \u05D2\u05DE\u05E8\\cvbuilder\\cvbuilder.core\\models\\template.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F849470C-D7A5-4EEC-882B-F23EC8283EB9}|CVBuilder.Core\\CVBuilder.Core.csproj|solutionrelative:cvbuilder.core\\models\\template.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2F167D28-AFF6-459A-93DD-2A70E6355B8E}|CVBuilder.Service\\CVBuilder.Service.csproj|c:\\users\\user1\\documents\\\u05EA\u05DB\u05E0\u05D5\u05EA \u05D5\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 \u05D2\u05DE\u05E8\\cvbuilder\\cvbuilder.service\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2F167D28-AFF6-459A-93DD-2A70E6355B8E}|CVBuilder.Service\\CVBuilder.Service.csproj|solutionrelative:cvbuilder.service\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D3CE3097-3FF7-4261-8F89-A5509EE5CEA4}|CVBuilder.Api\\CVBuilder.Api.csproj|c:\\users\\user1\\documents\\\u05EA\u05DB\u05E0\u05D5\u05EA \u05D5\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 \u05D2\u05DE\u05E8\\cvbuilder\\cvbuilder.api\\controllers\\templatecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D3CE3097-3FF7-4261-8F89-A5509EE5CEA4}|CVBuilder.Api\\CVBuilder.Api.csproj|solutionrelative:cvbuilder.api\\controllers\\templatecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{D3CE3097-3FF7-4261-8F89-A5509EE5CEA4}|CVBuilder.Api\\CVBuilder.Api.csproj|c:\\users\\user1\\documents\\\u05EA\u05DB\u05E0\u05D5\u05EA \u05D5\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 \u05D2\u05DE\u05E8\\cvbuilder\\cvbuilder.api\\controllers\\statisticscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D3CE3097-3FF7-4261-8F89-A5509EE5CEA4}|CVBuilder.Api\\CVBuilder.Api.csproj|solutionrelative:cvbuilder.api\\controllers\\statisticscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D3CE3097-3FF7-4261-8F89-A5509EE5CEA4}|CVBuilder.Api\\CVBuilder.Api.csproj|c:\\users\\user1\\documents\\\u05EA\u05DB\u05E0\u05D5\u05EA \u05D5\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 \u05D2\u05DE\u05E8\\cvbuilder\\cvbuilder.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D3CE3097-3FF7-4261-8F89-A5509EE5CEA4}|CVBuilder.Api\\CVBuilder.Api.csproj|solutionrelative:cvbuilder.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2F167D28-AFF6-459A-93DD-2A70E6355B8E}|CVBuilder.Service\\CVBuilder.Service.csproj|c:\\users\\user1\\documents\\\u05EA\u05DB\u05E0\u05D5\u05EA \u05D5\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 \u05D2\u05DE\u05E8\\cvbuilder\\cvbuilder.service\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2F167D28-AFF6-459A-93DD-2A70E6355B8E}|CVBuilder.Service\\CVBuilder.Service.csproj|solutionrelative:cvbuilder.service\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F849470C-D7A5-4EEC-882B-F23EC8283EB9}|CVBuilder.Core\\CVBuilder.Core.csproj|c:\\users\\user1\\documents\\\u05EA\u05DB\u05E0\u05D5\u05EA \u05D5\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 \u05D2\u05DE\u05E8\\cvbuilder\\cvbuilder.core\\validators\\uservalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F849470C-D7A5-4EEC-882B-F23EC8283EB9}|CVBuilder.Core\\CVBuilder.Core.csproj|solutionrelative:cvbuilder.core\\validators\\uservalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D3CE3097-3FF7-4261-8F89-A5509EE5CEA4}|CVBuilder.Api\\CVBuilder.Api.csproj|c:\\users\\user1\\documents\\\u05EA\u05DB\u05E0\u05D5\u05EA \u05D5\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 \u05D2\u05DE\u05E8\\cvbuilder\\cvbuilder.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D3CE3097-3FF7-4261-8F89-A5509EE5CEA4}|CVBuilder.Api\\CVBuilder.Api.csproj|solutionrelative:cvbuilder.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -35,12 +35,25 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "Template.cs",
+              "DocumentMoniker": "C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA \u05D5\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 \u05D2\u05DE\u05E8\\CVBuilder\\CVBuilder.Core\\Models\\Template.cs",
+              "RelativeDocumentMoniker": "CVBuilder.Core\\Models\\Template.cs",
+              "ToolTip": "C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA \u05D5\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 \u05D2\u05DE\u05E8\\CVBuilder\\CVBuilder.Core\\Models\\Template.cs",
+              "RelativeToolTip": "CVBuilder.Core\\Models\\Template.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-02T18:48:32.46Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "TemplateController.cs",
               "DocumentMoniker": "C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA \u05D5\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 \u05D2\u05DE\u05E8\\CVBuilder\\CVBuilder.Api\\Controllers\\TemplateController.cs",
               "RelativeDocumentMoniker": "CVBuilder.Api\\Controllers\\TemplateController.cs",
               "ToolTip": "C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA \u05D5\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 \u05D2\u05DE\u05E8\\CVBuilder\\CVBuilder.Api\\Controllers\\TemplateController.cs",
               "RelativeToolTip": "CVBuilder.Api\\Controllers\\TemplateController.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAA0AAAABAAAAAAAAAA==",
+              "ViewState": "AgIAADEAAAAAAAAAAAAmwD4AAAA+AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-01T02:01:09.334Z",
               "EditorCaption": ""
@@ -60,13 +73,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "AuthService.cs",
               "DocumentMoniker": "C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA \u05D5\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 \u05D2\u05DE\u05E8\\CVBuilder\\CVBuilder.Service\\AuthService.cs",
               "RelativeDocumentMoniker": "CVBuilder.Service\\AuthService.cs",
               "ToolTip": "C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA \u05D5\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 \u05D2\u05DE\u05E8\\CVBuilder\\CVBuilder.Service\\AuthService.cs",
               "RelativeToolTip": "CVBuilder.Service\\AuthService.cs",
-              "ViewState": "AgIAABIAAAAAAAAAAAAYwB8AAAAvAAAAAAAAAA==",
+              "ViewState": "AgIAABIAAAAAAAAAAAAYwBkAAAAoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-01T01:49:34.807Z",
               "EditorCaption": ""
@@ -74,24 +87,12 @@
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "UserValidator.cs",
-              "DocumentMoniker": "C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA \u05D5\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 \u05D2\u05DE\u05E8\\CVBuilder\\CVBuilder.Core\\Validators\\UserValidator.cs",
-              "RelativeDocumentMoniker": "CVBuilder.Core\\Validators\\UserValidator.cs",
-              "ToolTip": "C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA \u05D5\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 \u05D2\u05DE\u05E8\\CVBuilder\\CVBuilder.Core\\Validators\\UserValidator.cs",
-              "RelativeToolTip": "CVBuilder.Core\\Validators\\UserValidator.cs",
-              "ViewState": "AgIAAAwAAAAAAAAAAAA3wBsAAAANAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-01T01:11:11.845Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA \u05D5\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 \u05D2\u05DE\u05E8\\CVBuilder\\CVBuilder.Api\\Program.cs",
               "RelativeDocumentMoniker": "CVBuilder.Api\\Program.cs",
               "ToolTip": "C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA \u05D5\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 \u05D2\u05DE\u05E8\\CVBuilder\\CVBuilder.Api\\Program.cs",
               "RelativeToolTip": "CVBuilder.Api\\Program.cs",
-              "ViewState": "AgIAAE4AAAAAAAAAAAAAAHoAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAHMAAAAAAAAAAAAswHgAAAAYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-29T21:42:50.453Z",
               "EditorCaption": ""

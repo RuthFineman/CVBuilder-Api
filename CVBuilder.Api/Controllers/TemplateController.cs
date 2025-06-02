@@ -14,7 +14,7 @@ namespace CVBuilder.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    
     public class TemplateController : ControllerBase
     {
         private readonly ITemplateService _templateService;
@@ -57,6 +57,7 @@ namespace CVBuilder.Api.Controllers
             }
         }
         [HttpGet("files")]
+        [Authorize]
         public async Task<IActionResult> GetTemplates()
         {
             var templates = await _templateService.GetAllTemplatesCombinedAsync();
