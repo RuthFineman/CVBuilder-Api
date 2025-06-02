@@ -24,7 +24,7 @@ namespace CVBuilder.Api.Controllers
             _templateService = templateService;
         }
         [HttpPost("upload")]
-        [Authorize(Roles = "admin")]
+        //[Authorize(Roles = "admin")]
         public async Task<IActionResult> UploadFile(IFormFile file)
         {
             if (file == null || file.Length == 0)
