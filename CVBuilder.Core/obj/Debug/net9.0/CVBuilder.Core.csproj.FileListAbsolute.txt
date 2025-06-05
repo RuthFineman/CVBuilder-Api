@@ -23,3 +23,16 @@ C:\Users\user1\Documents\תכנות ו\פרויקט גמר\CVBuilder\CVBuilder.C
 C:\Users\user1\Documents\תכנות ו\פרויקט גמר\CVBuilder\CVBuilder.Core\obj\Debug\net9.0\CVBuilder.Core.pdb
 C:\Users\user1\Documents\תכנות ו\פרויקט גמר\CVBuilder\CVBuilder.Core\obj\Debug\net9.0\ref\CVBuilder.Core.dll
 C:\Users\user1\Documents\תכנות ו\פרויקט גמר\CVBuilder\CVBuilder.Core\obj\Debug\net9.0\CVBuilder.Core.sourcelink.json
+C:\Users\user1\Documents\תכנות ו\פרויקט גמר\פרויקט סופי\CVBuilder\CVBuilder.Core\bin\Debug\net9.0\CVBuilder.Core.deps.json
+C:\Users\user1\Documents\תכנות ו\פרויקט גמר\פרויקט סופי\CVBuilder\CVBuilder.Core\bin\Debug\net9.0\CVBuilder.Core.dll
+C:\Users\user1\Documents\תכנות ו\פרויקט גמר\פרויקט סופי\CVBuilder\CVBuilder.Core\bin\Debug\net9.0\CVBuilder.Core.pdb
+C:\Users\user1\Documents\תכנות ו\פרויקט גמר\פרויקט סופי\CVBuilder\CVBuilder.Core\obj\Debug\net9.0\CVBuilder.Core.csproj.AssemblyReference.cache
+C:\Users\user1\Documents\תכנות ו\פרויקט גמר\פרויקט סופי\CVBuilder\CVBuilder.Core\obj\Debug\net9.0\CVBuilder.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\user1\Documents\תכנות ו\פרויקט גמר\פרויקט סופי\CVBuilder\CVBuilder.Core\obj\Debug\net9.0\CVBuilder.Core.AssemblyInfoInputs.cache
+C:\Users\user1\Documents\תכנות ו\פרויקט גמר\פרויקט סופי\CVBuilder\CVBuilder.Core\obj\Debug\net9.0\CVBuilder.Core.AssemblyInfo.cs
+C:\Users\user1\Documents\תכנות ו\פרויקט גמר\פרויקט סופי\CVBuilder\CVBuilder.Core\obj\Debug\net9.0\CVBuilder.Core.csproj.CoreCompileInputs.cache
+C:\Users\user1\Documents\תכנות ו\פרויקט גמר\פרויקט סופי\CVBuilder\CVBuilder.Core\obj\Debug\net9.0\CVBuilder.Core.sourcelink.json
+C:\Users\user1\Documents\תכנות ו\פרויקט גמר\פרויקט סופי\CVBuilder\CVBuilder.Core\obj\Debug\net9.0\CVBuilder.Core.dll
+C:\Users\user1\Documents\תכנות ו\פרויקט גמר\פרויקט סופי\CVBuilder\CVBuilder.Core\obj\Debug\net9.0\refint\CVBuilder.Core.dll
+C:\Users\user1\Documents\תכנות ו\פרויקט גמר\פרויקט סופי\CVBuilder\CVBuilder.Core\obj\Debug\net9.0\CVBuilder.Core.pdb
+C:\Users\user1\Documents\תכנות ו\פרויקט גמר\פרויקט סופי\CVBuilder\CVBuilder.Core\obj\Debug\net9.0\ref\CVBuilder.Core.dll

@@ -72,16 +72,7 @@ builder.Services.AddCors(options =>
         .AllowAnyHeader()
         .AllowCredentials());
 });
-//builder.Services.AddCors(options =>
-//{
-//    options.AddPolicy("AllowAll",
-//        policy =>
-//        {
-//            policy.AllowAnyOrigin()
-//                  .AllowAnyMethod()
-//                  .AllowAnyHeader();
-//        });
-//});
+
 builder.Services.AddSwaggerGen(options =>
 {
     options.SupportNonNullableReferenceTypes(); 
@@ -115,9 +106,11 @@ if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
 }
-app.UseHttpsRedirection();
+if (app.Environment.IsDevelopment())
+{
+    app.UseHttpsRedirection();
+}
 app.UseCors("AllowFrontend");
-//app.UseCors("AllowAll");
 app.UseAuthentication();
 app.UseAuthorization();
 

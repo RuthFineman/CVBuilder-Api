@@ -14,7 +14,7 @@ namespace CVBuilder.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    
+
     public class TemplateController : ControllerBase
     {
         private readonly ITemplateService _templateService;
@@ -24,16 +24,22 @@ namespace CVBuilder.Api.Controllers
             _templateService = templateService;
         }
         [HttpPost("upload")]
-        //[Authorize(Roles = "admin")]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> UploadFile(IFormFile file)
         {
             if (file == null || file.Length == 0)
             {
                 return BadRequest("No file uploaded.");
             }
-
-            var fileUrl = await _templateService.AddTemplateAsync(file, file.FileName);
-            return Ok(new { FileUrl = fileUrl });
+            try
+            {
+                var fileUrl = await _templateService.AddTemplateAsync(file, file.FileName);
+                return Ok(new { FileUrl = fileUrl });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Error uploading file: {ex.Message}");
+            }
         }
         [HttpDelete("{fileName}")]
         [Authorize(Roles = "admin")]

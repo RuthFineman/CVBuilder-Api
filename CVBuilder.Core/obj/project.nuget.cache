@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "0g/CzUYwheo=",
+  "dgSpecHash": "ysKvm5UV8jI=",
   "success": true,
-  "projectFilePath": "C:\\Users\\user1\\Documents\\תכנות ו\\פרויקט גמר\\CVBuilder\\CVBuilder.Core\\CVBuilder.Core.csproj",
+  "projectFilePath": "C:\\Users\\user1\\Documents\\תכנות ו\\פרויקט גמר\\פרויקט סופי\\CVBuilder\\CVBuilder.Core\\CVBuilder.Core.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\user1\\.nuget\\packages\\bouncycastle.cryptography\\2.3.1\\bouncycastle.cryptography.2.3.1.nupkg.sha512",
     "C:\\Users\\user1\\.nuget\\packages\\duende.identitymodel\\7.0.0\\duende.identitymodel.7.0.0.nupkg.sha512",

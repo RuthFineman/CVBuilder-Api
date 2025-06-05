@@ -6453,11 +6453,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\user1\\Documents\\תכנות ו\\פרויקט גמר\\CVBuilder\\CVBuilder.Api\\CVBuilder.Api.csproj",
+      "projectUniqueName": "C:\\Users\\user1\\Documents\\תכנות ו\\פרויקט גמר\\פרויקט סופי\\CVBuilder\\CVBuilder.Api\\CVBuilder.Api.csproj",
       "projectName": "CVBuilder.Api",
-      "projectPath": "C:\\Users\\user1\\Documents\\תכנות ו\\פרויקט גמר\\CVBuilder\\CVBuilder.Api\\CVBuilder.Api.csproj",
+      "projectPath": "C:\\Users\\user1\\Documents\\תכנות ו\\פרויקט גמר\\פרויקט סופי\\CVBuilder\\CVBuilder.Api\\CVBuilder.Api.csproj",
       "packagesPath": "C:\\Users\\user1\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\user1\\Documents\\תכנות ו\\פרויקט גמר\\CVBuilder\\CVBuilder.Api\\obj\\",
+      "outputPath": "C:\\Users\\user1\\Documents\\תכנות ו\\פרויקט גמר\\פרויקט סופי\\CVBuilder\\CVBuilder.Api\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -6478,8 +6478,8 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
-            "C:\\Users\\user1\\Documents\\תכנות ו\\פרויקט גמר\\CVBuilder\\CVBuilder.Service\\CVBuilder.Service.csproj": {
-              "projectPath": "C:\\Users\\user1\\Documents\\תכנות ו\\פרויקט גמר\\CVBuilder\\CVBuilder.Service\\CVBuilder.Service.csproj"
+            "C:\\Users\\user1\\Documents\\תכנות ו\\פרויקט גמר\\פרויקט סופי\\CVBuilder\\CVBuilder.Service\\CVBuilder.Service.csproj": {
+              "projectPath": "C:\\Users\\user1\\Documents\\תכנות ו\\פרויקט גמר\\פרויקט סופי\\CVBuilder\\CVBuilder.Service\\CVBuilder.Service.csproj"
             }
           }
         }

@@ -31,3 +31,21 @@ C:\Users\user1\Documents\תכנות ו\פרויקט גמר\CVBuilder\CVBuilder.S
 C:\Users\user1\Documents\תכנות ו\פרויקט גמר\CVBuilder\CVBuilder.Service\obj\Debug\net9.0\CVBuilder.Service.sourcelink.json
 C:\Users\user1\Documents\תכנות ו\פרויקט גמר\CVBuilder\CVBuilder.Service\bin\Debug\net9.0\CVBuilder.Data.dll
 C:\Users\user1\Documents\תכנות ו\פרויקט גמר\CVBuilder\CVBuilder.Service\bin\Debug\net9.0\CVBuilder.Data.pdb
+C:\Users\user1\Documents\תכנות ו\פרויקט גמר\פרויקט סופי\CVBuilder\CVBuilder.Service\bin\Debug\net9.0\CVBuilder.Service.deps.json
+C:\Users\user1\Documents\תכנות ו\פרויקט גמר\פרויקט סופי\CVBuilder\CVBuilder.Service\bin\Debug\net9.0\CVBuilder.Service.dll
+C:\Users\user1\Documents\תכנות ו\פרויקט גמר\פרויקט סופי\CVBuilder\CVBuilder.Service\bin\Debug\net9.0\CVBuilder.Service.pdb
+C:\Users\user1\Documents\תכנות ו\פרויקט גמר\פרויקט סופי\CVBuilder\CVBuilder.Service\bin\Debug\net9.0\CVBuilder.Core.dll
+C:\Users\user1\Documents\תכנות ו\פרויקט גמר\פרויקט סופי\CVBuilder\CVBuilder.Service\bin\Debug\net9.0\CVBuilder.Data.dll
+C:\Users\user1\Documents\תכנות ו\פרויקט גמר\פרויקט סופי\CVBuilder\CVBuilder.Service\bin\Debug\net9.0\CVBuilder.Core.pdb
+C:\Users\user1\Documents\תכנות ו\פרויקט גמר\פרויקט סופי\CVBuilder\CVBuilder.Service\bin\Debug\net9.0\CVBuilder.Data.pdb
+C:\Users\user1\Documents\תכנות ו\פרויקט גמר\פרויקט סופי\CVBuilder\CVBuilder.Service\obj\Debug\net9.0\CVBuilder.Service.csproj.AssemblyReference.cache
+C:\Users\user1\Documents\תכנות ו\פרויקט גמר\פרויקט סופי\CVBuilder\CVBuilder.Service\obj\Debug\net9.0\CVBuilder.Service.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\user1\Documents\תכנות ו\פרויקט גמר\פרויקט סופי\CVBuilder\CVBuilder.Service\obj\Debug\net9.0\CVBuilder.Service.AssemblyInfoInputs.cache
+C:\Users\user1\Documents\תכנות ו\פרויקט גמר\פרויקט סופי\CVBuilder\CVBuilder.Service\obj\Debug\net9.0\CVBuilder.Service.AssemblyInfo.cs
+C:\Users\user1\Documents\תכנות ו\פרויקט גמר\פרויקט סופי\CVBuilder\CVBuilder.Service\obj\Debug\net9.0\CVBuilder.Service.csproj.CoreCompileInputs.cache
+C:\Users\user1\Documents\תכנות ו\פרויקט גמר\פרויקט סופי\CVBuilder\CVBuilder.Service\obj\Debug\net9.0\CVBuilder.Service.sourcelink.json
+C:\Users\user1\Documents\תכנות ו\פרויקט גמר\פרויקט סופי\CVBuilder\CVBuilder.Service\obj\Debug\net9.0\CVBuilde.1F9A8ECA.Up2Date
+C:\Users\user1\Documents\תכנות ו\פרויקט גמר\פרויקט סופי\CVBuilder\CVBuilder.Service\obj\Debug\net9.0\CVBuilder.Service.dll
+C:\Users\user1\Documents\תכנות ו\פרויקט גמר\פרויקט סופי\CVBuilder\CVBuilder.Service\obj\Debug\net9.0\refint\CVBuilder.Service.dll
+C:\Users\user1\Documents\תכנות ו\פרויקט גמר\פרויקט סופי\CVBuilder\CVBuilder.Service\obj\Debug\net9.0\CVBuilder.Service.pdb
+C:\Users\user1\Documents\תכנות ו\פרויקט גמר\פרויקט סופי\CVBuilder\CVBuilder.Service\obj\Debug\net9.0\ref\CVBuilder.Service.dll

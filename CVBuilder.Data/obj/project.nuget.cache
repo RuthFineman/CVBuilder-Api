@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "oN2alLG0JxI=",
+  "dgSpecHash": "/T98wKFeKC8=",
   "success": true,
-  "projectFilePath": "C:\\Users\\user1\\Documents\\תכנות ו\\פרויקט גמר\\CVBuilder\\CVBuilder.Data\\CVBuilder.Data.csproj",
+  "projectFilePath": "C:\\Users\\user1\\Documents\\תכנות ו\\פרויקט גמר\\פרויקט סופי\\CVBuilder\\CVBuilder.Data\\CVBuilder.Data.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\user1\\.nuget\\packages\\awssdk.core\\3.7.402.21\\awssdk.core.3.7.402.21.nupkg.sha512",
     "C:\\Users\\user1\\.nuget\\packages\\awssdk.s3\\3.7.415.20\\awssdk.s3.3.7.415.20.nupkg.sha512",

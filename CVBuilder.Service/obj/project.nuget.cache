@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "yIflKTRLYW8=",
+  "dgSpecHash": "j+6c67Qu2BY=",
   "success": true,
-  "projectFilePath": "C:\\Users\\user1\\Documents\\תכנות ו\\פרויקט גמר\\CVBuilder\\CVBuilder.Service\\CVBuilder.Service.csproj",
+  "projectFilePath": "C:\\Users\\user1\\Documents\\תכנות ו\\פרויקט גמר\\פרויקט סופי\\CVBuilder\\CVBuilder.Service\\CVBuilder.Service.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\user1\\.nuget\\packages\\automapper\\14.0.0\\automapper.14.0.0.nupkg.sha512",
     "C:\\Users\\user1\\.nuget\\packages\\awssdk.core\\3.7.402.21\\awssdk.core.3.7.402.21.nupkg.sha512",
