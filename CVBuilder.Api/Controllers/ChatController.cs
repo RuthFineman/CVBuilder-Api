@@ -14,7 +14,7 @@ public class ChatController : ControllerBase
     public ChatController(IHttpClientFactory httpClientFactory, IConfiguration configuration, ILogger<ChatController> logger)
     {
         _client = httpClientFactory.CreateClient();
-        _apiKey = configuration["OpenAI_ApiKey"];
+        _apiKey = configuration["OpenAI_ApiKey"]?.Trim();
         _logger = logger;
     }
 

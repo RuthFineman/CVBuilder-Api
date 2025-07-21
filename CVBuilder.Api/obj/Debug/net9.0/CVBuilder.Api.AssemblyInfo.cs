@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CVBuilder.Api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+84422340ec67851b6435c62473aa777b39cff254")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b205c2a9640ebd00bb09a72adec743ca8bed7b0b")]
 [assembly: System.Reflection.AssemblyProductAttribute("CVBuilder.Api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CVBuilder.Api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

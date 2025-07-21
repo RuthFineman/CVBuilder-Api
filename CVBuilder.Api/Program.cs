@@ -67,7 +67,8 @@ builder.Services.AddCors(options =>
         "http://localhost:3000",
         "http://localhost:4000",
         "http://localhost:4200",
-        "https://cvbuilder-r9zr.onrender.com")
+        "https://cvbuilder-r9zr.onrender.com",
+        "https://cvbuilder-angular1.onrender.com")
         .AllowAnyMethod()
         .AllowAnyHeader()
         .AllowCredentials());
